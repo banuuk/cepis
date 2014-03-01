@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="edu.uky.cepis.domain.UserAssessmentProfile" table="tblAssessmentProfile">
+		<meta attribute="class-description">Class to identify a UserAssessmentProfile</meta>
+		<cache region="edu.uky.cepis.cache.userassessmentprofile" usage="read-write" />
+		<id name="id" column="id" type="long">
+			<generator class="native"></generator>
+		</id>
+		<many-to-one name="programDomain" lazy="false" fetch="join"
+			class="edu.uky.cepis.domain.component.ProgramDomain" column="progDomainCode"
+			not-found="ignore" not-null="false" />
+		<many-to-one name="ukTerm" class="edu.uky.cepis.domain.component.UKTerm"
+			column="termCode" not-found="ignore" lazy="false" fetch="join"
+			not-null="false" />
+		<property name="assessmentType" column="assessmentType" type="integer"
+			not-null="true" />
+		<list name="standardSets" lazy="false" cascade="all" batch-size="10"
+			fetch="join">
+			<cache region="edu.uky.cepis.cache.userassessmentstandardset"
+				usage="read-write" />
+			<key>
+				<column name="assessmentId" not-null="true" />
+			</key>
+			<list-index column="stdset_index" base="0"></list-index>
+			<one-to-many class="edu.uky.cepis.domain.UserAssessmentStandardSet"
+				not-found="ignore" />
+		</list>
+		<property name="score" column="score" type="integer"
+			not-null="true" />
+		<property name="decision" column="decision" type="integer"
+			not-null="true" />
+		<property name="shortDesc" column="shortDescription" type="string"
+			length="255" />
+		<many-to-one name="user" lazy="false" fetch="join"
+			class="edu.uky.cepis.domain.User" column="UID" not-found="ignore"
+			not-null="false" />
+		<property name="lastModified" column="lastModified" />
+	</class>
+</hibernate-mapping>
+

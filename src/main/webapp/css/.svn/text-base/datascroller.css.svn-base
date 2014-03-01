@@ -1,0 +1,47 @@
+@CHARSET "ISO-8859-1";
+
+.ws10 {
+	font-size: 13px;
+}
+
+/* make TD elements pretty. Provide alternating classes for striping the table */
+	/* http://www.alistapart.com/articles/zebratables/                             */
+.normalRow {
+	background: #FFF;
+	border-bottom: none;
+	border-left: none;
+	border-right: 1px solid #CCC;
+	border-top: 1px solid #DDD;
+	padding: 2px 3px 3px 4px
+}
+
+.alternateRow {
+	background: #EEE;
+	border-bottom: none;
+	border-left: none;
+	border-right: 1px solid #CCC;
+	border-top: 1px solid #DDD;
+	padding: 2px 3px 3px 4px
+}
+
+.header {
+	background: #C6D3F7;
+	border-left: 0px solid #39618C;
+	border-right: 0px solid #39618C;
+	border-top: 1px solid #39618C;
+	border-bottom: 1px solid #39618C;
+	font-weight: normal;
+	padding: 4px 3px;
+	text-align: left
+}
+
+.footer {
+	background: lightgray;
+	border-left: 0px solid #39618C;
+	border-right: 0px solid #39618C;
+	border-top: 0.2px solid #39618C;
+	border-bottom: 0.2px solid #39618C;
+	font-weight: normal;
+	padding: 1px 1px;
+	text-align: center
+}

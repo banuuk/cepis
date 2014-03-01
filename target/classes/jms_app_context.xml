@@ -1,0 +1,85 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+	
+	<!-- Message Driven POJO -->
+	<bean id="messageListener" class="com.mytutorial.MyListener" />
+    
+	<!-- This is the message listener container -->
+	
+	<bean id="jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer102">
+		<property name="connectionFactory" ref="myJmsQueueConnectionFactory" />
+		<property name="destination" ref="myQueue" />
+		<property name="messageListener" ref="messageListener" />
+	</bean>
+
+	<!-- JMS Destinations -->
+	
+	<bean id="myQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiTemplate">
+			<ref bean="jndiTemplate" />
+		</property>
+		<property name="jndiName">
+			<value>queue1</value>
+		</property>
+	</bean>
+
+	<bean id="myJmsService" class="com.mytutorial.MyJmsServiceImpl">
+		<property name="sender">
+			<ref bean="jmsSender" />
+		</property>
+		<property name="receiver">
+			<ref bean="jmsReceiver" />
+		</property>
+	</bean>
+	<bean id="jmsSender" class="com.mytutorial.JmsSender">
+		<property name="jmsTemplate102">
+			<ref bean="jmsQueueTemplate102" />
+		</property>
+	</bean>
+	<bean id="jmsReceiver" class="com.mytutorial.JmsReceiver">
+		<property name="jmsTemplate102">
+			<ref bean="jmsQueueTemplate102" />
+		</property>
+	</bean>
+	<!-- JMS Queue Template -->
+	<bean id="jmsQueueTemplate102" class="org.springframework.jms.core.JmsTemplate102">
+		<property name="connectionFactory">
+			<ref bean="myJmsQueueConnectionFactory" />
+		</property>
+		<property name="pubSubDomain">
+			<value>false</value>
+		</property>
+		<property name="receiveTimeout">
+			<value>20000</value>
+		</property>
+	</bean>
+	<!-- JMS Queue Connection Factory -->
+	<bean id="myJmsQueueConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiTemplate">
+			<ref bean="jndiTemplate" />
+		</property>
+		<property name="jndiName">
+			<value>TCPQueueConnectionFactory</value>
+		</property>
+	</bean>
+	<bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate">
+		<property name="environment">
+			<props>
+
+
+				<prop key="java.naming.factory.initial">
+					org.exolab.jms.jndi.InitialContextFactory
+</prop>
+
+				<prop key="java.naming.provider.url">tcp://cepis.coe.uky.edu:3035</prop>
+				<prop key="java.naming.security.principal">rsalli2</prop>
+				<prop key="java.naming.security.credentials">u$teb189</prop>
+			</props>
+		</property>
+	</bean>
+</beans>

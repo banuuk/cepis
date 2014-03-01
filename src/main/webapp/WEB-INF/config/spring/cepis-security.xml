@@ -1,0 +1,481 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<http pattern="/login*" security="none" />
+	<http pattern="/accessdenied*" security="none" />
+	<http pattern="/images/**" security="none" />
+	<http pattern="/css/**" security="none" />
+	<http pattern="/js/**" security="none" />
+
+	<http auto-config="true">
+			
+		<intercept-url pattern="/pages/coldfusion/*" 
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_EPSB_MANAGER" />
+			
+		<intercept-url pattern="/pages/ws/*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW" />
+		
+		<intercept-url pattern="/pages/search*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_ASSESSMENT_MANAGER,
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW" />
+				
+		<intercept-url pattern="/pages/advising/student*"
+			access="
+			ROLE_STUDENT" />
+				
+		<intercept-url pattern="/pages/advising/mycalendar*"
+			access="
+			ROLE_ADVISOR,
+			ROLE_ADVISING_MANAGER" />
+				
+		<intercept-url pattern="/pages/advising/*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_ADVISOR,
+			ROLE_STUDENT,
+			ROLE_ADVISING_MANAGER" />
+			
+		<intercept-url pattern="/pages/conference/user-conference*"
+			access="
+			ROLE_ADMINISTRATOR,
+			ROLE_DEVELOPER,
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW,
+			ROLE_STUDENT,
+			ROLE_ADVISOR,
+			ROLE_ADVISING_MANAGER" />
+				
+		<intercept-url pattern="/pages/conference/*" 
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_CONFERENCE_MANAGER" />
+			
+<!--*********************************************************************************************-->			
+<!--************************************ ASSESSMENT APP SECURITY ***********************************-->
+<!--*********************************************************************************************-->
+
+				
+		<intercept-url pattern="/pages/assessment/*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_ASSESSMENT_MANAGER" />
+				
+<!--*********************************************************************************************-->			
+<!--************************************ BARCODE APP SECURITY ***********************************-->
+<!--*********************************************************************************************-->
+
+		<intercept-url pattern="/pages/barcode*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_BADGE_MANAGER,
+			ROLE_ADVISING_MANAGER" />
+
+<!--*********************************************************************************************-->			
+<!--**************************************** EMS SECURITY ***************************************-->
+<!--*********************************************************************************************-->
+		<intercept-url pattern="/pages/ems/*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW,
+			ROLE_STUDENT" />				
+							
+		
+<!--*********************************************************************************************-->			
+<!--******************************** ACCOUNT MANAGEMENT SECURITY ********************************-->
+<!--*********************************************************************************************-->	
+
+		<intercept-url pattern="/pages/account/*"
+			access="
+			ROLE_ADMINISTRATOR,
+			ROLE_DEVELOPER,
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW,
+			ROLE_STUDENT,
+			ROLE_ADVISOR,
+			ROLE_ADVISING_MANAGER" />
+
+		<intercept-url pattern="/pages/account/add/*"		
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,			
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+				
+		<intercept-url pattern="/pages/account/address/delete-address*"		
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,			
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+			
+		<intercept-url pattern="/pages/account/college-profile/delete-college-profile*"		
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,			
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+						
+		<intercept-url pattern="/pages/account/email-address/delete-email-address*"		
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />			
+			
+		<intercept-url pattern="/pages/account/identity/delete-identity*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR" />
+						
+		<intercept-url pattern="/pages/account/personal/delete-personal-profile*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,			
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+						
+		<intercept-url pattern="/pages/account/phone/delete-phone*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,			
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+						
+		<intercept-url pattern="/pages/account/program-profile/delete-program-profile*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,			
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+													
+		<intercept-url pattern="/pages/account/address/add-address*"
+			access="
+			ROLE_ADMINISTRATOR,
+			ROLE_DEVELOPER,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT,
+			ROLE_STUDENT" />
+				
+		<intercept-url pattern="/pages/account/college-profile/add-college-profile*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,			
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+				
+		<intercept-url pattern="/pages/account/email-address/add-email-address*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,			
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT,
+			ROLE_STUDENT" />
+				
+		<intercept-url pattern="/pages/account/identity/add-identity*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR" />
+				
+		<intercept-url pattern="/pages/account/personal/add-personal-profile*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+				
+		<intercept-url pattern="/pages/account/phone/add-phone*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT,
+			ROLE_STUDENT" />
+		
+		<intercept-url pattern="/pages/account/program-profile/add-program-profile*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+		
+		<intercept-url pattern="/pages/account/role/*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR" />
+			
+		<intercept-url pattern="/pages/account/address/edit-address*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+				
+		<intercept-url pattern="/pages/account/college-profile/edit-college-profile*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+				
+		<intercept-url pattern="/pages/account/email-address/edit-email-address*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+				
+		<intercept-url pattern="/pages/account/identity/edit-identity*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+				
+		<intercept-url pattern="/pages/account/personal/edit-personal-profile*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+				
+		<intercept-url pattern="/pages/account/phone/edit-phone*"		
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,			
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+				
+		<intercept-url pattern="/pages/account/program-profile/edit-program-profile*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+		<intercept-url pattern="/pages/account/test-score/*"
+			access="
+			ROLE_ADMINISTRATOR,
+			ROLE_DEVELOPER,			
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW" />
+
+<!--*********************************************************************************************-->				
+<!--*********************************** CONTROL PANEL SECURITY **********************************-->
+<!--*********************************************************************************************-->
+
+		<intercept-url pattern="/pages/cp/ping*" 
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,			
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW" />
+			
+		<intercept-url pattern="/pages/cp/picture*" 
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_BADGE_MANAGER" />
+
+<!--*********************************************************************************************-->				
+<!--**************************** ADMINISTRATION APPLICATION SECURITY ****************************-->
+<!--*********************************************************************************************-->
+
+		<intercept-url pattern="/pages/admin/**" 
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR" />
+		
+<!--*********************************************************************************************-->
+<!--********************************** TEP APPLICATION SECURITY *********************************-->
+<!--*********************************************************************************************-->
+			
+		<intercept-url pattern="/pages/tep/index*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW" />
+		
+		<intercept-url pattern="/pages/tep/view-tep*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW" />
+		
+		<intercept-url pattern="/pages/tep/report-tep*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW" />
+			
+		<intercept-url pattern="/pages/tep/add-tep*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+		
+		<intercept-url pattern="/pages/tep/edit-tep*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+			
+		<intercept-url pattern="/pages/tep/praxisI*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT,
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+		
+		<intercept-url pattern="/pages/tep/praxisII*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT,
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+		
+		<intercept-url pattern="/pages/tep/gre*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT,
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+			
+		<intercept-url pattern="/pages/tep/delete-tep*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+		
+<!--*********************************************************************************************-->		
+<!--***************************** CERTIFICATION APPLICATION SECURITY ****************************-->	
+<!--*********************************************************************************************-->		
+			
+		<intercept-url pattern="/pages/certification/index*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW" />
+		
+		<intercept-url pattern="/pages/certification/view-certification*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW" />
+			
+		<intercept-url pattern="/pages/certification/add-certification*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+		
+		<intercept-url pattern="/pages/certification/edit-certification*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+			
+		<intercept-url pattern="/pages/certification/delete-certification*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+			
+		<intercept-url pattern="/pages/certification/email-address*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT,
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+			
+		<intercept-url pattern="/pages/certification/phone*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT,
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+			
+		<intercept-url pattern="/pages/certification/address*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT,
+			ROLE_STUDENT_ACCOUNT_MANAGER_DELETE" />
+
+<!--*********************************************************************************************-->
+<!--**************************** NOTES AND EMAIL APPLICATION SECURITY ***************************-->
+
+		<intercept-url pattern="/pages/notes/index*"
+			access="
+			ROLE_DEVELOPER,
+			ROLE_ADMINISTRATOR,
+			ROLE_ADVISOR,
+			ROLE_ADVISING_MANAGER,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" />
+			
+
+<!--*********************************************************************************************-->
+<!--************************************** GENERAL SECURITY *************************************-->			
+<!--*********************************************************************************************-->
+						
+		<intercept-url pattern="/**"
+			access="
+			ROLE_ADMINISTRATOR,
+			ROLE_DEVELOPER,
+			ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT,
+			ROLE_STUDENT_ACCOUNT_MANAGER_VIEW,
+			ROLE_STUDENT,
+			ROLE_ADVISOR,
+			ROLE_ADVISING_MANAGER,
+			ROLE_BADGE_MANAGER,
+			ROLE_CONFERENCE_MANAGER,
+			ROLE_ASSESSMENT_MANAGER" />
+			
+		<form-login login-page="/login.jsp" default-target-url="/index.cps"
+			always-use-default-target="true" authentication-failure-url="/login.jsp?c=1" />
+		<session-management invalid-session-url="/login.jsp"
+			session-authentication-error-url="/login.jsp?c=4">
+			<concurrency-control max-sessions="1"
+				expired-url="/login.jsp?c=3" />
+		</session-management>
+		<logout delete-cookies="JSESSIONID" logout-success-url="/login.jsp?c=2" />
+	</http>
+	<ldap-server id="contextSource" url="ldap://128.163.16.252:389/o=uky" />
+	
+	<authentication-manager>
+ 		<authentication-provider ref="ukyLdapAuthenticationProvider" />
+ 		<authentication-provider>
+			<password-encoder hash="md5" />
+			<jdbc-user-service data-source-ref="itc5DataSource"
+				users-by-username-query="SELECT ADUserId as username, ADPassword as password, 1 as enabled FROM tblIdentity where ADUserId =?"
+				authorities-by-username-query="SELECT iden.ADUserId as username, role.name as authority FROM tblIdentity iden INNER JOIN tbl20User_Role userRoleMap ON iden.UID=userRoleMap.UID INNER JOIN lstRole role ON userRoleMap.roleid=role.ID where iden.ADUserId =?" />
+		</authentication-provider>
+		<authentication-provider>
+			<password-encoder hash="md5" />
+			<user-service id="userDetailsService">
+				<user name="badgeuser" password="66387e3419070977c4e84a2c29a7a52d"
+					authorities="ROLE_ADVISING_MANAGER,ROLE_BADGE_MANAGER" />
+				<user name="guest" password="d1d4efc0ca5155c4bc8885f5b9d1821d"
+					authorities="ROLE_STUDENT" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+
+	<beans:bean id="ukyLdapAuthenticationProvider"
+		class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
+		<beans:constructor-arg>
+			<beans:bean class="edu.uky.cepis.authenticator.CepisAuthenticator">
+				<beans:constructor-arg ref="contextSource" />
+				<beans:property name="userDnPatterns">
+					<beans:list>
+						<beans:value>cn={0},ou=users</beans:value>
+					</beans:list>
+				</beans:property>
+				<beans:property name="service">
+					<beans:ref bean="cepisUserService" />
+				</beans:property>
+			</beans:bean>
+		</beans:constructor-arg>
+		<beans:constructor-arg>
+			<beans:bean class="edu.uky.cepis.populator.CepisAuthoritiesPopulator">
+				<beans:property name="service">
+					<beans:ref bean="cepisUserService" />
+				</beans:property>
+				<beans:property name="accountManagementBean" ref="accountManagementBean" />
+			</beans:bean>
+		</beans:constructor-arg>
+	</beans:bean>
+
+</beans:beans>

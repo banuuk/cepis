@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="edu.uky.cepis.domain.CohortTerm" table="lstCohortTerm">
+		<meta attribute="class-description">Class to identify College of Education cohort terms (eg., Fall 2009, Spring 2010...)</meta>
+		<cache region="edu.uky.cepis.cache.cohortterm"
+			usage="read-write" />
+		<id name="termCode" column="CohortAdmTerm" type="integer"  />
+		<!-- Following variable will be used in the drop down menu -->
+		<property name="shortDesc" column="short_description" type="string"
+			not-null="true" length="255" />
+		<property name="description" column="Describer" type="string"
+			length="255" />
+	</class>
+
+</hibernate-mapping>
+

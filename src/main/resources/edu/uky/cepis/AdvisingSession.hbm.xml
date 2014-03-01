@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.AdvisingSession" table="tblAdvisingSession">
+		<meta attribute="class-description">Details about an Advising Session</meta>
+		<cache region="edu.uky.cepis.cache.advisingsession" usage="read-write" />
+
+		<id name="advisingSessionID" column="advisingSessionID" type="string"
+			length="255" />
+
+		<property name="sessionDate" column="sessionDate" type="timestamp" />
+		<property name="sessionType" column="sessionType" type="string" />
+		<property name="sessionStatus" column="sessionStatus" type="string" />
+		<property name="preSessionText" column="preSessionText" type="text" />
+		<property name="sessionText" column="sessionText" type="text" />
+		<property name="studentNotes" column="studentNotes" type="text" />
+		<property name="advisorNotes" column="advisorNotes" type="text" />
+		<property name="noShowEmailSent" column="noShowEmailSent" type="integer" />
+
+		<many-to-one name="advisingSessionSlot" lazy="false" fetch="join"
+			class="edu.uky.cepis.domain.AdvisingSessionSlot" column="slotID"
+			unique="true" />
+			
+		<set name="holdLifts" lazy="true" >
+			<cache region="edu.uky.cepis.cache.holdlift" usage="read-write" />
+			<key>
+				<column name="AdvisingcontactID" not-null="true" />
+			</key>
+			<one-to-many class="edu.uky.cepis.domain.HoldLift"
+				not-found="ignore" />
+		</set>
+		<property name="lastEdit" type="timestamp" column="Lastedit" />
+
+		<many-to-one name="advisor" class="edu.uky.cepis.domain.Advisor"
+			column="AdvisorUID" not-null="true" lazy="false" fetch="join"/>
+			
+		<many-to-one name="user" class="edu.uky.cepis.domain.User"
+			column="UID" not-null="true" lazy="false" fetch="join"/>
+			
+	</class>
+</hibernate-mapping>
+

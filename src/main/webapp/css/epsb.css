@@ -1,0 +1,30 @@
+.epsbTable thead tr td{
+color:#0000CC;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:bold;
+text-align:center;
+border:2px solid;
+border-color:#000099;
+}
+
+.epsbTable tbody tr td{
+font-family:Arial, Helvetica, sans-serif;
+font-size:10px;
+font-weight:bold;
+text-align:center;
+color:#000000;
+border:1px solid;
+border-color:#000099;
+}
+
+.headin{
+font-family:Arial, Helvetica, sans-serif;
+font-weight:bold;
+font-size:13px;
+font-style:italic;
+color:#000000;
+margin-top:2%;
+margin-left:45%;
+margin-bottom:2%;
+}

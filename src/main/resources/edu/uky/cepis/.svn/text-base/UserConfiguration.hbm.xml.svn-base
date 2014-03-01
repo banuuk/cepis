@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.UserConfiguration" table="tblUserConfiguration">
+		<meta attribute="class-description">CEPIS Portal User Configuration / Setting</meta>
+		<cache region="edu.uky.cepis.cache.userconfiguration" usage="read-write" />
+		<id name="configurationId" column="configurationId">
+			<generator class="native"></generator>
+		</id>
+		<many-to-one name="activeWorkingSet" class="edu.uky.cepis.domain.WorkingSet"
+			column="activeWorkingSet" cascade="none" not-found="ignore" not-null="false" />
+		<many-to-one name="primaryEmail" class="edu.uky.cepis.domain.EmailAddress"
+			column="primaryEmail" cascade="none" not-found="ignore" not-null="false"
+			fetch="join" />
+		<many-to-one name="primaryAddress" class="edu.uky.cepis.domain.Address"
+			column="primaryAddress" cascade="none" not-found="ignore" not-null="false"
+			fetch="join" />
+		<many-to-one name="primaryPhone" class="edu.uky.cepis.domain.Phone"
+			column="primaryPhone" cascade="none" not-found="ignore" not-null="false"
+			fetch="join" />
+		<many-to-one name="primaryUserType" class="edu.uky.cepis.domain.UserType"
+			column="primaryUserType" cascade="none" not-found="ignore" not-null="false"
+			fetch="join" />
+		<property name="rememberLastWorkingSet" type="yes_no"
+			column="rememberLastWorkingSet"></property>
+		<property name="rowCount" column="rowCount"
+			not-null="true" type="integer" />
+		<property name="searchCount" column="searchCount"
+			not-null="true" type="integer" />
+	</class>
+
+</hibernate-mapping>
+

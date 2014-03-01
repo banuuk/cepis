@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.Artifact">
+
+		<meta attribute="class-description">Artifacts/archives from the OTIS database</meta>
+		<subselect>
+			SELECT archive.ID as ID,archive.user as user,archive.faculty as faculty,archive.course as course,archive.type as type,archive.status as status,archive.assignment as assignment,
+archive.comment as comment,archive.portfolio as portfolio,archive.date as date,
+archive.semester as semester,archive.yr as yr,archive.sctn as sctn,
+archive.pacategory as pacategory,archive.domain as domain,archive.pacategory2 as pacategory2,archive.ciview as ciview,archive.usview as usview,archive.approve as approve,archive.approvedBy as approvedBy,
+archive.score as score,IFNULL(link.assessmentId, -1) as assessmentId FROM archives archive LEFT OUTER JOIN assessment_link link
+			on archive.ID=link.ID 
+		</subselect>
+		<cache region="edu.uky.cepis.cache.artifact" usage="read-write" />
+		<id name="id" column="ID" type="long">
+			<generator class="native"></generator>
+		</id>
+		<!-- Link to the tblAssessmentProfile table - UserAssessmentProfile domain -->
+		<property name="assessmentProfile" type="long" column="assessmentId" />
+		<!-- Link to the tblIdentity - User domain -->
+		<property name="user" type="string" column="user" length="50" />
+
+		<property name="faculty" type="string" column="faculty"
+			length="50" />
+		<property name="course" type="string" column="course" length="50" />
+		<property name="type" type="string" column="type" length="25" />
+		<property name="status" type="string" column="status" length="25" />
+		<property name="assignment" type="string" column="assignment"
+			length="255" />
+		<property name="comment" type="string" column="comment"
+			length="1024" />
+		<property name="portfolio" type="integer" column="portfolio" />
+		<property name="date" type="date" column="date" />
+		<property name="semester" type="string" column="semester"
+			length="25" />
+		<property name="year" type="string" column="yr" length="15" />
+		<property name="sctn" type="integer" column="sctn" />
+		<property name="domain" type="string" column="domain" length="50" />
+		<property name="pacategory" type="string" column="pacategory"
+			length="50" />
+		<property name="pacategory2" type="string" column="pacategory2"
+			length="50" />
+		<property name="usview" type="integer" column="usview" />
+		<property name="ciview" type="integer" column="ciview" />
+		<property name="approve" type="integer" column="approve" />
+		<property name="approvedBy" type="string" column="approvedby"
+			length="255" />
+		<property name="score" type="string" column="score" length="50" />
+		<set name="standards" lazy="false" fetch="join">
+			<cache region="edu.uky.cepis.cache.artifactstandard" usage="read-write" />
+			<key>
+				<column name="artifact" not-null="true" />
+			</key>
+			<one-to-many not-found="ignore"
+				class="edu.uky.cepis.domain.ArtifactStandard" />
+
+		</set>
+
+	</class>
+</hibernate-mapping>
+

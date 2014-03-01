@@ -1,0 +1,79 @@
+# CEPIS properties used by the configuration
+
+# CEPIS System Properties
+cepis.portal.version=2.13.0
+cepis.portal.releaseDate=2013/5/29
+cepis.portal.reportBug=https://coesis.coe.uky.edu/trac
+cepis.portal.copyrightTo=University of Kentucky
+cepis.portal.copyrightYear=2013
+cepis.portal.applicationName=CEPIS
+cepis.portal.applicationDescription
+cepis.portal.baseLocation=/opt/cepis
+cepis.portal.batch.ets.scorelink.praxis=${cepis.portal.baseLocation}/ets/scorelink/praxis
+cepis.portal.profileBaseLocation=${cepis.portal.baseLocation}/profile/images
+#cepis.portal.searchIndexLocation=C:/temp/lucene/index
+cepis.portal.searchIndexLocation=${cepis.portal.baseLocation}/index
+
+# ITC5 Datasource - PRODUCTION
+itc5.dialect=org.hibernate.dialect.MySQL5Dialect
+itc5.jdbc.driver=com.mysql.jdbc.Driver
+itc5.jdbc.url=jdbc:mysql://itc5.coe.uky.edu/DataReview?zeroDateTimeBehavior=convertToNull
+itc5.jdbc.username=portal
+itc5.jdbc.password=u$652608
+itc5.jdbc.maxIdle=2
+itc5.jdbc.maxActive=5
+itc5.jdbc.batch_fetch_size=25
+
+# CEPIS TEST Datasource - TEST
+#itc5.dialect=org.hibernate.dialect.MySQL5Dialect
+#itc5.jdbc.driver=com.mysql.jdbc.Driver
+#itc5.jdbc.url=jdbc:mysql://cepistest.coe.uky.edu/DataReview?zeroDateTimeBehavior=convertToNull
+#itc5.jdbc.username=cepis
+#itc5.jdbc.password=u$177007
+#itc5.jdbc.maxIdle=2
+#itc5.jdbc.maxActive=5
+#itc5.jdbc.batch_fetch_size=25
+
+# APEX Datasource
+apex.dialect=org.hibernate.dialect.SQLServerDialect
+
+apex.jdbc.driver=com.microsoft.sqlserver.jdbc.SQLServerDriver
+apex.jdbc.url=jdbc:sqlserver://gensql.ad.uky.edu:30002;DatabaseName=Darwin_DB
+apex.jdbc.username=apexed
+apex.jdbc.password=se9cneu8
+apex.jdbc.maxIdle=2
+apex.jdbc.maxActive=5
+apex.jdbc.batch_fetch_size=25
+
+# OTIS Datasource
+otis.dialect=org.hibernate.dialect.MySQL5Dialect
+otis.jdbc.driver=com.mysql.jdbc.Driver
+otis.jdbc.url=jdbc:mysql://otis.coe.uky.edu/OPUKEducation
+otis.jdbc.username=portal
+otis.jdbc.password=u$652608
+otis.jdbc.maxIdle=2
+otis.jdbc.maxActive=5
+otis.jdbc.batch_fetch_size=25
+
+# CEPIS Mail Sender
+cepis.mail.host=pop.coe.uky.edu
+cepis.mail.from=teb166@coe.uky.edu
+cepis.mail.replyTo=no-reply@coe.uky.edu
+
+# CEPIS Spring Batch
+# ETS ScoreLink Service
+cepis.batch.praxis.tokenNames=code,id,ssn,praxisid,lastname,firstname,middlename,gender,dob,street,city,state,zip,country,institution_code,edu_level,ugrad_major,grad_major,ugrad_gpa,ethnic_code,filler,cur_testdate1,cur_testcode1,cur_testscore1,cur_nai1,cur_rei1,cur_filler1,cur_testdate2,cur_testcode2,cur_testscore2,cur_nai2,cur_rei2,cur_filler2,cur_testdate3,cur_testcode3,cur_testscore3,cur_nai3,cur_rei3,cur_filler3,cur_testdate4,cur_testcode4,cur_testscore4,cur_nai4,cur_rei4,cur_filler4,cur_testdate5,cur_testcode5,cur_testscore5,cur_nai5,cur_rei5,cur_filler5,cur_testdate6,cur_testcode6,cur_testscore6,cur_nai6,cur_rei6,cur_filler6,high_testdate1,high_testcode1,high_testscore1,high_nai1,high_rsi1,high_rei1,high_testdate2,high_testcode2,high_testscore2,high_nai2,high_rsi2,high_rei2,high_testdate3,high_testcode3,high_testscore3,high_nai3,high_rsi3,high_rei3,high_testdate4,high_testcode4,high_testscore4,high_nai4,high_rsi4,high_rei4,high_testdate5,high_testcode5,high_testscore5,high_nai5,high_rsi5,high_rei5,high_testdate6,high_testcode6,high_testscore6,high_nai6,high_rsi6,high_rei6,high_testdate7,high_testcode7,high_testscore7,high_nai7,high_rsi7,high_rei7,high_testdate8,high_testcode8,high_testscore8,high_nai8,high_rsi8,high_rei8,high_testdate9,high_testcode9,high_testscore9,high_nai9,high_rsi9,high_rei9,high_testdate10,high_testcode10,high_testscore10,high_nai10,high_rsi10,high_rei10,prog_id,prog_create_date,state_code,full_testdate1,full_testcode1,full_testscore1,full_reqminscore1,full_minscore1,full_reqpassscore1,full_teststatus1,full_testdate2,full_testcode2,full_testscore2,full_reqminscore2,full_minscore2,full_reqpassscore2,full_teststatus2,full_testdate3,full_testcode3,full_testscore3,full_reqminscore3,full_minscore3,full_reqpassscore3,full_teststatus3,full_testdate4,full_testcode4,full_testscore4,full_reqminscore4,full_minscore4,full_reqpassscore4,full_teststatus4,full_testdate5,full_testcode5,full_testscore5,full_reqminscore5,full_minscore5,full_reqpassscore5,full_teststatus5,full_testdate6,full_testcode6,full_testscore6,full_reqminscore6,full_minscore6,full_reqpassscore6,full_teststatus6,full_testdate7,full_testcode7,full_testscore7,full_reqminscore7,full_minscore7,full_reqpassscore7,full_teststatus7,full_testdate8,full_testcode8,full_testscore8,full_reqminscore8,full_minscore8,full_reqpassscore8,full_teststatus8,full_testdate9,full_testcode9,full_testscore9,full_reqminscore9,full_minscore9,full_reqpassscore9,full_teststatus9,full_testdate10,full_testcode10,full_testscore10,full_reqminscore10,full_minscore10,full_reqpassscore10,full_teststatus10,full_testdate11,full_testcode11,full_testscore11,full_reqminscore11,full_minscore11,full_reqpassscore11,full_teststatus11,full_testdate12,full_testcode12,full_testscore12,full_reqminscore12,full_minscore12,full_reqpassscore12,full_teststatus12,full_testdate13,full_testcode13,full_testscore13,full_reqminscore13,full_minscore13,full_reqpassscore13,full_teststatus13,full_testdate14,full_testcode14,full_testscore14,full_reqminscore14,full_minscore14,full_reqpassscore14,full_teststatus14,full_testdate15,full_testcode15,full_testscore15,full_reqminscore15,full_minscore15,full_reqpassscore15,full_teststatus15,full_testdate16,full_testcode16,full_testscore16,full_reqminscore16,full_minscore16,full_reqpassscore16,full_teststatus16,full_testdate17,full_testcode17,full_testscore17,full_reqminscore17,full_minscore17,full_reqpassscore17,full_teststatus17,full_testdate18,full_testcode18,full_testscore18,full_reqminscore18,full_minscore18,full_reqpassscore18,full_teststatus18,full_testdate19,full_testcode19,full_testscore19,full_reqminscore19,full_minscore19,full_reqpassscore19,full_teststatus19,full_testdate20,full_testcode20,full_testscore20,full_reqminscore20,full_minscore20,full_reqpassscore20,full_teststatus20,full_testdate21,full_testcode21,full_testscore21,full_reqminscore21,full_minscore21,full_reqpassscore21,full_teststatus21,full_testdate22,full_testcode22,full_testscore22,full_reqminscore22,full_minscore22,full_reqpassscore22,full_teststatus22,full_testdate23,full_testcode23,full_testscore23,full_reqminscore23,full_minscore23,full_reqpassscore23,full_teststatus23,full_testdate24,full_testcode24,full_testscore24,full_reqminscore24,full_minscore24,full_reqpassscore24,full_teststatus24,full_testdate25,full_testcode25,full_testscore25,full_reqminscore25,full_minscore25,full_reqpassscore25,full_teststatus25,full_testdate26,full_testcode26,full_testscore26,full_reqminscore26,full_minscore26,full_reqpassscore26,full_teststatus26,full_testdate27,full_testcode27,full_testscore27,full_reqminscore27,full_minscore27,full_reqpassscore27,full_teststatus27,full_testdate28,full_testcode28,full_testscore28,full_reqminscore28,full_minscore28,full_reqpassscore28,full_teststatus28,full_testdate29,full_testcode29,full_testscore29,full_reqminscore29,full_minscore29,full_reqpassscore29,full_teststatus29,full_testdate30,full_testcode30,full_testscore30,full_reqminscore30,full_minscore30,full_reqpassscore30,full_teststatus30,full_testdate31,full_testcode31,full_testscore31,full_reqminscore31,full_minscore31,full_reqpassscore31,full_teststatus31,full_testdate32,full_testcode32,full_testscore32,full_reqminscore32,full_minscore32,full_reqpassscore32,full_teststatus32,full_testdate33,full_testcode33,full_testscore33,full_reqminscore33,full_minscore33,full_reqpassscore33,full_teststatus33,full_testdate34,full_testcode34,full_testscore34,full_reqminscore34,full_minscore34,full_reqpassscore34,full_teststatus34,full_testdate35,full_testcode35,full_testscore35,full_reqminscore35,full_minscore35,full_reqpassscore35,full_teststatus35,full_testdate36,full_testcode36,full_testscore36,full_reqminscore36,full_minscore36,full_reqpassscore36,full_teststatus36
+cepis.batch.praxis.tokenRanges=1-4, 5-5, 6-14, 15-22, 23-37, 38-47, 48-48, 49-49, 50-57, 58-87, 88-101, 102-103, 104-112, 113-115, 116-119, 120-122, 123-125, 126-128, 129-131, 132-134, 135-140, 141-148, 149-152, 153-155, 156-156, 157-157, 158-158, 159-166, 167-170, 171-173, 174-174, 175-175, 176-176, 177-184, 185-188, 189-191, 192-192, 193-193, 194-194, 195-202, 203-206, 207-209, 210-210, 211-211, 212-212, 213-220, 221-224, 225-227, 228-228, 229-229, 230-230, 231-238, 239-242, 243-245, 246-246, 247-247, 248-248, 249-256, 257-260, 261-263, 264-264, 265-265, 266-266, 267-274, 275-278, 279-281, 282-282, 283-283, 284-284, 285-292, 293-296, 297-299, 300-300, 301-301, 302-302, 303-310, 311-314, 315-317, 318-318, 319-319, 320-320, 321-328, 329-332, 333-335, 336-336, 337-337, 338-338, 339-346, 347-350, 351-353, 354-354, 355-355, 356-356, 357-364, 365-368, 369-371, 372-372, 373-373, 374-374, 375-382, 383-386, 387-389, 390-390, 391-391, 392-392, 393-400, 401-404, 405-407, 408-408, 409-409, 410-410, 411-418, 419-422, 423-425, 426-426, 427-427, 428-428, 429-434, 435-442, 443-444, 445-454, 455-458, 459-462, 463-465, 466-472, 473-476, 477-486, 487-496, 497-500, 501-504, 505-507, 508-514, 515-518, 519-528, 529-538, 539-542, 543-546, 547-549, 550-556, 557-560, 561-570, 571-580, 581-584, 585-588, 589-591, 592-598, 599-602, 603-612, 613-622, 623-626, 627-630, 631-633, 634-640, 641-644, 645-654, 655-664, 665-668, 669-672, 673-675, 676-682, 683-686, 687-696, 697-706, 707-710, 711-714, 715-717, 718-724, 725-728, 729-738, 739-748, 749-752, 753-756, 757-759, 760-766, 767-770, 771-780, 781-790, 791-794, 795-798, 799-801, 802-808, 809-812, 813-822, 823-832, 833-836, 837-840, 841-843, 844-850, 851-854, 855-864, 865-874, 875-878, 879-882, 883-885, 886-892, 893-896, 897-906, 907-916, 917-920, 921-924, 925-927, 928-934, 935-938, 939-948, 949-958, 959-962, 963-966, 967-969, 970-976, 977-980, 981-990, 991-1000, 1001-1004, 1005-1008, 1009-1011, 1012-1018, 1019-1022, 1023-1032, 1033-1042, 1043-1046, 1047-1050, 1051-1053, 1054-1060, 1061-1064, 1065-1074, 1075-1084, 1085-1088, 1089-1092, 1093-1095, 1096-1102, 1103-1106, 1107-1116, 1117-1126, 1127-1130, 1131-1134, 1135-1137, 1138-1144, 1145-1148, 1149-1158, 1159-1168, 1169-1172, 1173-1176, 1177-1179, 1180-1186, 1187-1190, 1191-1200, 1201-1210, 1211-1214, 1215-1218, 1219-1221, 1222-1228, 1229-1232, 1233-1242, 1243-1252, 1253-1256, 1257-1260, 1261-1263, 1264-1270, 1271-1274, 1275-1284, 1285-1294, 1295-1298, 1299-1302, 1303-1305, 1306-1312, 1313-1316, 1317-1326, 1327-1336, 1337-1340, 1341-1344, 1345-1347, 1348-1354, 1355-1358, 1359-1368, 1369-1378, 1379-1382, 1383-1386, 1387-1389, 1390-1396, 1397-1400, 1401-1410, 1411-1420, 1421-1424, 1425-1428, 1429-1431, 1432-1438, 1439-1442, 1443-1452, 1453-1462, 1463-1466, 1467-1470, 1471-1473, 1474-1480, 1481-1484, 1485-1494, 1495-1504, 1505-1508, 1509-1512, 1513-1515, 1516-1522, 1523-1526, 1527-1536, 1537-1546, 1547-1550, 1551-1554, 1555-1557, 1558-1564, 1565-1568, 1569-1578, 1579-1588, 1589-1592, 1593-1596, 1597-1599, 1600-1606, 1607-1610, 1611-1620, 1621-1630, 1631-1634, 1635-1638, 1639-1641, 1642-1648, 1649-1652, 1653-1662, 1663-1672, 1673-1676, 1677-1680, 1681-1683, 1684-1690, 1691-1694, 1695-1704, 1705-1714, 1715-1718, 1719-1722, 1723-1725, 1726-1732, 1733-1736, 1737-1746, 1747-1756, 1757-1760, 1761-1764, 1765-1767, 1768-1774, 1775-1778, 1779-1788, 1789-1798, 1799-1802, 1803-1806, 1807-1809, 1810-1816, 1817-1820, 1821-1830, 1831-1840, 1841-1844, 1845-1848, 1849-1851, 1852-1858, 1859-1862, 1863-1872, 1873-1882, 1883-1886, 1887-1890, 1891-1893, 1894-1900, 1901-1904, 1905-1914, 1915-1924, 1925-1928, 1929-1932, 1933-1935, 1936-1942, 1943-1946, 1947-1956 
+
+# Quartz Scheduler
+cepis.portal.scheduler.name=CEPISScheduler
+cepis.portal.scheduler.instanceId=AUTO
+cepis.portal.scheduler.threadPool.class=org.quartz.simpl.SimpleThreadPool
+cepis.portal.scheduler.threadPool.threadCount=25
+cepis.portal.scheduler.jobStore.class=org.quartz.impl.jdbcjobstore.JobStoreTX
+cepis.portal.scheduler.jobStore.isClustered=false
+cepis.portal.scheduler.jobStore.useProperties=false
+cepis.portal.scheduler.jobStore.tablePrefix=QRTZ_
+cepis.portal.scheduler.jobStore.driverDelegateClass=org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+cepis.portal.scheduler.jobStore.selectWithLockSQL=SELECT * FROM {0}LOCKS UPDLOCK WHERE LOCK_NAME = ?
+

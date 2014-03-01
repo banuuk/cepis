@@ -1,0 +1,375 @@
+@CHARSET "UTF-8";
+
+.layoutDefaultFont {font-size: 12px;font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;font-style: normal;font-weight: normal;}
+.layoutPanel{margin-left: 1%;margin-right: 1%;font-size: 12px;font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;font-style: normal;font-weight: normal;}
+.layoutCenter {margin-left:auto;margin-right:auto;,text-align: center;}
+.layoutHeaderImage{border: 0px;}
+.layoutSplit{height: 20px;}
+.layoutMenu{height:25px;width: 100%;}
+.layoutToolbar{height:23px;width: 100%;}
+.layoutNavigationTitleSplit{height: 5px;}
+.layoutTitle1{font-size: 20px;color: black;font-weight: bold; }
+.layoutThreeEqualSplit{width: 33.3%;text-align: center;}
+.layoutPageMark{margin-bottom:0.5px;}
+.layoutLineSeparator{margin-top:0px;}
+.layoutFooter{text-align:center;margin-left: 1%;margin-right: 1%;}
+.layoutFooterStatement{text-align: center;}
+.layoutFooterDefaultFormat{text-align: center;font-weight: bold;color: #C0C0C0;}
+.layoutFooterSpacer{color: #C0C0C0;width: 25px;text-align: center;display: inline-block;}
+a.layoutFooterLink:link {color: #C0C0C0;text-decoration: none underline;}
+a.layoutFooterLink:visited {color: #C0C0C0;text-decoration: none underline;}
+a.layoutFooterLink:active {color: #C0C0C0;text-decoration: none;}
+a.layoutFooterLink:hover {color: #FFFFFF;text-decoration: none;}
+
+table,td {
+	font-size: 12px;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	vertical-align: top;
+}
+
+.loadingStatus {
+	font-family: "Book Antiqua", "Times New Roman", Serif;
+	font-size: 14px;
+	color: #FFFFFF;
+	background-color: #FF0000;
+}
+
+.warningStatus {
+	font-family: "Book Antiqua", "Times New Roman", Serif;
+	font-size: 14px;
+	color: #FFFFFF;
+	background-color: #FF8040;
+}
+
+.testerStatus {
+	font-family: "Book Antiqua", "Times New Roman", Serif;
+	font-size: 14px;
+	color: #FFFFFF;
+	background-color: #0000FF;
+}
+
+.rich-page {
+	background-image: url('/cepis/images/pat2.jpg');
+	background-repeat: repeat;
+	font-family: "Book Antiqua", "Times New Roman", "Serif";
+	position: relative;
+	width: 82%;
+	margin-top: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: center;
+}
+
+.globalerror {
+	font-family: "Book Antiqua", "Times New Roman", "Serif";
+	font-size: 14px;
+	color: #FFFFFF;
+	background-color: #FF0000;
+	text-align: center;
+	font-weight: bold;
+	align: center;
+}
+
+.pic {
+	margin-bottom: -4px;
+	margin-right: 2px;
+}
+
+.search .rich-menu-item-hover {
+	background-color: transparent;
+	border-color: transparent;
+}
+
+a.menu:link {
+	color: #366B96;
+	text-decoration: none;
+}
+
+a.menu:visited {
+	color: #366B96;
+	text-decoration: none underline;
+}
+
+a.menu:active {
+	color: #366B96;
+	text-decoration: none underline;
+}
+
+a.menu:hover {
+	color: #333333;
+	text-decoration: none;
+}
+
+a.header:link {
+	color: #366B96;
+	text-decoration: none;
+}
+
+a.header:visited {
+	color: #366B96;
+	text-decoration: none;
+}
+
+a.header:active {
+	color: #366B96;
+	text-decoration: none;
+}
+
+a.header:hover {
+	color: #366B96;
+	text-decoration: none;
+}
+
+a.style1:link {
+	color: #366B96;
+	text-decoration: none underline;
+}
+
+a.style1:visited {
+	color: #366B96;
+	text-decoration: none underline;
+}
+
+a.style1:active {
+	color: #366B96;
+	text-decoration: none underline;
+}
+
+a.style1:hover {
+	color: #333333;
+	text-decoration: none;
+}
+
+a.style2:link {
+	color: #C0C0C0;
+	text-decoration: none underline;
+}
+
+a.style2:visited {
+	color: #C0C0C0;
+	text-decoration: none underline;
+}
+
+a.style2:active {
+	color: #C0C0C0;
+	text-decoration: none;
+}
+
+a.style2:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.bodyStyle {
+	background-color: white;
+}
+
+.label {
+	font-weight: bold;
+}
+
+.pbody {
+	width: 200px;
+}
+
+p {
+	font-family: verdana;
+	font-size: 11px;
+	line-height: 150%;
+	margin-bottom: 5px;
+	margin-top: 15px;
+}
+
+.centerBlock {
+	width: 100%;
+	position: relative;
+	margin-top: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	align: center;
+}
+
+.contentStyle {
+	position: relative;
+	margin-top: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	align: center;
+	background-color: white;
+	vertical-align: center;
+}
+
+.subtitleStyle {
+	font-family: "Book Antiqua", "Times New Roman", "Serif";
+	font-size: 16px;
+	color: #366B96;
+	text-align: center;
+	font-weight: bold;
+	align: center;
+}
+
+div#container {
+	position: relative;
+	width: 100%;
+	margin-top: 0px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+
+.cepisinfo1,.cepissuccess1,.cepiswarning1,.cepiserror1 {
+	border: 1px solid;
+	margin: 10px 0px;
+	padding: 5px 5px 5px 30px;
+	background-repeat: no-repeat;
+	background-position: 10px center;
+}
+
+.cepisinfo1 {
+	color: #00529B;
+	background-color: #BDE5F8;
+	background-image: url('/cepis/images/icons/information.png');
+}
+
+.cepissuccess1 {
+	color: #4F8A10;
+	background-color: #DFF2BF;
+	background-image: url('/cepis/images/icons/accept.png');
+}
+
+.cepiswarning1 {
+	color: #FFA500;
+	background-color: #FEEFB3;
+	background-image: url('/cepis/images/icons/bullet_error.png');
+}
+
+.cepiserror1 {
+	color: #D8000C;
+	background-color: #FFBABA;
+	background-image: url('/cepis/images/icons/exclamation.png');
+}
+
+.col1 {
+	width: 50%;
+	align: center;
+}
+
+.col2 {
+	width: 50%;
+	align: center;
+}
+
+.advisingmgrcol1 {
+	width: 70%;
+	align: center;
+}
+
+.advisingmgrcol2 {
+	width: 30%;
+	align: center;
+}
+
+.conferencecol1 {
+	width: 30%;
+	align: center;
+}
+
+.conferencecol2 {
+	width: 70%;
+	align: center;
+}
+
+.attendeecol1 {
+	width: 58%;
+	text-align: right;
+	align: right;
+}
+
+.attendeecol2 {
+	width: 42%;
+	text-align: right;
+	align: right;
+}
+
+.cepisinfo,.cepissuccess,.cepiswarning,.cepiserror {
+	-webkit-background-size: 40px 40px;
+	-moz-background-size: 40px 40px;
+	background-size: 40px 40px;
+	background-image: -webkit-gradient(linear, left top, right bottom, color-stop(.25, rgba(255
+		, 255, 255, .05) ), color-stop(.25, transparent),
+		color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .05) ),
+		color-stop(.75, rgba(255, 255, 255, .05) ),
+		color-stop(.75, transparent), to(transparent) );
+	background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, .05)
+		25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%,
+		rgba(255, 255, 255, .05) 75%, transparent 75%, transparent );
+	background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, .05)
+		25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%,
+		rgba(255, 255, 255, .05) 75%, transparent 75%, transparent );
+	background-image: -ms-linear-gradient(135deg, rgba(255, 255, 255, .05)
+		25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%,
+		rgba(255, 255, 255, .05) 75%, transparent 75%, transparent );
+	background-image: -o-linear-gradient(135deg, rgba(255, 255, 255, .05)
+		25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%,
+		rgba(255, 255, 255, .05) 75%, transparent 75%, transparent );
+	background-image: linear-gradient(135deg, rgba(255, 255, 255, .05) 25%,
+		transparent 25%, transparent 50%, rgba(255, 255, 255, .05) 50%,
+		rgba(255, 255, 255, .05) 75%, transparent 75%, transparent );
+	-moz-box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .4);
+	-webkit-box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .4);
+	box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .4);
+	width: 100%;
+	border: 1px solid;
+	color: #fff;
+	font-weight: bold;
+	font-size: 12px;
+	padding: 15px;
+	text-shadow: 0 1px 0 rgba(0, 0, 0, .5);
+	-webkit-animation: animate-bg 5s linear infinite;
+	-moz-animation: animate-bg 5s linear infinite;
+}
+
+.cepisinfo {
+	background-color: #4ea5cd;
+	border-color: #3b8eb5;
+}
+
+.cepiserror {
+	background-color: #de4343;
+	border-color: #c43d3d;
+}
+
+.cepiswarning {
+	background-color: #eaaf51;
+	border-color: #d99a36;
+}
+
+.cepissuccess {
+	background-color: #61b832;
+	border-color: #55a12c;
+}
+
+@
+-webkit-keyframes animate-bg {from { background-position:00;
+	
+}
+
+to {
+	background-position: -80px 0;
+}
+
+}
+@
+-moz-keyframes animate-bg {from { background-position:00;
+	
+}
+
+to {
+	background-position: -80px 0;
+}
+
+}
+ul.listType {
+	list-style-type: decimal;
+}

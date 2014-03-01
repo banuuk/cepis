@@ -1,0 +1,66 @@
+.displayData thead tr td{
+color:#0000CC;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:bold;
+text-align:center;
+border:2px solid;
+border-color:#000099;
+}
+
+.displayData tbody tr td{
+font-family:Arial, Helvetica, sans-serif;
+font-size:10px;
+font-weight:bold;
+text-align:center;
+color:#000000;
+border:1px solid;
+border-color:#000099;
+}
+
+#pieChartDisplay{
+margin-left:30%;
+margin-right:8%;
+margin-top:15px;
+margin-bottom:5px;
+width:340px;
+border-top:solid 2px;
+border-bottom:solid 2px;
+border-right:solid 2px;
+border-left:solid 2px;
+border-bottom-color:#000099;
+border-right-color:#000099;
+border-left-color:#000099;
+border-top-color:#000099;
+}
+
+#printDisplay{
+margin-left:85%;
+}
+
+#pieChartDisplay_E {
+margin-left:20%;
+margin-right:8%;
+margin-top:15px;
+margin-bottom:5px;
+width:400px;
+border-top:solid 2px;
+border-bottom:solid 2px;
+border-right:solid 2px;
+border-left:solid 2px;
+border-bottom-color:#000099;
+border-right-color:#000099;
+border-left-color:#000099;
+border-top-color:#000099;
+}
+
+#pieChartDisplay_GS table tr td{
+color:#0000CC;
+font-family:Arial, Helvetica, sans-serif;
+font-size:12px;
+font-weight:bold;
+text-align:left;
+border:2px solid;
+border-color:#000099;
+width:35%;
+}

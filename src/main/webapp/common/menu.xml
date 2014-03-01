@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<menu>
+	<item id="home" text="Home">
+		<href>/cepis/index.cps</href>
+		<hotkey>Ctrl+Alt+H</hotkey>
+	</item>
+	<item id="sep_top_1" type="separator" />
+	<item id="account" text="Account Management">
+		<href>/cepis/pages/account/index.cps</href>
+		<hotkey>Ctrl+Alt+A</hotkey>
+	</item>
+	<item id="ems" text="EMS">
+		<href>/cepis/pages/ems/index.cps</href>
+		<hotkey>Ctrl+Alt+E</hotkey>
+	</item>
+	<item id="sep_top_2" type="separator" />
+	<item id="search" text="Search">
+		<href>/cepis/pages/search/search.cps</href>
+	</item>
+	<item id="sep_top_3" type="separator" />
+	<item id="other" text="Other Apps">
+		<item id="mycalendar" text="myCalendar">
+		<href>/cepis/pages/calendar/mycalendar.cps</href>
+		</item>
+		<item id="epsb" text="EPSB">
+		<href>/cepis/pages/coldfusion/epsb/uk_data.cfm</href>
+		</item>
+		<item id="advising" text="Advising Appointments">
+		<href>/cepis/pages/advising/index.cps</href>
+		</item>
+	</item>
+</menu>

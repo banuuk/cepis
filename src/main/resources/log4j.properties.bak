@@ -1,0 +1,65 @@
+# Global logging configuration
+log4j.rootLogger=fileout
+#,stackhub
+log4j.logger=INFO,fileout
+log4j.logger.org.springframework.web.context.support=ERROR
+log4j.logger.org.springframework.beans.factory.support=ERROR
+log4j.logger.org.springframework.aop.framework.autoproxy=DEBUG,fileout
+log4j.logger.org.springframework.aop.framework.autoproxy.metadata=DEBUG,fileout
+log4j.logger.org.springframework.aop.framework.autoproxy.target=DEBUG,fileout
+log4j.logger.org.springframework.transaction.interceptor=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.intercept=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.intercept.method=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.intercept.web=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.afterinvocation=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.acl=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.acl.basic=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.taglibs.authz=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.ui.basicauth=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.ui.rememberme=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.ui=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.afterinvocation=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.ui.rmi=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.ui.httpinvoker=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.util=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity.providers.dao=DEBUG,fileout
+log4j.logger.net.sf.acegisecurity=WARN,fileout
+log4j.logger.org.springframework.orm.hibernate4.support.OpenSessionInViewFilter=DEBUG,fileout
+log4j.logger.edu.uky=DEBUG,fileout
+log4j.logger.org.efs=DEBUG,fileout
+#log4j.logger.javax.faces=DEBUG,fileout
+#log4j.logger.org.ajax4jsf=DEBUG,fileout
+# Log JDBC bind parameter runtime arguments
+#log4j.logger.org.hibernate=trace,fileout
+#log4j.logger.org.hibernate=DEBUG
+#log4j.logger.org.hibernate.SQL=DEBUG,fileout
+log4j.logger.org.efs.openreports.actions.ReportRunAction=DEBUG,fileout
+log4j.logger.org.efs.openreports.providers.impl.ChartProviderImpl=DEBUG,fileout
+log4j.logger.org.efs.openreports.providers.impl.ParameterProviderImpl=DEBUG,fileout
+log4j.logger.org.efs.openreports.util.ScheduledReportJob=DEBUG,fileout
+log4j.logger.org.jfree=DEBUG,fileout
+log4j.logger.org.jstripe=DEBUG,fileout
+
+
+
+# Console output...
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.conversionPattern=[%p,%c{1},%t] %m%n
+
+# Rolling log file output...
+log4j.appender.fileout=org.apache.log4j.RollingFileAppender
+#log4j.appender.fileout.File=${catalina.base}/logs/cepis_daily.log
+log4j.appender.fileout.File=cepis_daily.log
+log4j.appender.fileout.MaxFileSize=50MB
+log4j.appender.fileout.MaxBackupIndex=10
+log4j.appender.fileout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.conversionPattern=[%p,%c{1},%t] %m%n
+
+# Enable this setting for StackHub Online log analyser
+#log4j.appender.stackhub=org.apache.log4j.net.SocketAppender
+#log4j.appender.stackhub.RemoteHost=128.163.121.89
+#log4j.appender.stackhub.Port=8888
+#log4j.appender.stackhub.LocationInfo=false
+#log4j.appender.stackhub.ReconnectionDelay=5
+

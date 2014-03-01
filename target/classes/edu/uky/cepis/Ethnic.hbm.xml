@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.Ethnic" table="lstEthnic">
+
+		<meta attribute="class-description">Ethnic class contains CEPIS User's ethnic details</meta>
+		<cache region="edu.uky.cepis.cache.ethnic" usage="read-write" />
+		<id name="code" column="Ethniccode" type="string" length="50" />
+		<property name="shortDesc" type="string" column="Ethnicity"
+			length="50" />
+		<property name="kyEthnicCode" type="string" column="KYethniccode"
+			length="50" />
+		<property name="status" type="string" column="status"
+			length="50" />
+	</class>
+</hibernate-mapping>
+

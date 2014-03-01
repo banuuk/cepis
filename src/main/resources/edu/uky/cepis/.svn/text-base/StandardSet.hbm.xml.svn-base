@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="edu.uky.cepis.domain.StandardSet" table="lstStandardSet">
+		<meta attribute="class-description">Class to identify a StandardSet in a
+			ProgramDomain</meta>
+		<cache region="edu.uky.cepis.cache.standardset" usage="read-write" />
+		<id name="stdSetCode" column="stdSetCode" type="string" length="15" />
+		<!-- Following variable will be used in the info icon -->
+		<property name="shortDesc" column="shortDescription" type="string"
+			not-null="true" length="255" />
+		<list name="standards" lazy="false" cascade="all" batch-size="10"
+			fetch="join">
+			<cache region="edu.uky.cepis.cache.standard" usage="read-write" />
+			<key>
+				<column name="stdSetCode" not-null="true" />
+			</key>
+			<list-index column="std_index" base="0"></list-index>
+			<one-to-many class="edu.uky.cepis.domain.Standard"
+				not-found="ignore" />
+		</list>
+	</class>
+</hibernate-mapping>
+

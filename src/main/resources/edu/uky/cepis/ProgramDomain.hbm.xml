@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.component.ProgramDomain" table="lstProgdomain">
+		<meta attribute="class-description">Class to identify a Program Domain of a user
+			(Student)</meta>
+		<cache region="edu.uky.cepis.cache.programdomain" usage="read-write" />
+		<id name="programDomainCode" column="Programdomiancode" type="string"
+			length="15" />
+		<!-- Following variable will be used in the drop down menu -->
+		<property name="shortDesc" column="short_description" type="string"
+			not-null="true" length="255" />
+		<property name="description" column="Descprogramdomain" type="string"
+			length="255" />
+		<property name="status" column="currency" type="string"
+			length="15" />
+		<set name="programs" lazy="true" cascade="save-update">
+			<cache region="edu.uky.cepis.cache.program" usage="read-write" />
+			<key>
+				<column name="Progdomain" not-null="true" />
+			</key>
+			<one-to-many not-found="ignore"
+				class="edu.uky.cepis.domain.component.Program" />
+		</set>
+		<list name="standardSets" lazy="true" cascade="save-update">
+			<cache region="edu.uky.cepis.cache.standardset" usage="read-write" />
+			<key>
+				<column name="programDomainCode" not-null="true" />
+			</key>
+			<list-index column="stdset_index" base="0"></list-index>
+			<one-to-many not-found="ignore"
+				class="edu.uky.cepis.domain.StandardSet" />
+		</list>
+	</class>
+
+</hibernate-mapping>
+

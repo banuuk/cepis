@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<type-mapping>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="string"
+			not-null="true" length="15">
+		</sql-type>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="string"
+			not-null="false" length="512">
+		</sql-type>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="string"
+			not-null="true" length="255">
+		</sql-type>
+		<sql-type jdbc-type="VARCHAR" hibernate-type="yes_no"
+			not-null="false">
+		</sql-type>
+	</type-mapping>
+	<table-filter match-catalog="DataReview" match-name="lstProgram" />
+	<table-filter match-catalog="DataReview" match-name="lstProgdomain" />
+	<table catalog="DataReview" name="lstProgram"></table>
+	<table catalog="DataReview" name="lstProgdomain"></table>
+</hibernate-reverse-engineering>

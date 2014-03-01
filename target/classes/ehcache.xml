@@ -1,0 +1,394 @@
+<ehcache>
+
+	<!-- Sets the path to the directory where cache .data files are created. 
+		If the path is a Java System Property it is replaced by its value in the 
+		running VM. The following properties are translated: user.home - User's home 
+		directory user.dir - User's current working directory java.io.tmpdir - Default 
+		temp file path -->
+
+	<!-->diskStore path="java.io.tmpdir"/ -->
+	<diskStore path="java.io.tmpdir" />
+
+
+	<!-- Default Cache configuration. These will applied to caches programmatically 
+		created through the CacheManager. The following attributes are required: 
+		maxElementsInMemory - Sets the maximum number of objects that will be created 
+		in memory eternal - Sets whether elements are eternal. If eternal, timeouts 
+		are ignored and the element is never expired. overflowToDisk - Sets whether 
+		elements can overflow to disk when the in-memory cache has reached the maxInMemory 
+		limit. The following attributes are optional: timeToIdleSeconds - Sets the 
+		time to idle for an element before it expires. i.e. The maximum amount of 
+		time between accesses before an element expires Is only used if the element 
+		is not eternal. Optional attribute. A value of 0 means that an Element can 
+		idle for infinity. The default value is 0. timeToLiveSeconds - Sets the time 
+		to live for an element before it expires. i.e. The maximum time between creation 
+		time and when an element expires. Is only used if the element is not eternal. 
+		Optional attribute. A value of 0 means that and Element can live for infinity. 
+		The default value is 0. diskPersistent - Whether the disk store persists 
+		between restarts of the Virtual Machine. The default value is false. diskExpiryThreadIntervalSeconds- 
+		The number of seconds between runs of the disk expiry thread. The default 
+		value is 120 seconds. -->
+
+	<defaultCache maxElementsInMemory="250" eternal="false"
+		timeToIdleSeconds="180" timeToLiveSeconds="300" overflowToDisk="false"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120" />
+
+	<!-- CEPIS specific caches -->
+
+	<!-- Following are User specific caches -->
+	<!-- Time to live set to 300seconds and eternal to false -->
+	<cache name="edu.uky.cepis.domain.User" maxElementsInMemory="1000"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.user" maxElementsInMemory="1000"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.SharedUser"
+		maxElementsInMemory="250" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.shareduser" maxElementsInMemory="250"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.UserConfiguration"
+		maxElementsInMemory="200" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.userconfiguration"
+		maxElementsInMemory="200" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.WorkingSet"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.workingset" maxElementsInMemory="500"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.Query" maxElementsInMemory="500"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.query" maxElementsInMemory="500"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+
+	<cache name="edu.uky.cepis.domain.Email" maxElementsInMemory="500"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+
+	<cache name="edu.uky.cepis.cache.email" maxElementsInMemory="500"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.EmailAddress"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.emailaddress"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.Phone" maxElementsInMemory="100"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.phone" maxElementsInMemory="100"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+
+
+	<cache name="edu.uky.cepis.domain.Address" maxElementsInMemory="100"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.address" maxElementsInMemory="100"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+
+
+	<cache name="edu.uky.cepis.domain.UserCollegeProfile"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.usercollegeprofile"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.UserProgramProfile"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.userprogramprofile"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.UserPersonalProfile"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.userpersonalprofile"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.UserAssessmentProfile"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.userassessmentprofile"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.UserAssessmentStandardSet"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.userassessmentstandardset"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.UserAssessmentStandard"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.userassessmentstandard"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.AdvisingSession"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.advisingsession"
+		maxElementsInMemory="300" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.HoldLift" maxElementsInMemory="100"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.holdlift" maxElementsInMemory="100"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.AdvisingSessionSlot"
+		maxElementsInMemory="100" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.advisingsessionslot"
+		maxElementsInMemory="100" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.Event" maxElementsInMemory="250"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="100" />
+
+
+	<cache name="edu.uky.cepis.cache.event" maxElementsInMemory="250"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="100" />
+
+	<cache name="edu.uky.cepis.domain.Attendee" maxElementsInMemory="250"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="100" />
+
+
+	<cache name="edu.uky.cepis.cache.attendee" maxElementsInMemory="250"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="100" />
+
+	<cache name="edu.uky.cepis.domain.Conference"
+		maxElementsInMemory="250" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="100" />
+
+
+	<cache name="edu.uky.cepis.cache.conference" maxElementsInMemory="250"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="100" />
+
+	<cache name="edu.uky.cepis.cache.reportuser" maxElementsInMemory="100"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.PraxisTestScore"
+		maxElementsInMemory="150" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="100" />
+
+
+	<cache name="edu.uky.cepis.cache.praxistestscore"
+		maxElementsInMemory="150" eternal="false" overflowToDisk="false"
+		timeToLiveSeconds="100" />
+
+	<!-- Following are general purpose caches for CEPIS System -->
+	<!-- eternal is set to true -->
+
+	<cache name="edu.uky.cepis.domain.Advisor" maxElementsInMemory="180"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.advisor" maxElementsInMemory="180"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.domain.AdvisorGroup"
+		maxElementsInMemory="180" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.advisorgroup"
+		maxElementsInMemory="180" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.domain.CohortType"
+		maxElementsInMemory="10" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.cohorttype" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.domain.CohortTerm"
+		maxElementsInMemory="60" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.cohortterm" maxElementsInMemory="60"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.domain.Role" maxElementsInMemory="30"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.role" maxElementsInMemory="30"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.domain.UserClassification"
+		maxElementsInMemory="50" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.userclassification"
+		maxElementsInMemory="50" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.domain.UserType" maxElementsInMemory="50"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.usertype" maxElementsInMemory="50"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.domain.IPAddress" maxElementsInMemory="100"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.ipaddress" maxElementsInMemory="100"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.domain.LastLogin" maxElementsInMemory="100"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.lastlogin" maxElementsInMemory="100"
+		eternal="false" overflowToDisk="false" timeToLiveSeconds="300" />
+
+	<cache name="edu.uky.cepis.cache.program" maxElementsInMemory="350"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.programdomain"
+		maxElementsInMemory="50" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.programgroup"
+		maxElementsInMemory="50" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.programtrack"
+		maxElementsInMemory="25" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.ukcollege" maxElementsInMemory="25"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.ukdepartment"
+		maxElementsInMemory="50" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.ukmajor" maxElementsInMemory="100"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.ukstatus" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.ukterm" maxElementsInMemory="200"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.domain.AddressType"
+		maxElementsInMemory="5" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.addresstype"
+		maxElementsInMemory="5" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.domain.PhoneType" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.phonetype" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="false" />
+
+
+	<cache name="edu.uky.cepis.domain.EmailAddressType"
+		maxElementsInMemory="5" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.emailaddresstype"
+		maxElementsInMemory="5" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.domain.Ethnic" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.ethnic" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.ranking" maxElementsInMemory="10"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.certification"
+		maxElementsInMemory="3" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.domain.Standard" maxElementsInMemory="100"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.standard" maxElementsInMemory="100"
+		eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.domain.StandardSet"
+		maxElementsInMemory="50" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.standardset"
+		maxElementsInMemory="50" eternal="true" overflowToDisk="false" />
+
+	<cache name="edu.uky.cepis.cache.praxistest" maxElementsInMemory="50"
+		eternal="true" overflowToDisk="false" />
+
+	<!-- OpenReports specific caches -->
+
+	<cache name="org.efs.openreports.objects.ORProperty"
+		maxElementsInMemory="100" eternal="true" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.ORTag"
+		maxElementsInMemory="1000" eternal="true" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.Report"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.ReportAlert"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.ReportChart"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.ReportDataSource"
+		maxElementsInMemory="100" eternal="true" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.ReportExportOption"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.ReportGroup"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.ReportParameter"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.ReportUser"
+		maxElementsInMemory="100" eternal="false" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.Report.parameters"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.ReportGroup.reports"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.ReportUser.alerts"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false" />
+
+	<cache name="org.efs.openreports.objects.ReportUser.groups"
+		maxElementsInMemory="500" eternal="false" overflowToDisk="false" />
+
+
+	<!-- Hibernate Specific caches -->
+
+	<cache name="org.hibernate.cache.StandardQueryCache"
+		maxElementsInMemory="1000" eternal="false" timeToLiveSeconds="120"
+		overflowToDisk="false" />
+
+	<cache name="org.hibernate.cache.UpdateTimestampsCache"
+		maxElementsInMemory="5000" eternal="true" overflowToDisk="false" />
+
+</ehcache>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.Ranking" table="lstRanking">
+		<meta attribute="class-description">Ranking</meta>
+		<cache region="edu.uky.cepis.cache.ranking" usage="read-write" />
+		
+		
+		<id name="rankingCode" column="RankingCode" type="string" length="255"/>
+
+		<property name="title" column="Title" type="string" length="255" />
+		<property name="program" column="Program" type="string" length="255" />
+	</class>
+
+</hibernate-mapping>
+

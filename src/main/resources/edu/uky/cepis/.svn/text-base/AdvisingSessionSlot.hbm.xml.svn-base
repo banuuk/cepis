@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.AdvisingSessionSlot" table="tblAdvisingSessionSlot">
+		<meta attribute="class-description">Advising Session slots created by Advisors</meta>
+		<cache region="edu.uky.cepis.cache.advisingsessionslot" usage="read-write" />
+	
+		<id name="id" column="slotID" type="string" length="255" />
+	
+		<property name="slotNumber" column="slotNumber" type="integer" />
+		<property name="slotDate" column="slotDate" type="date" />
+		<property name="status" column="status" type="string" />
+		<property name="lastEdit" column="Lastedit" type="timestamp" />
+
+		<many-to-one name="advisor" class="edu.uky.cepis.domain.Advisor"
+			column="AdvisorUID" not-null="true" fetch="join"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,692 @@
+/**
+ * 
+ */
+package edu.uky.cepis.dao;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.log4j.Logger;
+import org.efs.openreports.objects.ReportUser;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Property;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import edu.uky.cepis.domain.Address;
+import edu.uky.cepis.domain.EmailAddress;
+import edu.uky.cepis.domain.Phone;
+import edu.uky.cepis.domain.Role;
+import edu.uky.cepis.domain.Standard;
+import edu.uky.cepis.domain.StandardSet;
+import edu.uky.cepis.domain.User;
+import edu.uky.cepis.domain.UserAssessmentProfile;
+import edu.uky.cepis.domain.UserAssessmentStandard;
+import edu.uky.cepis.domain.UserAssessmentStandardSet;
+import edu.uky.cepis.domain.UserCollegeProfile;
+import edu.uky.cepis.domain.UserConfiguration;
+import edu.uky.cepis.domain.UserPersonalProfile;
+import edu.uky.cepis.domain.UserProgramProfile;
+import edu.uky.cepis.domain.UserType;
+import edu.uky.cepis.domain.WorkingSet;
+import edu.uky.cepis.domain.component.ProgramDomain;
+import edu.uky.cepis.domain.component.UKTerm;
+
+/**
+ * Dao class to perform database operation on User domain object.<br/>
+ * <b>User Manager </b><br/>
+ * <br/>
+ * 
+ * @author keerthi
+ * @see User
+ * 
+ */
+@SuppressWarnings({ "unused", "unchecked" })
+public class UserDaoImpl implements UserDao {
+
+	private static Logger log = Logger.getLogger(UserDaoImpl.class);
+	private SessionFactory sessionFactory;
+	private Role reportUserRole = null;
+
+	@Override
+	public User addCEPISUser(User user, UserCollegeProfile userCollegeProfile,
+			UserProgramProfile userProgramProfile,
+			UserPersonalProfile userPersonalProfile, Phone phone,
+			Address address, EmailAddress emailAddress, List<Role> roles,
+			ReportUser reportUser) {
+
+		log.debug("Calling ADDCEPIS USER");
+		if (userCollegeProfile == null) {
+			return null;
+		}
+		if (user == null) {
+			return null;
+		}
+		List<Role> newroles = new ArrayList<Role>(0);
+		Role role = null;
+
+		this.sessionFactory.getCurrentSession().save(user);
+
+		log.debug("Adding UserCollegeProfile Object-" + user.getUid());
+		user.getUserCollegeProfiles().add(userCollegeProfile);
+		this.sessionFactory.getCurrentSession().save(userCollegeProfile);
+		if (userProgramProfile != null) {
+			log.debug("Adding UserProgramProfile Object");
+			userProgramProfile.setUserprogramprofileid("P-" + user.getUid()
+					+ "-1");
+			this.sessionFactory.getCurrentSession().save(userProgramProfile);
+			user.getUserProgramProfiles().add(userProgramProfile);
+
+		}
+		if (userPersonalProfile != null) {
+			log.debug("Adding UserPersonalProfile Object");
+			this.sessionFactory.getCurrentSession().save(userPersonalProfile);
+			user.setUserPersonalProfile(userPersonalProfile);
+
+		}
+		if (phone != null) {
+			log.debug("Adding Phone Object");
+			this.sessionFactory.getCurrentSession().save(phone);
+			user.getPhoneNumbers().add(phone);
+
+		}
+		if (address != null) {
+			log.debug("Adding Address Object");
+			this.sessionFactory.getCurrentSession().save(address);
+			user.getAddresses().add(address);
+
+		}
+		if (emailAddress != null) {
+			log.debug("Adding EmailAddress Object");
+			this.sessionFactory.getCurrentSession().save(emailAddress);
+			user.getEmailAddresses().add(emailAddress);
+
+		}
+		if (roles != null) {
+			log.debug("Adding User Roles Object");
+			Iterator<Role> iter = roles.iterator();
+			while (iter.hasNext()) {
+				role = (Role) this.sessionFactory.getCurrentSession().load(
+						Role.class, iter.next().getRoleid());
+				newroles.add(role);
+			}
+
+		}
+		if (user.getRoles().addAll(newroles)) {
+			log.debug(" User Role list added");
+		}
+		this.sessionFactory.getCurrentSession().saveOrUpdate(user);
+		if (reportUser != null) {
+			this.createReportUser(user, reportUser.getEmail(),
+					reportUser.getPdfExportType());
+		}
+
+		log.debug("User Object Created successfully ...");
+		return user;
+
+	}
+
+	private Role findByName(String roleName) {
+		if (reportUserRole == null) {
+			List<Role> roles = null;
+			String hql = "select a from Role a where a.rolename = '" + roleName
+					+ "'";
+			roles = this.sessionFactory.getCurrentSession().createQuery(hql)
+					.list();
+			if (roles.size() > 0) {
+				reportUserRole = roles.get(0);
+			}
+		}
+		return reportUserRole;
+	}
+
+	@Override
+	public User addUser(String uid, String ukID, String ssn, String username,
+			String lName, String mName, String fName, String maidenName,
+			String fullName, String suffix, String gender, String title,
+			Date dOB, int badgeHolder) {
+		User user = new User((ukID == null) ? null : ukID.trim(),
+				(ssn == null || ssn.isEmpty()
+						|| ssn.equalsIgnoreCase("123456789") || ssn
+						.equalsIgnoreCase("999999999")) ? "000000000" : ssn
+						.trim(), (username == null) ? null : username.trim(),
+				(lName == null) ? null : lName.trim(), (mName == null) ? null
+						: mName.trim(), (fName == null) ? null : fName.trim(),
+				(maidenName == null) ? null : maidenName.trim(),
+				(suffix == null) ? null : suffix.trim(), gender,
+				(title == null) ? null : title.trim(), dOB, badgeHolder);
+		if (user == null) {
+			return null;
+		}
+		if (!this.saveUser(user)) {
+			return null;
+		}
+		return user;
+
+	}
+
+	@Override
+	public User addUser(String uid, String ukID, String ssn, String username,
+			String lName, String lName1, String lName2, String lName3,
+			String lName4, String preferredName, String mName, String fName,
+			String maidenName, String fullName, String suffix, String gender,
+			String title, Date dOB, int badgeHolder) {
+		User user = new User((ukID == null) ? null : ukID.trim(),
+				(ssn == null || ssn.isEmpty()
+						|| ssn.equalsIgnoreCase("123456789") || ssn
+						.equalsIgnoreCase("999999999")) ? "000000000" : ssn
+						.trim(), (username == null) ? null : username.trim(),
+				(lName == null) ? null : lName.trim(), (mName == null) ? null
+						: mName.trim(), (fName == null) ? null : fName.trim(),
+				(maidenName == null) ? null : maidenName.trim(),
+				(suffix == null) ? null : suffix.trim(), gender,
+				(title == null) ? null : title.trim(), dOB, badgeHolder);
+		if (user == null) {
+			log.debug("cannot create user object. user object is null.");
+			return null;
+		}
+		user.setlName1((lName1 == null) ? null : lName1.trim());
+		user.setlName2((lName2 == null) ? null : lName2.trim());
+		user.setlName3((lName3 == null) ? null : lName3.trim());
+		user.setlName4((lName4 == null) ? null : lName4.trim());
+		user.setPreferredName((preferredName == null) ? null : preferredName
+				.trim());
+		if (!this.saveUser(user)) {
+			log.debug("Error in saving user object.");
+			return null;
+		}
+		return user;
+
+	}
+
+	@Override
+	public boolean checkDuplicacy(String username, String ukID) {
+		log.debug("Calling checkDuplicacy-username,ukID ...");
+		if (username == null || ukID == null) {
+			return true;
+		}
+		List<User> users = null;
+
+		String hql = "select a from User a where a.username ='" + username
+				+ "' and a.ukID ='" + ukID + "'";
+		users = this.sessionFactory.getCurrentSession().createQuery(hql).list();
+		if (users.size() > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean checkDuplicacy(String username) {
+		log.debug("Calling checkDuplicacy-username ...");
+		if (username == null) {
+			return true;
+		}
+		List<User> users = null;
+
+		String hql = "select a from User a where a.username ='" + username
+				+ "'";
+		users = this.sessionFactory.getCurrentSession().createQuery(hql).list();
+		if (users.size() > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see edu.uky.cepis.dao.UserDao#findByUsername(java.lang.String)
+	 */
+
+	@Override
+	public ReportUser createReportUser(User user, String email,
+			int pdfExportType) {
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		if (newuser == null) {
+			return null;
+		}
+		if (newuser.getReportUser() == null) {
+			return null;
+		}
+
+		newuser.getReportUser().clear();
+		ReportUser reportUser = new ReportUser();
+		if (reportUser == null) {
+			return null;
+		}
+		reportUser.setName(user.getUsername());
+		reportUser.setEmail(email);
+		reportUser.setPdfExportType(pdfExportType);
+		reportUser.setExternalId(newuser.getUid());
+		newuser.getReportUser().add(reportUser);
+		Role reportRole = this.findByName("ROLE_REPORT_USER");
+		if (reportRole != null) {
+			log.debug("Adding ReportRole Object");
+			newuser.getRoles().add(reportRole);
+		} else {
+			log.debug("Error: Cannot add Report Role to the user");
+		}
+		this.saveUser(newuser);
+		return reportUser;
+	}
+
+	@Override
+	public UserConfiguration createUserConfiguration(User user,
+			WorkingSet activeWorkingSet, Address primaryAddress,
+			Phone primaryPhone, EmailAddress primaryEmail,
+			UserType primaryUserType, boolean rememberLastWorkingSet) {
+		if (user == null) {
+			return null;
+		}
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		if (newuser == null) {
+			return null;
+		}
+		UserConfiguration userConfiguration = new UserConfiguration(
+				primaryEmail, activeWorkingSet, primaryAddress, primaryPhone,
+				primaryUserType, rememberLastWorkingSet);
+		if (userConfiguration == null) {
+			return null;
+		}
+		newuser.setUserConfiguration(userConfiguration);
+		this.saveUser(newuser);
+		return userConfiguration;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see edu.uky.cepis.dao.UserDao#findByUid(java.lang.String)
+	 */
+	@Override
+	public User findByUid(String uid) {
+		log.debug("Finding user by CEPIS UID: " + uid);
+
+		User cepisuser = (User) this.sessionFactory.getCurrentSession().get(
+				User.class, uid);
+		return cepisuser;
+	}
+
+	@Override
+	public User findByUsername(String username) {
+		log.debug("Find by Username function called: " + username);
+		List<User> users = null;
+
+		String hql = "select a from User a where a.username ='" + username
+				+ "'";
+		users = this.sessionFactory.getCurrentSession().createQuery(hql).list();
+		if (users == null) {
+			log.debug("User object is null.");
+		}
+		if (users.size() > 0) {
+			log.debug("Found matching user for " + username);
+			return users.get(0);
+		}
+		log.debug("Cannot find a user with matching parameters: " + username);
+		return null;
+	}
+
+	@Override
+	public User findBySSN(String ssn) {
+		User cepisuser = null;
+		List<User> users = null;
+
+		String hql = "select a from User a where a.ssn ='" + ssn + "'";
+		users = this.sessionFactory.getCurrentSession().createQuery(hql).list();
+		if (users == null) {
+			log.debug("User object is null.");
+		}
+		if (users.size() > 0) {
+			cepisuser = users.get(0);
+			log.debug("Found matching user for " + cepisuser.getUsername());
+		} else {
+			log.debug("Cannot find a user with matching parameters: XXX-XX-XXXX");
+		}
+		return cepisuser;
+	}
+
+	@Override
+	public List<User> findByGenderAndBirthDate(String gender, Date birthDate) {
+		List<User> users = new ArrayList<User>(0);
+
+		Criteria query = this.sessionFactory.getCurrentSession()
+				.createCriteria(User.class, "user");
+		if (birthDate != null && birthDate.before(new Date())) {
+			query.add(Restrictions.eq("user.dOB", birthDate));
+		}
+		if (gender != null && !gender.equalsIgnoreCase("NA")) {
+			query.add(Restrictions
+					.ilike("user.gender", gender, MatchMode.EXACT));
+		}
+		users = query.list();
+		if (users == null) {
+			log.debug("User object is null.");
+		}
+		if (users.size() > 0) {
+			log.debug("Found " + users.size() + " matching users.");
+			return users;
+		} else {
+			log.debug("Cannot find a user with matching parameters: " + gender
+					+ "," + birthDate);
+		}
+		return users;
+	}
+
+	@Override
+	public List<User> findByNames(String firstname, String lastname,
+			String lastname1, String lastname2, String lastname3,
+			String lastname4, String middlename) {
+		List<User> users = new ArrayList<User>(0);
+		Criteria query = this.sessionFactory.getCurrentSession()
+				.createCriteria(User.class, "user");
+		if (firstname != null && !firstname.isEmpty()) {
+			query.add(Restrictions.ilike("user.fName", firstname,
+					MatchMode.ANYWHERE));
+		}
+		if (lastname != null && !lastname.isEmpty()) {
+			query.add(Restrictions.ilike("user.lName", lastname,
+					MatchMode.ANYWHERE));
+		}
+		if (lastname1 != null && !lastname1.isEmpty()) {
+			query.add(Restrictions.ilike("user.lName", lastname1,
+					MatchMode.ANYWHERE));
+		}
+		if (lastname2 != null && !lastname2.isEmpty()) {
+			query.add(Restrictions.ilike("user.lName", lastname2,
+					MatchMode.ANYWHERE));
+		}
+		if (lastname3 != null && !lastname3.isEmpty()) {
+			query.add(Restrictions.ilike("user.lName", lastname3,
+					MatchMode.ANYWHERE));
+		}
+		if (lastname4 != null && !lastname4.isEmpty()) {
+			query.add(Restrictions.ilike("user.lName", lastname4,
+					MatchMode.ANYWHERE));
+		}
+		if (middlename != null && !middlename.isEmpty()) {
+			query.add(Restrictions.ilike("user.mName", middlename,
+					MatchMode.ANYWHERE));
+		}
+		users = query.list();
+		if (users == null) {
+			log.debug("User object is null.");
+		}
+		if (users.size() > 0) {
+			log.debug("Found " + users.size() + " matching users.");
+			return users;
+		} else {
+			log.debug("Cannot find a user with matching parameters: "
+					+ firstname + "," + lastname + "," + lastname1 + ","
+					+ lastname2 + "," + lastname3 + "," + lastname4 + ","
+					+ middlename);
+		}
+		return users;
+	}
+
+	@Override
+	public List<User> getAll(int firstResult, int maxResults) {
+
+		log.debug(" List all User function called ");
+
+		List<User> users = new ArrayList<User>(0);
+
+		// ht
+		// .setQueryCacheRegion("edu.uky.cepis.cache.query.User");
+		// this.sessionFactory.getCurrentSession().setCacheQueries(true);
+		// String hql = "select a from User a ";
+		DetachedCriteria query = DetachedCriteria.forClass(User.class, "user");
+		query = query.add(Property.forName("username").isNotNull());
+
+		Criteria criteria = query.getExecutableCriteria(this.sessionFactory
+				.getCurrentSession());
+		criteria.setFirstResult(firstResult);
+		criteria.setMaxResults(maxResults);
+		users = criteria.list();
+		// users =
+		// this.sessionFactory.getCurrentSession().findByCriteria(criteria)find(hql);
+		// this.sessionFactory.getCurrentSession().setCacheQueries(false);
+		return users;
+	}
+
+	@Override
+	public EmailAddress getPrimaryEmailAddress(User user) {
+
+		if (user == null) {
+			return null;
+		}
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		if (newuser.getUserConfiguration() != null)
+			return newuser.getUserConfiguration().getPrimaryEmail();
+		return null;
+	}
+
+	@Override
+	public Phone getPrimaryPhone(User user) {
+
+		if (user == null) {
+			return null;
+		}
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		if (newuser.getUserConfiguration() != null)
+			return newuser.getUserConfiguration().getPrimaryPhone();
+		return null;
+	}
+
+	@Override
+	public ReportUser getReportUser(User user) {
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		if (newuser == null) {
+			return null;
+		}
+		if (newuser.getReportUser() == null) {
+			return null;
+		}
+
+		Iterator<ReportUser> iter = newuser.getReportUser().iterator();
+		if (iter.hasNext()) {
+			return iter.next();
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	public void manualFlush() {
+
+		this.sessionFactory.getCurrentSession().flush();
+	}
+
+	@Override
+	public boolean removeUser(User user) {
+
+		if (user == null) {
+			return false;
+		}
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		this.sessionFactory.getCurrentSession().delete(newuser);
+		return true;
+	}
+
+	@Override
+	public boolean disableUser(User user) {
+		if (user == null) {
+			return false;
+		}
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		newuser.setEnabled(0);
+		this.sessionFactory.getCurrentSession().saveOrUpdate(newuser);
+		return true;
+	}
+
+	@Override
+	public boolean enableUser(User user) {
+		if (user == null) {
+			return false;
+		}
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		newuser.setEnabled(1);
+		this.sessionFactory.getCurrentSession().saveOrUpdate(newuser);
+		return true;
+	}
+
+	public boolean saveUser(User user) {
+
+		this.sessionFactory.getCurrentSession().saveOrUpdate(user);
+		return true;
+	}
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	@Override
+	public User updateBadgeInfo(User user, int badgeHolder) {
+		log.debug("Updating Badge status for " + user.getUsername());
+		if (user == null) {
+			return null;
+		}
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+
+		newuser.setBadgeHolder(badgeHolder);
+
+		this.sessionFactory.getCurrentSession().saveOrUpdate(newuser);
+		return newuser;
+	}
+
+	@Override
+	public User updatePassword(User user, String password) {
+		log.debug("Updating Password for " + user.getUsername());
+		if (user == null || password == null || password.isEmpty()) {
+			return null;
+		}
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+
+		newuser.setPassword(password);
+
+		this.sessionFactory.getCurrentSession().saveOrUpdate(newuser);
+		return newuser;
+	}
+
+	@Override
+	public User updateUser(User user, String uid, String ukID, String ssn,
+			String username, String lName, String mName, String fName,
+			String maidenName, String fullName, String suffix, String gender,
+			String title, Date dOB, int badgeHolder) {
+
+		if (user == null) {
+			return null;
+		}
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		newuser.setUkID((ukID == null) ? null : ukID.trim());
+		newuser.setSsn((ssn == null) ? null : ssn.trim());
+		newuser.setUsername((username == null) ? null : username.trim());
+		newuser.setlName((lName == null) ? null : lName.trim());
+		newuser.setmName((mName == null) ? null : mName.trim());
+		newuser.setfName((fName == null) ? null : fName.trim());
+		newuser.setMaidenName((maidenName == null) ? null : maidenName.trim());
+		newuser.setSuffix((suffix == null) ? null : suffix.trim());
+		newuser.setGender((gender == null) ? null : gender.trim());
+		newuser.setTitle((title == null) ? null : title.trim());
+		newuser.setdOB(dOB);
+		newuser.setBadgeHolder(badgeHolder);
+
+		this.sessionFactory.getCurrentSession().saveOrUpdate(newuser);
+		return newuser;
+
+	}
+
+	@Override
+	public User updateUser(User user, String uid, String ukID, String ssn,
+			String username, String lName, String lName1, String lName2,
+			String lName3, String lName4, String preferredName, String mName,
+			String fName, String maidenName, String fullName, String suffix,
+			String gender, String title, Date dOB, int badgeHolder) {
+
+		if (user == null) {
+			return null;
+		}
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(User.class, user.getUid());
+		newuser.setdOB(new Date());
+				
+//		newuser.setUkID((ukID == null) ? null : ukID.trim());
+//		newuser.setSsn((ssn == null) ? null : ssn.trim());
+//		newuser.setUsername((username == null) ? null : username.trim());
+//		newuser.setlName((lName == null) ? null : lName.trim());
+//		newuser.setlName1((lName1 == null) ? null : lName1.trim());
+//		newuser.setlName2((lName2 == null) ? null : lName2.trim());
+//		newuser.setlName3((lName3 == null) ? null : lName3.trim());
+//		newuser.setlName4((lName4 == null) ? null : lName4.trim());
+//		newuser.setPreferredName((preferredName == null) ? null : preferredName
+//				.trim());
+//		newuser.setmName((mName == null) ? null : mName.trim());
+//		newuser.setfName((fName == null) ? null : fName.trim());
+//		newuser.setMaidenName((maidenName == null) ? null : maidenName.trim());
+//		newuser.setSuffix((suffix == null) ? null : suffix.trim());
+//		newuser.setGender((gender == null) ? null : gender.trim());
+//		newuser.setTitle((title == null) ? null : title.trim());
+//		newuser.setdOB(dOB);
+//		newuser.setBadgeHolder(badgeHolder);
+
+		this.sessionFactory.getCurrentSession().saveOrUpdate(newuser);
+		return newuser;
+
+	}
+
+	@Override
+	public UserConfiguration updateUserConfiguration(User user,
+			EmailAddress emailAddress, Phone phone) {
+
+		if (user == null) {
+			return null;
+		}
+
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		UserConfiguration userConfiguration = newuser.getUserConfiguration();
+		if (userConfiguration == null) {
+			// Create userconfiguration for this user
+			userConfiguration = this.createUserConfiguration(newuser, null,
+					null, null, null, null, false);
+		}
+		userConfiguration.setPrimaryEmail(emailAddress);
+		userConfiguration.setPrimaryPhone(phone);
+		newuser.setUserConfiguration(userConfiguration);
+		this.sessionFactory.getCurrentSession().saveOrUpdate(userConfiguration);
+		this.saveUser(newuser);
+		return userConfiguration;
+	}
+
+}

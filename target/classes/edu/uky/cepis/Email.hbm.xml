@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.Email" table="tbl20Email">
+		<meta attribute="class-description">Email class to store basic email information sent</meta>
+		<cache region="edu.uky.cepis.cache.email" usage="read-write" />
+		<id name="emailId" column="ID">
+			<generator class="increment"></generator>
+		</id>
+		
+		<property name="sentAt" column="SqlDate" />
+		<property name="subject" column="subject" type="string"
+			length="255" />
+		<property name="starred" column="starredMail"  type="yes_no" />
+		<property name="read" column="readMail" type="yes_no"/>
+		<property name="sent" column="sentMail" type="yes_no"/>
+		<property name="body" column="body" type="string" length="1024" />
+		
+		<many-to-one name="fromAddress" class="edu.uky.cepis.domain.EmailAddress"
+			column="fromAddress" not-null="true" cascade="all"/>
+
+		<list name="toAddresses" table="tbl20Email_EmailAddressTO" lazy="false">
+			<cache region="edu.uky.cepis.cache.emailaddress"
+				usage="read-write" />
+			<key>
+				<column name="emailId" not-null="true" />
+			</key>
+
+			<list-index column="toAddress_index" base="0" ></list-index>
+
+			<many-to-many class="edu.uky.cepis.domain.EmailAddress"
+				column="ID">
+			</many-to-many>
+		</list>
+		<list name="ccAddresses" table="tbl20Email_EmailAddressCC" lazy="true">
+			<cache region="edu.uky.cepis.cache.emailaddress"
+				usage="read-write" />
+			<key>
+				<column name="emailId" not-null="true" />
+			</key>
+
+			<list-index column="ccAddress_index" base="0"></list-index>
+
+			<many-to-many class="edu.uky.cepis.domain.EmailAddress"
+				column="ID">
+			</many-to-many>
+		</list>
+		<list name="bccAddresses" table="tbl20Email_EmailAddressBCC" lazy="true">
+			<cache region="edu.uky.cepis.cache.emailaddress"
+				usage="read-write" />
+			<key>
+				<column name="emailId" not-null="true" />
+			</key>
+
+			<list-index column="bccAddress_index" base="0"></list-index>
+
+			<many-to-many class="edu.uky.cepis.domain.EmailAddress"
+				column="ID">
+			</many-to-many>
+		</list>
+		<list name="replyEmails" table="tbl20Email_EmailREPLY" lazy="true">
+			<cache region="edu.uky.cepis.cache.email"
+				usage="read-write" />
+			<key>
+				<column name="emailId" not-null="true" />
+			</key>
+
+			<list-index column="replyEmail_index" base="0"></list-index>
+
+			<many-to-many class="edu.uky.cepis.domain.Email" column="ID">
+			</many-to-many>
+		</list>
+	</class>
+
+</hibernate-mapping>
+

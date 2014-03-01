@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.Attendee" table="tblAttendee">
+
+		<meta attribute="class-description">Attendee class contains CEPIS conference
+			attendee
+			details</meta>
+		<cache region="edu.uky.cepis.cache.attendee" usage="read-write" />
+		<id name="id" column="attendeeID" type="long">
+			<generator class="native"></generator>
+		</id>
+		<many-to-one name="user" class="edu.uky.cepis.domain.User"
+			column="UID" not-found="ignore" />
+		<property name="attended" type="yes_no" column="attended" ></property>
+		<property name="shortDesc" column="shortDescription" type="string"
+			length="1024" />
+		<property name="lastEdit" type="date" column="Lastedit" />
+	</class>
+</hibernate-mapping>
+

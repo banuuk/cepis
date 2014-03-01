@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.WorkingSet" table="tblUserSearches2">
+		<meta attribute="class-description">WorkingSet class to store the current active
+			working set. It contains list of user objects</meta>
+		<cache region="edu.uky.cepis.cache.workingset" usage="read-write" />
+		<id name="wid" column="SEARCH_ID">
+			<generator class="increment"></generator>
+		</id>
+		<property name="name" column="SEARCH_NAME" not-null="true"
+			length="255" />
+		<property name="desc" column="SEARCH_MEMO" not-null="false"
+			length="1024" />
+		<property name="dateCreated" column="DATE_CREATED" />
+		<property name="dateModified" column="LAST_MODIFIED" />
+		<property name="createdBy" column="UID" length="50"/>
+		<property name="public_status" column="public_status" />
+		<property name="shared_mode" column="shared_mode" />
+
+		<set name="users" table="tblUserSearches2Members" fetch="join"> 
+			<key>
+				<column name="SEARCH_ID" not-null="true" />
+			</key>
+			
+			<many-to-many class="edu.uky.cepis.domain.User" column="INDIVIDUAL_UID" not-found="ignore">
+			</many-to-many>
+
+		</set>
+		
+		<set name="sharedUsers" cascade="all" lazy="true">
+			<cache region="edu.uky.cepis.cache.shareduser" usage="read-write" />
+			<key>
+				<column name="SEARCH_ID" not-null="true" />
+			</key>
+			<one-to-many class="edu.uky.cepis.domain.SharedUser"
+				not-found="ignore" />
+		</set>
+	</class>
+
+</hibernate-mapping>
+

@@ -1,0 +1,21 @@
+@CHARSET "ISO-8859-1";
+
+.col1 {
+	width: 25%;
+}
+
+.col2 {
+	width: 75%;
+}
+
+.confCol1 {
+	width: 50%;
+	text-align:center;
+	align: center;
+}
+
+.confCol2 {
+	width: 50%;
+	text-align:center;
+	align: center;
+}

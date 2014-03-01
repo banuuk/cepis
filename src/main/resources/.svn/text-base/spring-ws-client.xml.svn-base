@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+
+
+    <import resource="activemq_jms_shared.xml"/>
+
+	<!-- This is the message listener container -->
+
+	
+	
+	<bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory" />
+
+	
+	
+	
+	
+	<bean id="webServiceTemplate" class="org.springframework.ws.client.core.WebServiceTemplate"> 
+		<constructor-arg ref="messageFactory" />
+		<property name="messageSender">
+			<bean class="org.springframework.ws.transport.jms.JmsMessageSender">
+				<property name="connectionFactory" ref="connectionFactory"/>
+			</bean>
+		</property>
+		<property name="defaultUri" value="jms:cepis.replyQueue"/>
+		
+	</bean>
+	
+	
+	
+	
+    
+	<!-- 
+	<bean
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer102">
+		<property name="connectionFactory" ref="myJmsQueueConnectionFactory" />
+		<property name="destination" ref="myQueue" />
+		<property name="messageListener">
+			<bean
+				class="org.springframework.ws.transport.jms.WebServiceMessageListener">
+				<property name="messageFactory" ref="messageFactory" />
+				<property name="messageReceiver" ref="messageDispatcher" />
+			</bean>
+		</property>
+	</bean>
+     -->
+	<!-- JMS Destinations -->
+    <!-- 
+    <bean id="myQueue" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiTemplate">
+			<ref bean="jndiTemplate" />
+		</property>
+		<property name="jndiName">
+			<value>queue1</value>
+		</property>
+	</bean>
+
+	
+
+
+	<bean id="messageDispatcher"
+		class="org.springframework.ws.soap.server.SoapMessageDispatcher">
+		<property name="endpointMappings">
+			<ref bean="endpointMappings" />
+		</property>
+	</bean>
+	<bean id="endpointMappings"
+		class="org.springframework.ws.server.endpoint.mapping.PayloadRootQNameEndpointMapping">
+		<property name="mappings">
+			<props>
+				<prop key="simpleRequest">simpleEndPoint</prop>
+			</props>
+		</property>
+		<property name="interceptors">
+			<list>
+				<bean
+					class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor" />
+				<bean
+					class="org.springframework.ws.soap.server.endpoint.interceptor.SoapEnvelopeLoggingInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+
+
+	
+
+
+
+
+
+	<bean id="simple"
+		class="org.springframework.ws.wsdl.wsdl11.DynamicWsdl11Definition">
+		<property name="builder">
+			<bean
+				class="org.springframework.ws.wsdl.wsdl11.builder.XsdBasedSoap11Wsdl4jDefinitionBuilder">
+				<property name="schema" value="/WEB-INF/Simple.xsd" />
+				<property name="portTypeName" value="simple" />
+				<property name="locationUri"
+					value="http://localhost:8080/cepisfs_rmi_server/simpleService/" />
+				<property name="targetNamespace" value="http://mytutorial.com/definitions" />
+			</bean>
+		</property>
+	</bean>
+	-->
+</beans>

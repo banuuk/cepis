@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.IPAddress" table="tbl20IPAddress">
+		<meta attribute="class-description">Class that stores the IP Address and other client
+			information</meta>
+		<cache region="edu.uky.cepis.cache.ipaddress"
+			usage="read-write" />
+		<id name="id" column="ID" type="long">
+			<generator class="native"></generator>
+		</id>
+
+		<property name="ipAddr" column="ipAddr" type="string" length="255" />
+		<property name="clientInfo" column="clientInfo" type="string"
+			length="255" />
+		<list name="users" table="tbl20User_IPAddress" lazy="true" inverse="true" cascade="save-update">
+			<cache region="edu.uky.cepis.cache.user" usage="read-write" />
+			<key>
+				<column name="id" not-null="true" />
+			</key>
+
+			<list-index column="user_index" base="0"></list-index>
+			<many-to-many class="edu.uky.cepis.domain.User" column="UID">
+			</many-to-many>
+
+		</list>
+
+	</class>
+
+</hibernate-mapping>
+

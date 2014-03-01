@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.SharedUser" table="tblSharedUser">
+
+		<meta attribute="class-description">SharedUser for workingsets and saved queries</meta>
+		<cache region="edu.uky.cepis.cache.shareduser" usage="read-write" />
+		<id name="id" column="shareID" type="long">
+			<generator class="native"></generator>
+		</id>
+		<property name="allowAddOperation" column="allowAddOperation" />
+		<property name="allowRemoveOperation" column="allowRemoveOperation" />
+		<property name="lastEdit" type="date" column="Lastedit" />
+		<many-to-one name="user" class="edu.uky.cepis.domain.User"
+			column="UID" not-found="ignore" />
+	</class>
+</hibernate-mapping>
+

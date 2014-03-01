@@ -1,0 +1,21 @@
+@CHARSET "ISO-8859-1";
+.indexCol1{align:left;vertical-align:top;width: 20%;}
+.indexCol2{align:right;vertical-align:top;width: 80%;}
+
+.inplace{cursor:pointer;background-color: #ECEEF5;border:1px solid #CAD4E7;border-radius:3px 3px 3px 3px;padding:2px 4px;}
+.rich-inplace-select-changed-hover,.rich-inplace-select-view-hover{cursor:pointer;color:black;background-image: none;background-color: #ECEEF5;border:1px solid #9DACCE;border-radius:3px 3px 3px 3px;padding:2px 4px;}
+.rich-inplace-select-changed{background-image:none;}
+input.rich-inplace-select-field,.rich-inplace-select-field,.rich-inplace-select-list-decoration{cursor:pointer;background-color:#ECEEF5;background-image:none;font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;font-size: 12px;font-weight: 400;}
+.rich-pmenu-selected-element{font-weight:bold;border:1px solid #CAD4E7;}
+
+.boldText{font-weight:bold;}
+.instructionText{font-weight:bold;text-decoration:underline;font-size: 13px;}
+.toolBox{padding: 0px;}
+.toolBoxPanel{border: 0px; background-color: inherit;}
+.selectedRow {background-color: #0080ff;color: #FFFFFF;}
+li {=margin-top: 0.5em;}
+.buttonClass{cursor:pointer;border-radius:3px 3px 3px 3px;padding:2px 4px;}
+.studentDataHeader {font-weight: bold;color: #003366;}
+.customEventStyle {background-color: #eeeeee;text-decoration:none;font-family: Verdana, Arial, Helvetica, Sans-Serif;font-size: 11px;text-align: center;border-color:#CAD4E7;border-radius:3px 3px 3px 3px;vertical-align: middle;}
+.customTextStyle {color:black;text-decoration:none;}
+div.entry-selected{background-color: #eeeeee;border-left:inherit;color:black;text-decoration:none;font-family: Verdana, Arial, Helvetica, Sans-Serif;font-size: 11px;text-align: center;border-color:#CAD4E7;border-radius:3px 3px 3px 3px;vertical-align: middle;}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="edu.uky.cepis.domain.UserClassification" table="lstCollclassification">
+		<meta attribute="class-description">Class to identify classification of a cepis user
+			type (Adjunct professor,
+			research assistant, professor and more)</meta>
+		<cache region="edu.uky.cepis.cache.userclassification" usage="read-write" />
+		<id name="classificationCode" column="Collclassificationcode" type="string"
+			length="15" />
+		<!-- Following variable will be used in the drop down menu -->
+		<property name="shortDesc" column="short_description" type="string"
+			not-null="true" length="255" />
+		<property name="description" column="Desccollclassification"
+			type="string" not-null="true" length="255" />
+		<property name="status" column="currency" type="string"
+			not-null="true" length="15" />
+
+
+	</class>
+</hibernate-mapping>
+

@@ -1,0 +1,39 @@
+@CHARSET "ISO-8859-1";
+
+.startMsgCol1 {
+	vertical-align: top;
+}
+
+.startMsgCol2 {
+	vertical-align: top;
+}
+
+.indexAssessmentCol1 {
+	align: left;
+	vertical-align: top;
+	width: 100%;
+}
+
+.indexAssessmentCol2 {
+	align: right;
+	vertical-align: top;
+}
+
+.addPanelCol1 {
+	width: 70%;
+	text-align:left;
+	align: left;
+}
+
+.addPanelCol2 {
+	width: 30%;
+	text-align:right;
+	align: right;
+}
+
+.selectedRow {
+	background-color: #0080ff;
+	color: #FFFFFF;
+}
+
+.highlightClass{cursor:pointer;border-radius:3px 3px 3px 3px;padding:2px 4px;background-color: #ECEEF5;border-color: #CAD4E7;text-decoration: none;color: #3B5998;}

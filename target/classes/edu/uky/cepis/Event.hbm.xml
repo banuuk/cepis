@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.Event" table="tblEvent">
+
+		<meta attribute="class-description">Event Class for mycalendar module</meta>
+		<cache region="edu.uky.cepis.cache.event" usage="read-write" />
+		<id name="id" column="eventID" type="string">
+		</id>
+		<property name="startTime" type="timestamp" column="startTime" />
+		<property name="endTime" type="timestamp" column="endTime" />
+		<property name="title" type="string" column="title" length="255" />
+		<property name="subtitle" type="string" column="location"
+			length="255" />
+		<property name="description" type="string" column="description"
+			length="1024" />
+		<property name="lastEdit" type="date" column="Lastedit" />
+	</class>
+</hibernate-mapping>
+

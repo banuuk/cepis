@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.AdvisorGroup" table="lstAdvisorGroup">
+		<meta attribute="class-description">Class to group the advisors</meta>
+		<cache region="edu.uky.cepis.cache.advisorgroup" usage="read-write" />
+		<id name="id" column="id" type="long">
+			<generator class="native"></generator>
+		</id>
+		<property name="name" column="name" type="string"
+			not-null="true" length="50" />
+		<property name="shortDesc" column="shortDesc" type="string" length="255" />
+		<property name="lastEdit" column="lastEdit" type="date"/>
+
+		<set name="advisors" lazy="false">
+			<cache region="edu.uky.cepis.cache.advisor" usage="read-write" />
+			<key>
+				<column name="id" not-null="true" />
+			</key>
+			<one-to-many not-found="ignore"
+				class="edu.uky.cepis.domain.Advisor" />
+
+		</set>
+
+	</class>
+
+</hibernate-mapping>
+

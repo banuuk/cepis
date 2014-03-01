@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db-diagram version="1.0" provider="Plazma Forge">
+  <connection session="MySession" database="MyDatabase" schema="MySchema" />
+  <drawing is-grid-visible="true" is-snap-on="true" is-fast-routing="false" is-labels-visible="true" />
+  <tables />
+  <views />
+  <relationships />
+  <notes />
+  <links />
+</db-diagram>
+

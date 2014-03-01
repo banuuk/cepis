@@ -1,0 +1,34 @@
+10
+
+dir
+239
+svn+ssh://coesis.coe.uky.edu/opt/svn/svndev/coesis/trunk/cepis/trunk/cepis/src/main/webapp/doc/coe/cepisportal
+svn+ssh://coesis.coe.uky.edu/opt/svn/svndev/coesis
+
+
+
+2012-10-26T12:58:18.773722Z
+239
+cawalk4
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+cf020c74-4b5d-48ac-ba2e-ebbf6d9cb4c8
+
+addPerson
+dir
+
+login
+dir
+

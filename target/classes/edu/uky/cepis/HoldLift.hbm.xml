@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.HoldLift" table="tblHoldlift">
+
+		<meta attribute="class-description">Holdlift class associated with an appointment for
+			each term</meta>
+		<cache region="edu.uky.cepis.cache.holdlift" usage="read-write" />
+		<id name="id" column="HoldliftID" type="long">
+			<generator class="native"></generator>
+		</id>
+		<property name="addedOn" type="date" column="Date" />
+		
+		<many-to-one name="term" class="edu.uky.cepis.domain.component.UKTerm"
+			column="Termcode" not-found="ignore" fetch="join" />
+			
+		<many-to-one name="liftedBy" class="edu.uky.cepis.domain.User"
+			column="Lifter" not-found="ignore" fetch="join" />
+	</class>
+</hibernate-mapping>
+

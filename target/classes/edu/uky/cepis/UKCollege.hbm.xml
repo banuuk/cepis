@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="edu.uky.cepis.domain.component.UKCollege" table="lstCollege">
+		<meta attribute="class-description">Class to identify a College of a cepis user</meta>
+		<cache region="edu.uky.cepis.cache.ukcollege" usage="read-write" />
+		<id name="ukCollegeCode" column="Collegecode" type="string" length="15" />
+		<!-- Following variable will be used in the drop down menu -->
+		<property name="collegeName" column="Collegename" type="string"
+			not-null="true" length="255" />
+		<property name="collegeAddress" column="Collegeaddress" type="string"
+			not-null="true" length="255" />
+		<property name="collegeSpeedSort" column="Collegespeedsort"
+			type="string" not-null="true" length="255" />
+		<property name="collegePhone" column="Collegephone" type="string"
+			not-null="true" length="255" />
+		<property name="collegeDeanName" column="Collegedean" type="string"
+			length="255" />
+		<set name="departments" lazy="true" cascade="save-update">
+			<cache region="edu.uky.cepis.cache.ukdepartment"
+				usage="read-write" />
+			<key>
+				<column name="CollegeID" not-null="true" />
+			</key>
+			<one-to-many class="edu.uky.cepis.domain.component.UKDepartment" not-found="ignore"/>
+
+		</set>
+	</class>
+</hibernate-mapping>
+

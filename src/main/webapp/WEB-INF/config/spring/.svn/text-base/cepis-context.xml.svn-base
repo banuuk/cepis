@@ -1,0 +1,371 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<!-- Scan controller for annotations -->
+	<context:component-scan base-package="edu.uky.cepis" />
+
+	<!-- CEPIS Properties file -->
+	<context:property-placeholder location="classpath:cepis.properties" />
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- CEPIS Configuration -->
+	<bean id="cepisConfigurator" class="edu.uky.cepis.util.global.CEPISConfigurator">
+		<property name="version" value="${cepis.portal.version}" />
+		<property name="releaseDate" value="${cepis.portal.releaseDate}" />
+		<property name="authorNames">
+			<list value-type="java.lang.String">
+				<value>Curt Walker</value>
+				<value>Dr. Gary Schroeder</value>
+			</list>
+		</property>
+		<property name="authorEmails">
+			<list value-type="edu.uky.cepis.domain.EmailAddress">
+				<bean class="edu.uky.cepis.domain.EmailAddress">
+					<constructor-arg index="0" value="21308" />
+					<constructor-arg index="1" value="cawalk4@uky.edu" />
+					<constructor-arg index="2" ref="ukyEmailAddressType" />
+				</bean>
+				<bean class="edu.uky.cepis.domain.EmailAddress">
+					<constructor-arg index="0" value="14861" />
+					<constructor-arg index="1" value="gschr1@uky.edu" />
+					<constructor-arg index="2" ref="ukyEmailAddressType" />
+				</bean>
+			</list>
+		</property>
+		<property name="bugReportLink">
+			<bean class="java.net.URL">
+				<constructor-arg index="0" value="${cepis.portal.reportBug}" />
+			</bean>
+		</property>
+		<property name="copyRightTo" value="${cepis.portal.copyrightTo}" />
+		<property name="year" value="${cepis.portal.copyrightYear}" />
+		<property name="applicationName" value="${cepis.portal.applicationName}" />
+		<property name="baseLocation" value="${cepis.portal.baseLocation}" />
+		<property name="profileBaseLocation" value="${cepis.portal.profileBaseLocation}" />
+		<property name="etsScorelinkBaseLocation" value="${cepis.portal.batch.ets.scorelink.praxis}" />
+
+	</bean>
+
+	<bean id="ukyEmailAddressType" class="edu.uky.cepis.domain.EmailAddressType">
+		<constructor-arg index="0" value="UKY" />
+		<constructor-arg index="1"
+			value="e-mail, UK address (i.e. *.uky.edu)" />
+	</bean>
+	<!-- Spring PropertyEditor -->
+	<bean id="customEditorConfigurer"
+		class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="java.util.Date">
+					<bean class="org.springframework.beans.propertyeditors.CustomDateEditor">
+						<constructor-arg index="0">
+							<bean class="java.text.SimpleDateFormat">
+								<constructor-arg>
+									<value>yyyy/MM/dd</value>
+								</constructor-arg>
+							</bean>
+						</constructor-arg>
+
+						<constructor-arg index="1">
+							<value>true</value>
+						</constructor-arg>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+	<!-- CEPIS POP3/SMTP Email Sender -->
+	<bean id="cepisEmailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="${cepis.mail.host}" />
+	</bean>
+	<bean id="cepisTemplateMessage" class="org.springframework.mail.SimpleMailMessage">
+		<property name="from" value="${cepis.mail.from}" />
+	</bean>
+	<!-- CEPIS ITC5 Database -->
+	<bean id="itc5DataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${itc5.jdbc.driver}" />
+		<property name="url" value="${itc5.jdbc.url}" />
+		<property name="username" value="${itc5.jdbc.username}" />
+		<property name="password" value="${itc5.jdbc.password}" />
+		<property name="maxIdle" value="${itc5.jdbc.maxIdle}" />
+		<property name="maxActive" value="${itc5.jdbc.maxActive}" />
+	</bean>
+
+	<!-- APEX Database -->
+	<bean id="apexDataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${apex.jdbc.driver}" />
+		<property name="url" value="${apex.jdbc.url}" />
+		<property name="username" value="${apex.jdbc.username}" />
+		<property name="password" value="${apex.jdbc.password}" />
+		<property name="maxIdle" value="${apex.jdbc.maxIdle}" />
+		<property name="maxActive" value="${apex.jdbc.maxActive}" />
+	</bean>
+
+	<!-- OTIS Database -->
+	<bean id="otisDataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${otis.jdbc.driver}" />
+		<property name="url" value="${otis.jdbc.url}" />
+		<property name="username" value="${otis.jdbc.username}" />
+		<property name="password" value="${otis.jdbc.password}" />
+		<property name="maxIdle" value="${otis.jdbc.maxIdle}" />
+		<property name="maxActive" value="${otis.jdbc.maxActive}" />
+	</bean>
+
+	<!-- Default SessionFactory for Hibernate in Spring based on ITC5 Datasource -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		scope="singleton">
+		<property name="dataSource" ref="itc5DataSource" />
+		<property name="mappingResources">
+			<list>				
+				<value>edu/uky/cepis/SharedUser.hbm.xml</value>
+				<value>edu/uky/cepis/UserConfiguration.hbm.xml</value>
+				<value>edu/uky/cepis/UserType.hbm.xml</value>
+				<value>edu/uky/cepis/UserClassification.hbm.xml</value>				
+				<value>edu/uky/cepis/IPAddress.hbm.xml</value>
+				<value>edu/uky/cepis/WorkingSet.hbm.xml</value>		
+				<value>edu/uky/cepis/PhoneType.hbm.xml</value>
+				<value>edu/uky/cepis/Event.hbm.xml</value>			
+				<value>edu/uky/cepis/AddressType.hbm.xml</value>					
+				<value>edu/uky/cepis/EmailAddressType.hbm.xml</value>
+				<value>edu/uky/cepis/Ethnic.hbm.xml</value>
+				<value>edu/uky/cepis/Email.hbm.xml</value>
+				<value>edu/uky/cepis/AdvisorGroup.hbm.xml</value>
+				<value>edu/uky/cepis/Program.hbm.xml</value>
+				<value>edu/uky/cepis/ProgramDomain.hbm.xml</value>
+				<value>edu/uky/cepis/ProgramGroup.hbm.xml</value>
+				<value>edu/uky/cepis/ProgramTrack.hbm.xml</value>
+				<value>edu/uky/cepis/CohortType.hbm.xml</value>
+				<value>edu/uky/cepis/CohortTerm.hbm.xml</value>
+				<value>edu/uky/cepis/UKCollege.hbm.xml</value>
+				<value>edu/uky/cepis/UKDepartment.hbm.xml</value>
+				<value>edu/uky/cepis/UKMajor.hbm.xml</value>
+				<value>edu/uky/cepis/UKStatus.hbm.xml</value>
+				<value>edu/uky/cepis/UKTerm.hbm.xml</value>				
+				<value>edu/uky/cepis/AdvisingSession.hbm.xml</value>
+				<value>edu/uky/cepis/AdvisingSessionSlot.hbm.xml</value>
+				<value>edu/uky/cepis/HoldLift.hbm.xml</value>
+				<value>edu/uky/cepis/Conference.hbm.xml</value>
+				<value>edu/uky/cepis/Attendee.hbm.xml</value>
+				<value>edu/uky/cepis/Ranking.hbm.xml</value>				
+				<value>edu/uky/cepis/CustomTypes.hbm.xml</value>	
+				<value>edu/uky/cepis/Query.hbm.xml</value>			
+				<value>edu/uky/cepis/Standard.hbm.xml</value>
+				<value>edu/uky/cepis/StandardSet.hbm.xml</value>
+				<value>edu/uky/cepis/UserAssessmentStandard.hbm.xml</value>
+				<value>edu/uky/cepis/UserAssessmentStandardSet.hbm.xml</value>
+				<value>edu/uky/cepis/UserAssessmentProfile.hbm.xml</value>
+				<value>org/efs/openreports/objects/Report.hbm.xml</value>
+				<value>org/efs/openreports/objects/ReportDataSource.hbm.xml</value>
+				<value>org/efs/openreports/objects/ReportGroup.hbm.xml</value>
+				<value>org/efs/openreports/objects/ReportParameter.hbm.xml</value>
+				<value>org/efs/openreports/objects/ReportUser.hbm.xml</value>
+				<value>org/efs/openreports/objects/ReportLog.hbm.xml</value>
+				<value>org/efs/openreports/objects/ReportDeliveryLog.hbm.xml</value>
+				<value>org/efs/openreports/objects/ReportChart.hbm.xml</value>
+				<value>org/efs/openreports/objects/ReportAlert.hbm.xml</value>
+				<value>org/efs/openreports/objects/ORProperty.hbm.xml</value>
+				<value>org/efs/openreports/objects/ORTag.hbm.xml</value>
+				<value>org/efs/openreports/objects/ReportExportOption.hbm.xml</value>				
+			</list>
+		</property>
+		
+		<!-- Scan domain package for annotated classes -->
+		<property name="packagesToScan" value="edu.uky.cepis.domain"/>
+		
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${itc5.dialect}</prop>
+				<prop key="transaction.factory_class">org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+				</prop>
+				<prop key="current_session_context_class">thread</prop>
+				<prop key="hibernate.connection.zeroDateTimeBehavior">convertToNull</prop>
+				<prop key="hibernate.default_batch_fetch_size">${itc5.jdbc.batch_fetch_size}</prop>
+				<prop key="hibernate.jdbc.batch_size">${itc5.jdbc.batch_fetch_size}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.use_sql_comments">false</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+				</prop>
+				<!-- <prop key="hibernate.search.default.directory_provider">filesystem</prop> 
+					<prop key="hibernate.search.default.indexBase">C:/temp/</prop> <prop key="hibernate.search.lucene_version">LUCENE_35</prop> -->
+				<prop key="hibernate.connection.zeroDateTimeBehavior">convertToNull</prop>
+				<prop key="hbm2ddl.auto">update</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.c3p0.max_size">5</prop>
+				<prop key="hibernate.c3p0.min_size">1</prop>
+				<prop key="hibernate.c3p0.timeout">5000</prop>
+				<prop key="hibernate.c3p0.max_statements">100</prop>
+				<prop key="hibernate.c3p0.acquire_incrementm">2</prop>
+				<prop key="hibernate.c3p0.idle_test_period">300</prop>
+			</props>
+		</property>
+
+	</bean>
+
+	<!-- APEX SessionFactory Used by UserAcademicProfileDao -->
+	<bean id="apexSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		scope="singleton">
+		<property name="dataSource" ref="apexDataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>edu/uky/cepis/Course.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${apex.dialect}</prop>
+				<prop key="transaction.factory_class">org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+				</prop>
+				<prop key="current_session_context_class">thread</prop>
+				<prop key="hibernate.default_batch_fetch_size">${apex.jdbc.batch_fetch_size}</prop>
+				<prop key="hibernate.jdbc.batch_size">${apex.jdbc.batch_fetch_size}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.use_sql_comments">false</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+				</prop>
+				<!-- <prop key="hibernate.search.default.directory_provider">filesystem</prop> 
+					<prop key="hibernate.search.default.indexBase">C:/temp/</prop> <prop key="hibernate.search.lucene_version">LUCENE_35</prop> -->
+				<prop key="hibernate.connection.zeroDateTimeBehavior">convertToNull</prop>
+				<prop key="hbm2ddl.auto">update</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.c3p0.max_size">5</prop>
+				<prop key="hibernate.c3p0.min_size">1</prop>
+				<prop key="hibernate.c3p0.timeout">5000</prop>
+				<prop key="hibernate.c3p0.max_statements">100</prop>
+				<prop key="hibernate.c3p0.acquire_incrementm">2</prop>
+				<prop key="hibernate.c3p0.idle_test_period">300</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!-- OTIS SessionFactory Used by UserAcademicProfileDao -->
+	<bean id="otisSessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+		scope="singleton">
+		<property name="dataSource" ref="otisDataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>edu/uky/cepis/Artifact.hbm.xml</value>
+				<value>edu/uky/cepis/ArtifactStandard.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${otis.dialect}</prop>
+				<prop key="transaction.factory_class">org.hibernate.engine.transaction.internal.jdbc.JdbcTransactionFactory
+				</prop>
+				<prop key="current_session_context_class">thread</prop>
+				<prop key="hibernate.default_batch_fetch_size">${otis.jdbc.batch_fetch_size}</prop>
+				<prop key="hibernate.jdbc.batch_size">${otis.jdbc.batch_fetch_size}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.use_sql_comments">false</prop>
+				<prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+				</prop>
+				<!-- <prop key="hibernate.search.default.directory_provider">filesystem</prop> 
+					<prop key="hibernate.search.default.indexBase">C:/temp/</prop> <prop key="hibernate.search.lucene_version">LUCENE_35</prop> -->
+				<prop key="hibernate.connection.zeroDateTimeBehavior">convertToNull</prop>
+				<prop key="hbm2ddl.auto">update</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.c3p0.max_size">5</prop>
+				<prop key="hibernate.c3p0.min_size">1</prop>
+				<prop key="hibernate.c3p0.timeout">5000</prop>
+				<prop key="hibernate.c3p0.max_statements">100</prop>
+				<prop key="hibernate.c3p0.acquire_incrementm">2</prop>
+				<prop key="hibernate.c3p0.idle_test_period">300</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- CEPIS Transaction manager for managing transactions -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- CEPIS Transaction Advice -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>	
+	
+	<!-- APEX Datasource Transaction Manager -->
+	<bean id="apexTransactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="apexSessionFactory" />
+		</property>
+	</bean>
+
+	<!-- APEX Transaction Advice -->
+	<tx:advice id="txApexAdvice" transaction-manager="apexTransactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+
+	<!-- OTIS Datasource Transaction Manager -->
+	<bean id="otisTransactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="otisSessionFactory" />
+		</property>
+	</bean>
+
+	<!-- OTIS Transaction Advice -->
+	<tx:advice id="txOTISAdvice" transaction-manager="otisTransactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+
+
+
+	<!-- Advice classes -->
+	<!-- Currently this perform no action -->
+	<!-- Use this to perform certain action before calling methods starting 
+		with find* -->
+	<bean id="tracingBeforeAdvice" class="edu.uky.cepis.aop.TracingBeforeAdvice" />
+	<bean id="traceBeforeAdvisor"
+		class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice">
+			<ref local="tracingBeforeAdvice" />
+		</property>
+		<property name="pattern">
+			<value>.*\.find.*</value>
+		</property>
+	</bean>
+</beans>

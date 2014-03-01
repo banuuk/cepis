@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+.indexCol1{align:left;vertical-align:top;width: 10%;}
+.indexCol2{align:right;vertical-align:top;width: 100%;}
+.boldText{font-weight:bold;}
+.inplace{cursor:pointer;background-color: #ECEEF5;border:1px solid #CAD4E7;border-radius:3px 3px 3px 3px;padding:2px 4px;}
+.rich-inplace-select-changed-hover,.rich-inplace-select-view-hover{cursor:pointer;color:black;background-image: none;background-color: #ECEEF5;border:1px solid #9DACCE;border-radius:3px 3px 3px 3px;padding:2px 4px;}
+.rich-inplace-select-changed{background-image:none;}
+input.rich-inplace-select-field,.rich-inplace-select-field,.rich-inplace-select-list-decoration{cursor:pointer;background-color:#ECEEF5;background-image:none;font-family: Verdana,Geneva,Arial,Helvetica,sans-serif;font-size: 12px;font-weight: 400;}
+.rich-pmenu-selected-element{font-weight:bold;border:1px solid #CAD4E7;}
+.actioncol1{text-align:left;align:left;vertical-align:middle;width: 50%;}
+.actioncol2{text-align:right;align:right;vertical-align:middle;width: 50%;}
+.highlightClass{cursor:pointer;border-radius:3px 3px 3px 3px;padding:2px 4px;background-color: #ECEEF5;border-color: #CAD4E7;text-decoration: none;color: #3B5998;}

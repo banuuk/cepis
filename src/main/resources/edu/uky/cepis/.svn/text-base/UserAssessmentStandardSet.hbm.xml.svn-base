@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="edu.uky.cepis.domain.UserAssessmentStandardSet" table="tblStandardSet">
+		<meta attribute="class-description">Class to identify a UserAssessmentStandardSet Metric
+			with a list of UserAssessmentStandardSets</meta>
+		<cache region="edu.uky.cepis.cache.userassessmentstandardset"
+			usage="read-write" />
+		<id name="stdSetId" column="stdSetId" type="long">
+			<generator class="native"></generator>
+		</id>
+		<many-to-one name="standardSet" class="edu.uky.cepis.domain.StandardSet"
+			column="standardSet" not-found="ignore" lazy="false"
+			not-null="true" fetch="join"/>
+		<property name="finalScore" column="finalScore" type="integer"
+			not-null="true" />
+		<list name="standards" lazy="false" cascade="all" batch-size="10"
+			fetch="join">
+			<cache region="edu.uky.cepis.cache.userassessmentstandard" usage="read-write" />
+			<key>
+				<column name="stdSetId" not-null="true" />
+			</key>
+			<list-index column="std_index" base="0"></list-index>
+			<one-to-many class="edu.uky.cepis.domain.UserAssessmentStandard"
+				not-found="ignore" />
+		</list>
+	</class>
+</hibernate-mapping>
+

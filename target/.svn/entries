@@ -1,0 +1,28 @@
+10
+
+dir
+0
+svn+ssh://coesis.coe.uky.edu/opt/svn/svndev/coesis/trunk/cepis/trunk/cepis/target
+svn+ssh://coesis.coe.uky.edu/opt/svn/svndev/coesis
+add
+
+
+
+
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+cf020c74-4b5d-48ac-ba2e-ebbf6d9cb4c8
+

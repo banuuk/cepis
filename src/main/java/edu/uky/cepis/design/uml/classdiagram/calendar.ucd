@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="calendar" size="773,542" id="edu.uky.cepis.calendar" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D313030302063657069732F6B656572746869">
+  <children xsi:type="editmodel:ClassEditModel" name="AddEntryHandler" location="589,50" size="149,175" id="edu.uky.cepis.calendar/AddEntryHandler" runTimeClassModel="title,model,add(),location,from,until,comments">
+    <children xsi:type="editmodel:CompartmentEditModel" size="126,108">
+      <children xsi:type="editmodel:AttributeEditModel" name="comments" id="edu.uky.cepis.calendar/AddEntryHandler#comments"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="from" id="edu.uky.cepis.calendar/AddEntryHandler#from"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="location" id="edu.uky.cepis.calendar/AddEntryHandler#location"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="model" id="edu.uky.cepis.calendar/AddEntryHandler#model"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="title" id="edu.uky.cepis.calendar/AddEntryHandler#title"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="until" id="edu.uky.cepis.calendar/AddEntryHandler#until"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="48,18">
+      <children xsi:type="editmodel:MethodEditModel" name="add" id="edu.uky.cepis.calendar/AddEntryHandler#add()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="RandomColorScheduleEntryRenderer" location="50,455" size="280,67" id="edu.uky.cepis.calendar/RandomColorScheduleEntryRenderer" runTimeClassModel="getColor(Ljavax.faces.context.FacesContext;Lorg.apache.myfaces.custom.schedule.HtmlSchedule;Lorg.apache.myfaces.custom.schedule.model.ScheduleEntry;Z)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="70,18">
+      <children xsi:type="editmodel:MethodEditModel" name="getColor" id="edu.uky.cepis.calendar/RandomColorScheduleEntryRenderer#getColor(Ljavax.faces.context.FacesContext;Lorg.apache.myfaces.custom.schedule.HtmlSchedule;Lorg.apache.myfaces.custom.schedule.model.ScheduleEntry;Z)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="ScheduleSettings" location="357,50" size="182,355" id="edu.uky.cepis.calendar/ScheduleSettings" runTimeClassModel="compactWeekRowHeight,visibleEndHour,visibleStartHour,model,workingStartHour,theme,renderZeroLength,compactMonthRowHeight,workingEndHour,getMode(),save(),setMode(Ljava.lang.String;),expandToFitEntries,detailedRowHeight,headerDateFormat,readonly,tooltip">
+    <children xsi:type="editmodel:CompartmentEditModel" size="159,252">
+      <children xsi:type="editmodel:AttributeEditModel" name="compactMonthRowHeight" id="edu.uky.cepis.calendar/ScheduleSettings#compactMonthRowHeight"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="compactWeekRowHeight" id="edu.uky.cepis.calendar/ScheduleSettings#compactWeekRowHeight"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="detailedRowHeight" id="edu.uky.cepis.calendar/ScheduleSettings#detailedRowHeight"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="expandToFitEntries" id="edu.uky.cepis.calendar/ScheduleSettings#expandToFitEntries"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="headerDateFormat" id="edu.uky.cepis.calendar/ScheduleSettings#headerDateFormat"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="model" id="edu.uky.cepis.calendar/ScheduleSettings#model"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="readonly" id="edu.uky.cepis.calendar/ScheduleSettings#readonly"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="renderZeroLength" id="edu.uky.cepis.calendar/ScheduleSettings#renderZeroLength"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="theme" id="edu.uky.cepis.calendar/ScheduleSettings#theme"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="tooltip" id="edu.uky.cepis.calendar/ScheduleSettings#tooltip"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="visibleEndHour" id="edu.uky.cepis.calendar/ScheduleSettings#visibleEndHour"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="visibleStartHour" id="edu.uky.cepis.calendar/ScheduleSettings#visibleStartHour"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="workingEndHour" id="edu.uky.cepis.calendar/ScheduleSettings#workingEndHour"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="workingStartHour" id="edu.uky.cepis.calendar/ScheduleSettings#workingStartHour"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="71,54">
+      <children xsi:type="editmodel:MethodEditModel" name="getMode" id="edu.uky.cepis.calendar/ScheduleSettings#getMode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="save" id="edu.uky.cepis.calendar/ScheduleSettings#save()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setMode" id="edu.uky.cepis.calendar/ScheduleSettings#setMode(Ljava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="BindingScheduleExampleHandler" location="50,221" size="257,139" id="edu.uky.cepis.calendar/BindingScheduleExampleHandler" runTimeClassModel="schedule,mouseActionText,scheduleAction(),scheduleClicked(Lorg.apache.myfaces.custom.schedule.ScheduleMouseEvent;),getLastClickedDate()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="137,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="mouseActionText" id="edu.uky.cepis.calendar/BindingScheduleExampleHandler#mouseActionText"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="schedule" id="edu.uky.cepis.calendar/BindingScheduleExampleHandler#schedule"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="122,54">
+      <children xsi:type="editmodel:MethodEditModel" name="getLastClickedDate" id="edu.uky.cepis.calendar/BindingScheduleExampleHandler#getLastClickedDate()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="scheduleAction" id="edu.uky.cepis.calendar/BindingScheduleExampleHandler#scheduleAction()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="scheduleClicked" id="edu.uky.cepis.calendar/BindingScheduleExampleHandler#scheduleClicked(Lorg.apache.myfaces.custom.schedule.ScheduleMouseEvent;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.calendar/BindingScheduleExampleHandler-Standard::Derive->edu.uky.cepis.calendar/ScheduleExampleHandler" source="//@children.3" target="//@children.4" targetEnd="//@children.3/@sourceConnections.0/@children.2" label="//@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Derive»" size="43,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="128,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="104,121"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="edu.uky.cepis.calendar/ScheduleExampleHandler&lt;-edu.uky.cepis.calendar/BindingScheduleExampleHandler" source="//@children.3" target="//@children.4" targetEnd="//@children.3/@sourceConnections.1/@children.1" sourceEnd="//@children.3/@sourceConnections.1/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="108,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="84,121"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.3/@sourceConnections.0 //@children.3/@sourceConnections.1" name="ScheduleExampleHandler" location="74,50" size="208,121" id="edu.uky.cepis.calendar/ScheduleExampleHandler" runTimeClassModel="model,addSampleHoliday(Ljavax.faces.event.ActionEvent;),addSampleEntries(Ljavax.faces.event.ActionEvent;),deleteSelectedEntry(Ljavax.faces.event.ActionEvent;)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="126,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="model" id="edu.uky.cepis.calendar/ScheduleExampleHandler#model"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="126,54">
+      <children xsi:type="editmodel:MethodEditModel" name="addSampleEntries" id="edu.uky.cepis.calendar/ScheduleExampleHandler#addSampleEntries(Ljavax.faces.event.ActionEvent;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addSampleHoliday" id="edu.uky.cepis.calendar/ScheduleExampleHandler#addSampleHoliday(Ljavax.faces.event.ActionEvent;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="deleteSelectedEntry" id="edu.uky.cepis.calendar/ScheduleExampleHandler#deleteSelectedEntry(Ljavax.faces.event.ActionEvent;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" level="-1" properties="wireOptions=7;Product=eUML2"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

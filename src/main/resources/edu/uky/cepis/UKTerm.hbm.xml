@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="edu.uky.cepis.domain.component.UKTerm" table="lstTerm">
+		<meta attribute="class-description">Class to identify University of Kentucky terms (eg., Fall 2009, Spring 2010...)</meta>
+		<cache region="edu.uky.cepis.cache.ukterm"
+			usage="read-write" />
+		<id name="ukTermCode" column="Termcode" type="string" length="15" />
+		<!-- Following variable will be used in the drop down menu -->
+		<property name="shortDesc" column="short_description" type="string"
+			not-null="true" length="255" />
+		<property name="description" column="Termname" type="string"
+			length="255" />
+		<property name="status" column="currency" type="string" length="15" />
+
+	</class>
+
+</hibernate-mapping>
+

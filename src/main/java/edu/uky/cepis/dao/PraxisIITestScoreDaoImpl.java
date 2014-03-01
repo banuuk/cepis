@@ -1,0 +1,366 @@
+/**
+ * 
+ */
+package edu.uky.cepis.dao;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.SessionFactory;
+
+
+import edu.uky.cepis.domain.PraxisIITest;
+import edu.uky.cepis.domain.PraxisIITestScore;
+import edu.uky.cepis.domain.User;
+
+/**
+ * Hibernate-based DAO class for CRUD operation on test scores such as
+ * {@link PraxisTestScore} object.<br>
+ * 
+ * {@link SessionFactory} object injected via Spring IoC.
+ * 
+ * @see PraxisTestScore
+ * @see PraxisTest
+ * 
+ * @author keerthi
+ * 
+ */
+@SuppressWarnings("unchecked")
+public class PraxisIITestScoreDaoImpl implements PraxisIITestScoreDao {
+
+	private static Logger log = Logger.getLogger(PraxisIITestScoreDaoImpl.class);
+	private SessionFactory sessionFactory;
+
+	@Override
+	public boolean addPraxisIITestScoreToUser(User user,
+			PraxisIITestScore praxisIITestScore) {
+		if (user == null || praxisIITestScore == null) {
+			log.debug("user or praxisIITestScore object is null.");
+			return false;
+		}
+		this.savePraxisTestScore(praxisIITestScore);
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		if (newuser == null) {
+			return false;
+		}
+		newuser.getPraxisIITestScores().add(praxisIITestScore);
+		return true;
+	}
+
+	@Override
+	public int addArchivedPraxisIITestScoreToUser(User user,
+			PraxisIITestScore archivedPraxisIITestScore) {
+		if (user == null || archivedPraxisIITestScore == null) {
+			log.debug("user or archivedPraxisTestScore object is null.");
+			return 0;
+		}
+
+		String insertQuery = "insert into tbl20PraxisArchive (UID, Testdate, Praxiscode,PraxisStudentID ,Score , Datereceived,Lastedit) values (:uid, :testDate, :praxisCode, :candidateID, :score, :receivedDate, :lastEdit)";
+		SQLQuery query = this.sessionFactory.getCurrentSession()
+				.createSQLQuery(insertQuery);
+		query.setString("uid", user.getUid());
+		query.setDate("testDate", archivedPraxisIITestScore.getTestDate());
+		if (archivedPraxisIITestScore.getPraxisIITest() != null) {
+			query.setString("praxisCode", archivedPraxisIITestScore
+					.getPraxisIITest().getTestCode());
+		} else {
+			query.setString("praxisCode", "NA");
+		}
+		query.setString("candidateID", archivedPraxisIITestScore.getCandidateId());
+		query.setDouble("score", archivedPraxisIITestScore.getScore());
+		query.setDate("receivedDate", archivedPraxisIITestScore.getReceivedDate());
+		query.setDate("lastEdit", new Date());
+		return query.executeUpdate();
+	}
+
+	@Override
+	public List<PraxisIITestScore> getArchivedPraxisIITestScoresForUser(User user) {
+		List<PraxisIITestScore> archivedPraxisIITestScore = new ArrayList<PraxisIITestScore>(
+				0);
+		if (user == null) {
+			log.debug("user object is null.");
+			return archivedPraxisIITestScore;
+		}
+		SQLQuery query = this.sessionFactory
+				.getCurrentSession()
+				.createSQLQuery(
+						"SELECT pA.PraxisID,pA.UID, pA.Testdate, pA.Praxiscode,pA.PraxisStudentID ,pA.Score , pA.Datereceived  FROM tbl20PraxisArchive pA,lstPraxis pT,tblIdentity iden WHERE pA.UID=iden.UID and pT.ID=pA.Praxiscode and pA.UID =:uid");
+		query.setString("uid", user.getUid());
+		query.addEntity("pA", PraxisIITestScore.class);
+		query.addJoin("pT", "pA.praxisTest");
+		query.addJoin("user", "pA.user");
+
+		return archivedPraxisIITestScore;
+	}
+
+	private void savePraxisTestScore(PraxisIITestScore praxisTestScore) {
+		if (praxisTestScore != null) {
+			this.sessionFactory.getCurrentSession().saveOrUpdate(
+					praxisTestScore);
+		}
+	}
+
+	@Override
+	public boolean addPraxisIITestScoreToUser(User user, Date testDate,
+			PraxisIITest praxisIITest, String candidateId, double score,
+			int primary, int nonStandardAdministration,
+			int revisedScoreIndicator, int excellenceIndicator) {
+		if (user == null || praxisIITest == null || candidateId == null
+				|| score < 0 || testDate == null) {
+			log.debug("one of the parameters is null.");
+			return false;
+		}
+		PraxisIITestScore praxisTestScore = new PraxisIITestScore(testDate,
+				praxisIITest, candidateId, score, primary, 
+				nonStandardAdministration, revisedScoreIndicator,
+				excellenceIndicator);
+		this.savePraxisTestScore(praxisTestScore);
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		if (newuser == null) {
+			return false;
+		}
+		newuser.getPraxisIITestScores().add(praxisTestScore);
+		return true;
+	}
+
+	@Override
+	public List<PraxisIITestScore> findByTestDate(User user, Date testDate) {
+		List<PraxisIITestScore> praxisTestScores = new ArrayList<PraxisIITestScore>(
+				0);
+
+		if (user == null || testDate == null) {
+			log.debug("user or testDate object is null.");
+			return praxisTestScores;
+		}
+		String hql = "select distinct s from User a join a.praxisIITestScores s where a.uid = :uid and s.testDate = :testDate order by s.testDate desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("testDate", testDate);
+		query.setString("uid", user.getUid());
+		praxisTestScores = query.list();
+
+		return praxisTestScores;
+	}
+
+	@Override
+	public PraxisIITestScore findPraxisIITestScoreById(long id) {
+		List<PraxisIITestScore> praxisTestScores = new ArrayList<PraxisIITestScore>(
+				0);
+		if (id < 1) {
+			return null;
+		}
+		String hql = "select distinct s from PraxisIITestScore s where  s.id = :id order by s.testDate desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("id", id);
+		praxisTestScores = query.list();
+		if (praxisTestScores.size() > 0) {
+			return praxisTestScores.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public List<PraxisIITestScore> findByCandidateId(String candidateId) {
+		List<PraxisIITestScore> praxisTestScores = new ArrayList<PraxisIITestScore>(
+				0);
+		if (candidateId == null || candidateId.trim().isEmpty()) {
+			return null;
+		}
+		String hql = "select distinct s from PraxisIITestScore s where  s.candidateId = :candidateId order by s.testDate desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("candidateId", candidateId);
+		praxisTestScores = query.list();
+
+		return praxisTestScores;
+	}
+
+	@Override
+	public List<PraxisIITestScore> findByTestCode(User user, PraxisIITest praxisTest) {
+		List<PraxisIITestScore> praxisTestScores = new ArrayList<PraxisIITestScore>(
+				0);
+
+		if (user == null || praxisTest == null) {
+			log.debug("user or praxisIITest object is null.");
+			return praxisTestScores;
+		}
+		String hql = "select distinct s from User a join a.praxisIITestScores s where a.uid = :uid and s.praxisIITest.testCode = :testCode order by s.testDate desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("testCode", praxisTest.getTestCode());
+		query.setString("uid", user.getUid());
+		praxisTestScores = query.list();
+
+		return praxisTestScores;
+	}
+
+	@Override
+	public User findUserByCandidateId(String candidateId) {
+		List<User> users = new ArrayList<User>(0);
+		if (candidateId == null || candidateId.trim().isEmpty()) {
+			return null;
+		}
+		String hql = "select distinct user from User user join user.praxisIITestScores s where s.candidateId = :candidateId order by s.testDate desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("candidateId", candidateId);
+		users = query.list();
+		if (users.size() > 0) {
+			return users.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public List<PraxisIITestScore> getPraxisIITestScoreList(User user) {
+		List<PraxisIITestScore> praxisIITestScores = new ArrayList<PraxisIITestScore>(
+				0);
+
+		if (user == null) {
+			log.debug("user object is null.");
+			return praxisIITestScores;
+		}
+		String hql = "select distinct s from User a join a.praxisIITestScores s where a.uid = :uid order by s.testDate desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setString("uid", user.getUid());
+		
+		praxisIITestScores = query.list();
+
+		return praxisIITestScores;
+	}
+
+	@Override
+	public PraxisIITestScore getPrimaryPraxisIITestScore(User user, String testCode) {
+		List<PraxisIITestScore> praxisIITestScores = new ArrayList<PraxisIITestScore>(
+				0);
+		if (user == null || testCode == null || testCode.trim().isEmpty()) {
+			log.debug("user object or testCode is null.");
+			return null;
+		}
+		String hql = "select distinct s from User a join a.praxisIITestScores s where a.uid = :uid and s.praxisIITest.testCode = :testCode and (s.primary = :primaryplus1 or s.primary = :primaryminus1) order by s.testDate desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setString("uid", user.getUid());
+		query.setParameter("primaryplus1", 1);
+		query.setParameter("primaryminus1", -1);
+		query.setParameter("testCode", testCode);
+		praxisIITestScores = query.list();
+		if (praxisIITestScores.size() > 0) {
+			return praxisIITestScores.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public List<PraxisIITest> getPraxisIITestsTakenByUser(User user) {
+		List<PraxisIITest> praxisIITests = new ArrayList<PraxisIITest>(0);
+		if (user == null) {
+			log.debug("user object is null.");
+			return praxisIITests;
+		}
+		String hql = "select distinct s.praxisTest from User a join a.praxisIITestScores s where a.uid = :uid order by s.testDate desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setString("uid", user.getUid());
+		praxisIITests = query.list();
+
+		return praxisIITests;
+	}
+
+	@Override
+	public List<PraxisIITestScore> getPraxisIITestScoreListByTestCode(User user,
+			String testCode) {
+		List<PraxisIITestScore> praxisTestScores = new ArrayList<PraxisIITestScore>(
+				0);
+		if (user == null || testCode == null || testCode.trim().isEmpty()) {
+			log.debug("user object or testCode is null.");
+			return praxisTestScores;
+		}
+		String hql = "select distinct s from User a join a.praxisIITestScores s where a.uid = :uid and s.praxisIITest.testCode = :testCode order by s.testDate desc";
+		Query query = this.sessionFactory.getCurrentSession().createQuery(hql);
+		query.setString("uid", user.getUid());
+		query.setParameter("testCode", testCode);
+		praxisTestScores = query.list();
+
+		return praxisTestScores;
+	}
+
+	@Override
+	public boolean removePraxisIITestScoreFromUser(User user,
+			PraxisIITestScore praxisIITestScore) {
+		if (user == null || praxisIITestScore == null) {
+			return false;
+		}
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		if (newuser == null) {
+			return false;
+		}
+
+		PraxisIITestScore newPraxisTestScore = (PraxisIITestScore) this.sessionFactory
+				.getCurrentSession().load(PraxisIITestScore.class,
+						praxisIITestScore.getId());
+		if (newPraxisTestScore == null) {
+			return false;
+		}
+
+		if (newuser.getPraxisIITestScores().contains(newPraxisTestScore)) {
+			newuser.getPraxisIITestScores().remove(newPraxisTestScore);
+			this.sessionFactory.getCurrentSession().saveOrUpdate(newuser);
+			this.sessionFactory.getCurrentSession().delete(newPraxisTestScore);
+			return true;
+		}
+		log.debug("PraxisIITestScore is not found in the given user object.");
+		return false;
+	}
+
+	@Override
+	public PraxisIITestScore updatePraxisIITestScore(User user,
+			PraxisIITestScore praxisIITestScore,Date receivedDate, Date testDate,
+			PraxisIITest praxisIITest, String candidateId, double score,
+			int primary, int nonStandardAdministration,
+			int revisedScoreIndicator, int excellenceIndicator) {
+		if (user == null || praxisIITestScore == null || praxisIITest == null) {
+			return null;
+		}
+		User newuser = (User) this.sessionFactory.getCurrentSession().load(
+				User.class, user.getUid());
+		if (newuser == null) {
+			return null;
+		}
+
+		PraxisIITestScore newPraxisTestScore = (PraxisIITestScore) this.sessionFactory
+				.getCurrentSession().load(PraxisIITestScore.class,
+						praxisIITestScore.getId());
+		if (newPraxisTestScore == null) {
+			return null;
+		}
+
+		if (!newuser.getPraxisIITestScores().contains(newPraxisTestScore)) {
+			log.debug("PraxisIITestScore is not found in the given user object.");
+			return null;
+		}
+		newPraxisTestScore.setCandidateId(candidateId);
+		newPraxisTestScore.setTestDate(testDate);
+		newPraxisTestScore.setReceivedDate(receivedDate);
+		newPraxisTestScore.setPraxisIITest(praxisIITest);
+		newPraxisTestScore.setScore(score);
+		newPraxisTestScore.setPrimary(primary);
+		newPraxisTestScore.setNonStandardAdministration(nonStandardAdministration);
+		newPraxisTestScore.setRevisedScoreIndicator(revisedScoreIndicator);
+		newPraxisTestScore.setExcellenceIndicator(excellenceIndicator);
+		newPraxisTestScore.setLastEdit(new Date());
+
+		this.savePraxisTestScore(newPraxisTestScore);
+		return newPraxisTestScore;
+	}
+
+	/**
+	 * @param sessionFactory
+	 *            the sessionFactory to set
+	 */
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+}

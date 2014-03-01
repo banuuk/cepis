@@ -1,0 +1,223 @@
+<%@ taglib uri="http://java.sun.com/jsf/html" prefix="h"%>
+<%@ taglib uri="http://java.sun.com/jsf/core" prefix="f"%>
+<%@ taglib uri="http://richfaces.org/rich" prefix="rich"%>
+<%@ taglib uri="http://richfaces.org/a4j" prefix="a4j"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="authz"%>
+
+<f:subview id="praxisII">	
+	<h:form id="praxisII_manager_form" styleClass="styleish">					
+		<h:panelGroup>
+			<h:outputLabel for="studentId" value="Student ID: "  styleClass="small" />
+			<h:outputText id="studentId" value ="#{testScoreController.currentlySelectedUser.ukID}" />	
+		</h:panelGroup>		
+		<h:panelGroup id="praxisII_list">			
+			<rich:extendedDataTable id="praxisII_Table" styleClass="basicTable"
+				rowClasses="oddRow,evenRow" selectedClass="selectedRow"
+				width="100%" var="praxisIITestScore" height="200px"
+				value="#{testScoreController.praxisIITestScoreList}"				
+				binding="#{testScoreController.praxisIITable}"					
+				noDataLabel="No Praxis II Scores Found.">					
+				<a4j:support event="onRowClick" 
+					action="#{testScoreController.takePraxisIISelection}">
+				</a4j:support>						
+				<rich:column id="praxisIITestCode_Col" width="9%"
+				sortable="true" sortBy="#{praxisIITestScore.praxisIICode}">
+					<f:facet name="header">
+						<h:outputText value="Test Code" />
+					</f:facet>
+					<h:panelGroup>
+						<h:outputText value="#{praxisIITestScore.praxisIICode}"/>
+					</h:panelGroup>
+				</rich:column>
+				<rich:column id="praxisIITestTitle_Col" width="28%"
+				sortable="true" sortBy="#{praxisIITestScore.praxisIITest.title}">
+					<f:facet name="header">
+						<h:outputText value="Test Title" />
+					</f:facet>
+					<h:outputText value="#{praxisIITestScore.praxisIITest.title}"/>
+				</rich:column>
+				<rich:column id="praxisIITestDate_Col" width="9%"
+				sortable="true" sortBy="#{praxisIITestScore.testDate}">
+					<f:facet name="header">
+						<h:outputText value="Test Date" />
+					</f:facet>
+					<h:outputText value="#{praxisIITestScore.testDate}"/>
+				</rich:column>
+				<rich:column id="praxisIIScore_Col" width="9%"
+				sortable="true" sortBy="#{praxisIITestScore.score}">
+					<f:facet name="header">
+						<h:outputText value="Score" />
+					</f:facet>
+					<h:panelGroup>
+						<h:outputText value="#{praxisIITestScore.scoreInt}"/>							
+					</h:panelGroup>
+				</rich:column>		
+				<rich:column id="praxisIICutoff_Col" width="9%"
+				sortable="true" sortBy="#{praxisIITestScore.praxisIITest.cutoffScore}">
+					<f:facet name="header">
+						<h:outputText value="Cutoff" />
+					</f:facet>
+					<h:outputText value="#{praxisIITestScore.praxisIITest.cutoffScore}"/>
+				</rich:column>			
+				<rich:column id="praxisIIMadeCutoff_Col" width="9%"
+				sortable="true" sortBy="#{praxisIITestScore.cutoff}">
+					<f:facet name="header">
+						<h:outputText value="Made Cutoff" />
+					</f:facet>
+					<h:outputText value="#{praxisIITestScore.cutoff}"/>
+				</rich:column>					
+				<rich:column id="praxisIIReceivedDate_Col" width="9%"
+				sortable="true" sortBy="#{praxisIITestScore.receivedDate}">
+					<f:facet name="header">
+						<h:outputText value="Received Date" />
+					</f:facet>
+					<h:panelGroup>
+						<h:outputText value="#{praxisIITestScore.receivedDate}"/>							
+					</h:panelGroup>
+				</rich:column>
+				<rich:column id="praxisIIPrimary_Col" width="9%"
+				sortable="true" sortBy="#{praxisIITestScore.primaryString}">
+					<f:facet name="header">
+						<h:outputText value="Primary" />
+					</f:facet>
+					<h:outputText value="#{praxisIITestScore.primaryString}"/>
+				</rich:column>
+				<rich:column id="praxisIILastEdit_Col" width="9%"
+				sortable="true" sortBy="#{praxisIITestScore.lastEdit}">
+					<f:facet name="header">
+						<h:outputText value="Last Edit" />
+					</f:facet>
+					<h:outputText value="#{praxisIITestScore.lastEdit}"/>
+				</rich:column>					
+			</rich:extendedDataTable>
+		</h:panelGroup>	
+		<h:panelGrid columns="2">
+		
+			<authz:authorize ifAnyGranted="ROLE_ADMINISTRATOR,ROLE_DEVELOPER,ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" >
+				<a4j:commandButton id="edit_praxis" value="Edit Selected" styleClass="buttonStyle"
+				limitToList="true" ajaxSingle="true"  oncomplete="Richfaces.showModalPanel('selectedPraxisIIScoreEditPanel')"  
+				reRender="selectedPraxisIIScoreEditPanel" action="#{testScoreController.prepEditSelectedPraxisII}"/>
+			</authz:authorize>
+			
+			<authz:authorize ifAnyGranted="ROLE_ADMINISTRATOR,ROLE_DEVELOPER,ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" >						 
+				<h:commandButton id="delete_test" value="Delete Selected" styleClass="buttonStyle" 
+					action="#{testScoreController.deletePraxisIITestScoreFromUser}"  >
+					<a4j:support reRender="praxisII_manager_form:praxisII_list" limitToList="true" />
+				</h:commandButton>
+			</authz:authorize>		
+			
+		</h:panelGrid>
+	</h:form>
+	<authz:authorize ifAnyGranted="ROLE_ADMINISTRATOR,ROLE_DEVELOPER,ROLE_STUDENT_ACCOUNT_MANAGER_ADD_EDIT" >
+		<h:form id="praxisII_entry_form" styleClass="styleish">
+			<h:panelGroup id="praxisII_entry">		
+				<h:panelGrid columns="2" cellpadding="5"  styleClass="highlightClass" width="100%">				
+						<h:outputLabel for="testDate" styleClass="small" value="Test Date : *"/>
+						<rich:calendar id="testDate" value="#{testScoreController.praxisIITestDate}"
+							cellWidth="24px" datePattern="MMM d,yyyy" enableManualInput="true"
+							cellHeight="22px" style="width:200px" required="true" requiredMessage="Test Date: Value is required.">
+						</rich:calendar>	
+						<h:outputLabel for="receivedDate" styleClass="small" value="Received Date : *"/>
+						<rich:calendar id="receivedDate" value="#{testScoreController.praxisIIReceivedDate}"
+							cellWidth="24px" datePattern="MMM d,yyyy" enableManualInput="true"
+							cellHeight="22px" style="width:200px" required="true" requiredMessage="Received Date: Value is required.">
+						</rich:calendar>	
+						<h:outputLabel for="praxisIICode" styleClass="small" value="Test(Current) : *"/>
+						<h:selectOneMenu id="praxisIICode" value="#{testScoreController.selectedPraxisIITest}" 
+							converter="#{PraxisIITestDataConverter}" disabled="#{testScoreController.praxisIIOldTestCodeFlg}" 
+							required="true" requiredMessage="Test(Current): Value is required.">
+							<f:selectItem itemValue="" itemLabel="-- Select --" />
+							<f:selectItems value="#{testScoreController.currentPraxisIITestList}" var="praxisIITest" itemValue="#{praxisIITest}"
+							itemLabel="#{praxisIITest.testCode}  |  #{praxisIITest.title} | Begin: #{praxisIITest.beginDateFormatted} |
+							 End: #{praxisIITest.endDateFormatted} | Cutoff: #{praxisIITest.cutoffScore} | #{praxisIITest.status} "  />
+						</h:selectOneMenu>									
+						<h:outputLabel for="isOldPraxisIICode" styleClass="small" value="Old Praxis II Test : "/>
+						<h:selectBooleanCheckbox id="isOldPraxisIICode" value="#{testScoreController.praxisIIOldTestCodeFlg}" >
+							<a4j:support event="onclick" ajaxSingle="true" reRender="praxisII_entry_form:praxisII_entry"/>
+						</h:selectBooleanCheckbox>					
+						<h:outputLabel for="oldPraxisIICode" styleClass="small" value="Test(Old) : " />
+						<h:selectOneMenu id="oldPraxisIICode" value="#{testScoreController.selectedPraxisIITest}" 
+							converter="#{PraxisIITestDataConverter}" disabled="#{!testScoreController.praxisIIOldTestCodeFlg}" 
+							required="true" requiredMessage="Test(Old): Value is required.">
+							<f:selectItem itemValue="" itemLabel="-- Select --" />
+							<f:selectItems value="#{testScoreController.oldPraxisIITestList}" var="oldPraxisIITest" itemValue="#{oldPraxisIITest}"
+							itemLabel="#{oldPraxisIITest.testCode}  |  #{oldPraxisIITest.title} | Begin: #{oldPraxisIITest.beginDateFormatted} |
+							 End: #{oldPraxisIITest.endDateFormatted} | Cutoff: #{oldPraxisIITest.cutoffScore} | #{oldPraxisIITest.status} "  />
+						</h:selectOneMenu>			
+						<h:outputLabel for="score" styleClass="small" value="Exam Score : *"/>
+						<h:inputText id="score" value="#{testScoreController.praxisIITestScore}" 
+						required="true" requiredMessage="Exam Score: Value is required.">
+							<f:convertNumber />
+						</h:inputText>		
+						<h:commandButton id="add_new" value="Add New" styleClass="buttonStyle" 
+						action="#{testScoreController.addPraxisIITestScoreToUser}">
+							<a4j:support reRender="praxisII_manager_form:praxisII_list" limitToList="true" /> 
+						</h:commandButton> 								
+					</h:panelGrid>				
+				</h:panelGroup>			
+			</h:form>
+		</authz:authorize>
+		<rich:modalPanel id="selectedPraxisIIScoreEditPanel" height="450" width="550" autosized="true" domElementAttachment="parent">
+			<f:facet name="header">
+				<h:outputText value="Edit Praxis II Score" />
+			</f:facet>
+			<f:facet name="controls">
+				<h:panelGroup>
+					<h:graphicImage value="/images/icons/cancel.png" id="hideViewlink"
+					styleClass="hidelink" alt="X" />
+					<rich:componentControl for="selectedPraxisIIScoreEditPanel"
+					attachTo="hideViewlink" operation="hide" event="onclick" />
+				</h:panelGroup>
+			</f:facet>
+			<h:form styleClass="styleish">
+				<rich:messages style="color:red;"/>		
+				<h:panelGrid columns="2" cellpadding="5"  styleClass="highlightClass" width="100%">	
+				
+					<h:outputLabel for="editTestDate" value="Test Date: " styleClass="small"/>
+					<rich:calendar id="editTestDate" value="#{testScoreController.selectedPraxisIITestScore.testDate}"
+						cellWidth="24px" datePattern="MMM d,yyyy" enableManualInput="true"
+						cellHeight="22px" style="width:200px" required="true" requiredMessage="Test Date: Value is Required">
+					</rich:calendar>	
+								
+					<h:outputLabel for="editPraxisIICode" value="Test(Current): " styleClass="small"/>
+					<h:selectOneMenu id="editPraxisIICode" value="#{testScoreController.selectedPraxisIITestScore.praxisIITest}" 
+						converter="#{ PraxisIITestDataConverter}" disabled="#{testScoreController.praxisIIEditOldTestCodeFlg}"
+						required="true" requiredMessage="Test(Current): Value is Required">
+						<f:selectItems value="#{testScoreController.currentPraxisIITestList}" var="praxisIITest" itemValue="#{praxisIITest}"
+						itemLabel="#{praxisIITest.testCode}  |  #{praxisIITest.title} | Begin: #{praxisIITest.beginDateFormatted} |
+						 End: #{praxisIITest.endDateFormatted} | Cutoff: #{praxisIITest.cutoffScore}"  />
+					</h:selectOneMenu>	
+					
+					<h:outputLabel for="editIsOldPraxisIICode" value="Old Praxis II Test: " styleClass="small"/>
+					<h:selectBooleanCheckbox id="editIsOldPraxisIICode" value="#{testScoreController.praxisIIEditOldTestCodeFlg}" >
+						<a4j:support event="onclick" ajaxSingle="true" reRender="selectedPraxisIIScoreEditPanel"
+						 oncomplete="Richfaces.showModalPanel('selectedPraxisIIScoreEditPanel')"/>
+					</h:selectBooleanCheckbox>
+					
+					<h:outputLabel for="editOldPraxisIICode" value="Test(Old): " styleClass="small"/>
+					<h:selectOneMenu id="editOldPraxisIICode" value="#{testScoreController.selectedPraxisIITestScore.praxisIITest}" 
+						converter="#{ PraxisIITestDataConverter}" disabled="#{!testScoreController.praxisIIEditOldTestCodeFlg}" 
+						required="true" requiredMessage="Test(Old): Value is Required">
+						<f:selectItems value="#{testScoreController.oldPraxisIITestList}" var="oldPraxisIITest" itemValue="#{oldPraxisIITest}"
+						itemLabel="#{oldPraxisIITest.testCode}  |  #{oldPraxisIITest.title} | Begin: #{oldPraxisIITest.beginDateFormatted} |
+						 End: #{oldPraxisIITest.endDateFormatted} | Cutoff: #{oldPraxisIITest.cutoffScore}"  />
+					</h:selectOneMenu>
+								
+					<h:outputLabel for="editScore" value="Exam Score: " styleClass="small"/>
+					<h:inputText id="editScore" value="#{testScoreController.selectedPraxisIITestScore.score}" 
+					required="true" requiredMessage="Exam Score: Value is Required">
+						<f:convertNumber />
+					</h:inputText>		
+					
+					<a4j:commandButton id="edit_test" value="Edit" styleClass="buttonStyle"
+					reRender="praxisII_manager_form:praxisII_list" limitToList="true" 
+					action="#{testScoreController.editPraxisIITestScoreForUser}"  
+					oncomplete="Richfaces.hideModalPanel('selectedPraxisIIScoreEditPanel')" /> 		
+								
+				
+				</h:panelGrid>
+			</h:form>			
+		</rich:modalPanel>
+	
+	
+</f:subview>

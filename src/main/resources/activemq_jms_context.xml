@@ -1,0 +1,62 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+	
+	<import resource="activemq_jms_shared.xml"/>
+	
+	<!-- Message Driven POJO -->
+	<bean id="messageListener" class="com.mytutorial.MyListener" />
+    
+	<!-- This is the message listener container -->
+	
+	<bean id="jmsContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="replyQueue" />
+		<property name="messageListener" ref="messageListener" />
+	</bean>
+
+		
+
+	<bean id="myJmsService" class="com.mytutorial.MyJmsServiceImpl">
+		<property name="sender">
+			<ref bean="jmsSender" />
+		</property>
+		<property name="receiver">
+			<ref bean="jmsReceiver" />
+		</property>
+	</bean>
+	<bean id="jmsSender" class="com.mytutorial.JmsSender">
+		<property name="jmsTemplate">
+			<ref bean="jmsQueueTemplate" />
+		</property>
+	</bean>
+	<bean id="jmsReceiver" class="com.mytutorial.JmsReceiver">
+		<property name="jmsTemplate">
+			<ref bean="jmsQueueTemplate" />
+		</property>
+	</bean>
+	
+	
+	<!-- JMS Queue Template -->
+	<bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<property name="connectionFactory">
+			<ref bean="connectionFactory" />
+		</property>
+		<property name="defaultDestination">
+			<ref bean="replyQueue" />
+		</property>
+		<property name="pubSubDomain">
+			<value>false</value>
+		</property>
+		<property name="receiveTimeout">
+			<value>20000</value>
+		</property>
+	</bean>
+	
+
+	
+</beans>

@@ -1,0 +1,10 @@
+.menu ul li a.hide, .menu ul li a:visited.hide {display:none;}
+.menu ul li a:hover ul li a.hide {display:none;}
+.menu ul li a:hover {color:#fff; background-color:#006699}
+.menu ul li a:hover ul {display:block; position:absolute; top:21px; left:0; width:105px;}
+.menu ul li a:hover ul li a.sub {background-color:#CCCCCC; color:#000000;}
+.menu ul li a:hover ul li a {display:block; background-color:#ddd; color:#000;}
+.menu ul li a:hover ul li a ul {visibility:hidden;}
+.menu ul li a:hover ul li a:hover {background-color:#FF9933; color:#000;}
+.menu ul li a:hover ul li a:hover ul {visibility:visible; position:absolute; left:125px; top:0; color:#000;}
+.menu ul li a:hover ul li a:hover ul.left {left:-105px;}

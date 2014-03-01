@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="component" size="2385,1948" id="edu.uky.cepis.domain.component" metadata="uml2-1.0" initialized="true" scrolledY="1269" tag="1000" key="32303037303533312D313030302063657069732F6B656572746869">
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.3 //@children.2/@sourceConnections.9" name="UKCollege" location="1404,1663" size="206,265" id="edu.uky.cepis.domain.component/UKCollege">
+    <children xsi:type="editmodel:CompartmentEditModel" size="183,126">
+      <children xsi:type="editmodel:AttributeEditModel" name="collegeAddress" id="edu.uky.cepis.domain.component/UKCollege#collegeAddress"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="collegeDeanName" id="edu.uky.cepis.domain.component/UKCollege#collegeDeanName"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="collegeName" id="edu.uky.cepis.domain.component/UKCollege#collegeName"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="collegePhone" id="edu.uky.cepis.domain.component/UKCollege#collegePhone"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="collegeSpeedSort" id="edu.uky.cepis.domain.component/UKCollege#collegeSpeedSort"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="departments" id="edu.uky.cepis.domain.component/UKCollege#departments"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="ukCollegeCode" id="edu.uky.cepis.domain.component/UKCollege#ukCollegeCode"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,90">
+      <children xsi:type="editmodel:MethodEditModel" name="UKCollege" id="edu.uky.cepis.domain.component/UKCollege#UKCollege(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="UKCollege" id="edu.uky.cepis.domain.component/UKCollege#UKCollege()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain.component/UKCollege#compare(Ledu.uky.cepis.domain.component.UKCollege;Ledu.uky.cepis.domain.component.UKCollege;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain.component/UKCollege#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain.component/UKCollege#hashCode()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/UKCollege-Soyatec::Import->edu.uky.cepis.domain.component/UKDepartment" source="//@children.0" target="//@children.13" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="206,128" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,153"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.0 //@children.2/@sourceConnections.8 //@children.14/@sourceConnections.0" name="UserClassification" location="2069,1314" size="164,225" id="edu.uky.cepis.domain/UserClassification">
+    <children xsi:type="editmodel:CompartmentEditModel" size="141,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="classificationCode" id="edu.uky.cepis.domain/UserClassification#classificationCode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="edu.uky.cepis.domain/UserClassification#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain/UserClassification#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="status" id="edu.uky.cepis.domain/UserClassification#status"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="117,90">
+      <children xsi:type="editmodel:MethodEditModel" name="UserClassification" id="edu.uky.cepis.domain/UserClassification#UserClassification(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="UserClassification" id="edu.uky.cepis.domain/UserClassification#UserClassification()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain/UserClassification#compare(Ledu.uky.cepis.domain.UserClassification;Ledu.uky.cepis.domain.UserClassification;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain/UserClassification#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain/UserClassification#hashCode()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.0 //@children.4/@sourceConnections.1 //@children.4/@sourceConnections.2 //@children.8/@sourceConnections.0" name="UserCollegeProfile" location="1578,1104" size="170,207" id="edu.uky.cepis.domain/UserCollegeProfile">
+    <children xsi:type="editmodel:CompartmentEditModel" size="147,54">
+      <children xsi:type="editmodel:AttributeEditModel" name="lastUpdated" id="edu.uky.cepis.domain/UserCollegeProfile#lastUpdated"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain/UserCollegeProfile#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="usercollegeprofileid" id="edu.uky.cepis.domain/UserCollegeProfile#usercollegeprofileid"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="118,90">
+      <children xsi:type="editmodel:MethodEditModel" name="UserCollegeProfile" id="edu.uky.cepis.domain/UserCollegeProfile#UserCollegeProfile()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="UserCollegeProfile" id="edu.uky.cepis.domain/UserCollegeProfile#UserCollegeProfile(Ledu.uky.cepis.domain.UserType;Ledu.uky.cepis.domain.UserClassification;Ledu.uky.cepis.domain.component.UKCollege;Ledu.uky.cepis.domain.component.UKDepartment;Ledu.uky.cepis.domain.component.UKTerm;Ledu.uky.cepis.domain.component.UKTerm;Ledu.uky.cepis.domain.component.UKStatus;Ledu.uky.cepis.domain.CohortType;Ledu.uky.cepis.domain.component.UKTerm;Ljava.lang.String;Ljava.util.Date;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain/UserCollegeProfile#compare(Ledu.uky.cepis.domain.UserCollegeProfile;Ledu.uky.cepis.domain.UserCollegeProfile;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain/UserCollegeProfile#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain/UserCollegeProfile#hashCode()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserClassification@userClassification+edu.uky.cepis.domain/UserCollegeProfile@" source="//@children.2" target="//@children.1" targetEnd="//@children.2/@sourceConnections.0/@children.2" label="//@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="160,207" id="edu.uky.cepis.domain/UserClassification@userClassification+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain/UserCollegeProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="userClassification" location="0,10" id="edu.uky.cepis.domain/UserClassification@userClassification+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain/UserClassification#userClassification" multiplicityLabel="//@children.2/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.2/@sourceConnections.0/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - userClassification" location="1966,1331" size="96,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="2044,1303" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain/CohortType@cohortType+edu.uky.cepis.domain/UserCollegeProfile@" source="//@children.2" target="//@children.3" targetEnd="//@children.2/@sourceConnections.1/@children.2" label="//@children.2/@sourceConnections.1/@children.0" sourceEnd="//@children.2/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="160,0" id="edu.uky.cepis.domain/CohortType@cohortType+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain/UserCollegeProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="cohortType" location="0,233" id="edu.uky.cepis.domain/CohortType@cohortType+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain/CohortType#cohortType" multiplicityLabel="//@children.2/@sourceConnections.1/@children.2/@children.1" roleLabel="//@children.2/@sourceConnections.1/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - cohortType" location="1833,822" size="65,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1880,850" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/UKDepartment@ukDepartment+edu.uky.cepis.domain/UserCollegeProfile@" source="//@children.2" target="//@children.13" targetEnd="//@children.2/@sourceConnections.2/@children.2" label="//@children.2/@sourceConnections.2/@children.0" sourceEnd="//@children.2/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="160,207" id="edu.uky.cepis.domain.component/UKDepartment@ukDepartment+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain/UserCollegeProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ukDepartment" location="0,10" id="edu.uky.cepis.domain.component/UKDepartment@ukDepartment+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain.component/UKDepartment#ukDepartment" multiplicityLabel="//@children.2/@sourceConnections.2/@children.2/@children.1" roleLabel="//@children.2/@sourceConnections.2/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - ukDepartment" location="1667,1655" size="76,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1725,1627" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/UKCollege@ukCollege+edu.uky.cepis.domain/UserCollegeProfile@" source="//@children.2" target="//@children.0" targetEnd="//@children.2/@sourceConnections.3/@children.2" label="//@children.2/@sourceConnections.3/@children.0" sourceEnd="//@children.2/@sourceConnections.3/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="15,207" id="edu.uky.cepis.domain.component/UKCollege@ukCollege+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain/UserCollegeProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ukCollege" location="189,0" id="edu.uky.cepis.domain.component/UKCollege@ukCollege+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain.component/UKCollege#ukCollege" multiplicityLabel="//@children.2/@sourceConnections.3/@children.2/@children.1" roleLabel="//@children.2/@sourceConnections.3/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - ukCollege" location="1600,1642" size="56,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1568,1642" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserType@userType+edu.uky.cepis.domain/UserCollegeProfile@" source="//@children.2" target="//@children.14" targetEnd="//@children.2/@sourceConnections.4/@children.2" label="//@children.2/@sourceConnections.4/@children.0" sourceEnd="//@children.2/@sourceConnections.4/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="170,37" id="edu.uky.cepis.domain/UserType@userType+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain/UserCollegeProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="userType" location="0,187" id="edu.uky.cepis.domain/UserType@userType+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain/UserType#userType" multiplicityLabel="//@children.2/@sourceConnections.4/@children.2/@children.1" roleLabel="//@children.2/@sourceConnections.4/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - userType" location="2046,1120" size="56,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="2084,1148" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserCollegeProfile->Standard::Call" source="//@children.2" target="//@children.8" targetEnd="//@children.2/@sourceConnections.5/@children.2" label="//@children.2/@sourceConnections.5/@children.0" sourceEnd="//@children.2/@sourceConnections.5/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,65" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="131,163"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserCollegeProfile->Standard::Call" source="//@children.2" target="//@children.13" targetEnd="//@children.2/@sourceConnections.6/@children.2" label="//@children.2/@sourceConnections.6/@children.0" sourceEnd="//@children.2/@sourceConnections.6/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="170,202" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="15,0"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserCollegeProfile->Standard::Call" source="//@children.2" target="//@children.4" targetEnd="//@children.2/@sourceConnections.7/@children.2" label="//@children.2/@sourceConnections.7/@children.0" sourceEnd="//@children.2/@sourceConnections.7/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,31" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="136,171"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserCollegeProfile->Standard::Call" source="//@children.2" target="//@children.1" targetEnd="//@children.2/@sourceConnections.8/@children.2" label="//@children.2/@sourceConnections.8/@children.0" sourceEnd="//@children.2/@sourceConnections.8/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="170,202" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="15,0"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserCollegeProfile->Standard::Call" source="//@children.2" target="//@children.0" targetEnd="//@children.2/@sourceConnections.9/@children.2" label="//@children.2/@sourceConnections.9/@children.0" sourceEnd="//@children.2/@sourceConnections.9/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,202" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="154,0"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserCollegeProfile->Standard::Call" source="//@children.2" target="//@children.14" targetEnd="//@children.2/@sourceConnections.10/@children.2" label="//@children.2/@sourceConnections.10/@children.0" sourceEnd="//@children.2/@sourceConnections.10/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="170,57" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,224"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserCollegeProfile->Standard::Call" source="//@children.2" target="//@children.3" targetEnd="//@children.2/@sourceConnections.11/@children.2" label="//@children.2/@sourceConnections.11/@children.0" sourceEnd="//@children.2/@sourceConnections.11/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="170,10" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="15,243"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.1 //@children.2/@sourceConnections.11" name="CohortType" location="1905,610" size="129,243" id="edu.uky.cepis.domain/CohortType">
+    <children xsi:type="editmodel:CompartmentEditModel" size="106,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="edu.uky.cepis.domain/CohortType#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain/CohortType#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="status" id="edu.uky.cepis.domain/CohortType#status"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="typeCode" id="edu.uky.cepis.domain/CohortType#typeCode"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="86,108">
+      <children xsi:type="editmodel:MethodEditModel" name="CohortType" id="edu.uky.cepis.domain/CohortType#CohortType(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="CohortType" id="edu.uky.cepis.domain/CohortType#CohortType()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain/CohortType#compare(Ledu.uky.cepis.domain.CohortType;Ledu.uky.cepis.domain.CohortType;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain/CohortType#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain/CohortType#hashCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="edu.uky.cepis.domain/CohortType#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.0 //@children.6/@sourceConnections.1 //@children.6/@sourceConnections.6 //@children.6/@sourceConnections.12 //@children.2/@sourceConnections.7" name="UKTerm" location="1159,726" size="136,229" id="edu.uky.cepis.domain.component/UKTerm">
+    <children xsi:type="editmodel:CompartmentEditModel" size="113,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="edu.uky.cepis.domain.component/UKTerm#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain.component/UKTerm#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="status" id="edu.uky.cepis.domain.component/UKTerm#status"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="ukTermCode" id="edu.uky.cepis.domain.component/UKTerm#ukTermCode"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,108">
+      <children xsi:type="editmodel:MethodEditModel" name="UKTerm" id="edu.uky.cepis.domain.component/UKTerm#UKTerm()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="UKTerm" id="edu.uky.cepis.domain.component/UKTerm#UKTerm(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain.component/UKTerm#compare(Ledu.uky.cepis.domain.component.UKTerm;Ledu.uky.cepis.domain.component.UKTerm;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain.component/UKTerm#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain.component/UKTerm#hashCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="edu.uky.cepis.domain.component/UKTerm#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/UKTerm@startTerm+edu.uky.cepis.domain/UserCollegeProfile@" source="//@children.4" target="//@children.2" targetEnd="//@children.4/@sourceConnections.0/@children.2" label="//@children.4/@sourceConnections.0/@children.0" sourceEnd="//@children.4/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="startTerm" location="136,216" id="edu.uky.cepis.domain.component/UKTerm@startTerm+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain.component/UKTerm#startTerm" attachSource="true" multiplicityLabel="//@children.4/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.4/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - startTerm" location="1302,921" size="56,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1302,949" size="18,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,35" id="edu.uky.cepis.domain.component/UKTerm@startTerm+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain/UserCollegeProfile#"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/UKTerm@cohortTerm+edu.uky.cepis.domain/UserCollegeProfile@" source="//@children.4" target="//@children.2" targetEnd="//@children.4/@sourceConnections.1/@children.2" label="//@children.4/@sourceConnections.1/@children.0" sourceEnd="//@children.4/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="cohortTerm" location="136,140" id="edu.uky.cepis.domain.component/UKTerm@cohortTerm+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain.component/UKTerm#cohortTerm" attachSource="true" multiplicityLabel="//@children.4/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.4/@sourceConnections.1/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - cohortTerm" location="1302,845" size="65,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1302,873" size="18,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,11" id="edu.uky.cepis.domain.component/UKTerm@cohortTerm+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain/UserCollegeProfile#"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/UKTerm@changeTerm+edu.uky.cepis.domain/UserCollegeProfile@" source="//@children.4" target="//@children.2" targetEnd="//@children.4/@sourceConnections.2/@children.2" label="//@children.4/@sourceConnections.2/@children.0" sourceEnd="//@children.4/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="changeTerm" location="136,119" id="edu.uky.cepis.domain.component/UKTerm@changeTerm+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain.component/UKTerm#changeTerm" attachSource="true" multiplicityLabel="//@children.4/@sourceConnections.2/@children.1/@children.1" roleLabel="//@children.4/@sourceConnections.2/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - changeTerm" location="1302,824" size="70,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1302,852" size="18,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,1" id="edu.uky.cepis.domain.component/UKTerm@changeTerm+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain/UserCollegeProfile#"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.3 //@children.6/@sourceConnections.16" name="Advisor" location="365,1156" size="127,207" id="edu.uky.cepis.domain/Advisor">
+    <children xsi:type="editmodel:CompartmentEditModel" size="103,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain/Advisor#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="userid" id="edu.uky.cepis.domain/Advisor#userid"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,108">
+      <children xsi:type="editmodel:MethodEditModel" name="Advisor" id="edu.uky.cepis.domain/Advisor#Advisor(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Advisor" id="edu.uky.cepis.domain/Advisor#Advisor()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain/Advisor#compare(Ledu.uky.cepis.domain.Advisor;Ledu.uky.cepis.domain.Advisor;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain/Advisor#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain/Advisor#hashCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="edu.uky.cepis.domain/Advisor#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.12/@sourceConnections.0" name="UserProgramProfile" location="597,624" size="176,243" id="edu.uky.cepis.domain/UserProgramProfile">
+    <children xsi:type="editmodel:CompartmentEditModel" size="153,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="degreeAwarded" id="edu.uky.cepis.domain/UserProgramProfile#degreeAwarded"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="lastUpdated" id="edu.uky.cepis.domain/UserProgramProfile#lastUpdated"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain/UserProgramProfile#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="userprogramprofileid" id="edu.uky.cepis.domain/UserProgramProfile#userprogramprofileid"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="123,108">
+      <children xsi:type="editmodel:MethodEditModel" name="UserProgramProfile" id="edu.uky.cepis.domain/UserProgramProfile#UserProgramProfile(Ledu.uky.cepis.domain.component.Program;Ledu.uky.cepis.domain.component.ProgramDomain;Ledu.uky.cepis.domain.component.ProgramTrack;Ledu.uky.cepis.domain.component.ProgramGroup;Ledu.uky.cepis.domain.Advisor;Ledu.uky.cepis.domain.component.UKMajor;Ledu.uky.cepis.domain.component.UKStatus;Ledu.uky.cepis.domain.component.UKTerm;Ledu.uky.cepis.domain.component.UKTerm;Ledu.uky.cepis.domain.component.UKTerm;Ljava.lang.Integer;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="UserProgramProfile" id="edu.uky.cepis.domain/UserProgramProfile#UserProgramProfile()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain/UserProgramProfile#compare(Ledu.uky.cepis.domain.UserProgramProfile;Ledu.uky.cepis.domain.UserProgramProfile;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain/UserProgramProfile#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain/UserProgramProfile#hashCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="edu.uky.cepis.domain/UserProgramProfile#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/UKTerm@ukCompleteTerm+edu.uky.cepis.domain/UserProgramProfile@" source="//@children.6" target="//@children.4" targetEnd="//@children.6/@sourceConnections.0/@children.2" label="//@children.6/@sourceConnections.0/@children.0" sourceEnd="//@children.6/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="176,172" id="edu.uky.cepis.domain.component/UKTerm@ukCompleteTerm+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain/UserProgramProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ukCompleteTerm" location="0,70" id="edu.uky.cepis.domain.component/UKTerm@ukCompleteTerm+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain.component/UKTerm#ukCompleteTerm" multiplicityLabel="//@children.6/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.6/@sourceConnections.0/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - ukCompleteTerm" location="1063,775" size="89,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1134,803" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/UKTerm@ukChangeTerm+edu.uky.cepis.domain/UserProgramProfile@" source="//@children.6" target="//@children.4" targetEnd="//@children.6/@sourceConnections.1/@children.2" label="//@children.6/@sourceConnections.1/@children.0" sourceEnd="//@children.6/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="176,202" id="edu.uky.cepis.domain.component/UKTerm@ukChangeTerm+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain/UserProgramProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ukChangeTerm" location="0,133" id="edu.uky.cepis.domain.component/UKTerm@ukChangeTerm+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain.component/UKTerm#ukChangeTerm" multiplicityLabel="//@children.6/@sourceConnections.1/@children.2/@children.1" roleLabel="//@children.6/@sourceConnections.1/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - ukChangeTerm" location="1070,866" size="82,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1134,838" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/ProgramGroup@programGroup+edu.uky.cepis.domain/UserProgramProfile@" source="//@children.6" target="//@children.7" targetEnd="//@children.6/@sourceConnections.2/@children.2" label="//@children.6/@sourceConnections.2/@children.0" sourceEnd="//@children.6/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="56,0" id="edu.uky.cepis.domain.component/ProgramGroup@programGroup+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain/UserProgramProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="programGroup" location="114,229" id="edu.uky.cepis.domain.component/ProgramGroup@programGroup+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain.component/ProgramGroup#programGroup" multiplicityLabel="//@children.6/@sourceConnections.2/@children.2/@children.1" roleLabel="//@children.6/@sourceConnections.2/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - programGroup" location="660,286" size="80,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="628,286" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain/Advisor@advisor+edu.uky.cepis.domain/UserProgramProfile@" source="//@children.6" target="//@children.5" targetEnd="//@children.6/@sourceConnections.3/@children.2" label="//@children.6/@sourceConnections.3/@children.0" sourceEnd="//@children.6/@sourceConnections.3/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="10,243" id="edu.uky.cepis.domain/Advisor@advisor+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain/UserProgramProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="advisor" location="127,10" id="edu.uky.cepis.domain/Advisor@advisor+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain/Advisor#advisor" multiplicityLabel="//@children.6/@sourceConnections.3/@children.2/@children.1" roleLabel="//@children.6/@sourceConnections.3/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - advisor" location="499,1173" size="46,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="499,1145" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/ProgramDomain@programDomain+edu.uky.cepis.domain/UserProgramProfile@" source="//@children.6" target="//@children.9" targetEnd="//@children.6/@sourceConnections.4/@children.2" label="//@children.6/@sourceConnections.4/@children.0" sourceEnd="//@children.6/@sourceConnections.4/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,233" id="edu.uky.cepis.domain.component/ProgramDomain@programDomain+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain/UserProgramProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="programDomain" location="166,0" id="edu.uky.cepis.domain.component/ProgramDomain@programDomain+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain.component/ProgramDomain#programDomain" multiplicityLabel="//@children.6/@sourceConnections.4/@children.2/@children.1" roleLabel="//@children.6/@sourceConnections.4/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - programDomain" location="182,900" size="85,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="281,900" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/UKStatus@ukStatus+edu.uky.cepis.domain/UserProgramProfile@" source="//@children.6" target="//@children.8" targetEnd="//@children.6/@sourceConnections.5/@children.2" label="//@children.6/@sourceConnections.5/@children.0" sourceEnd="//@children.6/@sourceConnections.5/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="176,233" id="edu.uky.cepis.domain.component/UKStatus@ukStatus+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain/UserProgramProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ukStatus" location="10,0" id="edu.uky.cepis.domain.component/UKStatus@ukStatus+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain.component/UKStatus#ukStatus" multiplicityLabel="//@children.6/@sourceConnections.5/@children.2/@children.1" roleLabel="//@children.6/@sourceConnections.5/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - ukStatus" location="1040,985" size="52,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1008,985" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/UKTerm@ukStartTerm+edu.uky.cepis.domain/UserProgramProfile@" source="//@children.6" target="//@children.4" targetEnd="//@children.6/@sourceConnections.6/@children.2" label="//@children.6/@sourceConnections.6/@children.0" sourceEnd="//@children.6/@sourceConnections.6/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="176,192" id="edu.uky.cepis.domain.component/UKTerm@ukStartTerm+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain/UserProgramProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ukStartTerm" location="0,112" id="edu.uky.cepis.domain.component/UKTerm@ukStartTerm+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain.component/UKTerm#ukStartTerm" multiplicityLabel="//@children.6/@sourceConnections.6/@children.2/@children.1" roleLabel="//@children.6/@sourceConnections.6/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - ukStartTerm" location="1084,845" size="68,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1134,817" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/UKMajor@ukMajor+edu.uky.cepis.domain/UserProgramProfile@" source="//@children.6" target="//@children.10" targetEnd="//@children.6/@sourceConnections.7/@children.2" label="//@children.6/@sourceConnections.7/@children.0" sourceEnd="//@children.6/@sourceConnections.7/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="166,0" id="edu.uky.cepis.domain.component/UKMajor@ukMajor+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain/UserProgramProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ukMajor" location="0,237" id="edu.uky.cepis.domain.component/UKMajor@ukMajor+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain.component/UKMajor#ukMajor" multiplicityLabel="//@children.6/@sourceConnections.7/@children.2/@children.1" roleLabel="//@children.6/@sourceConnections.7/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - ukMajor" location="818,333" size="47,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="847,361" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/ProgramTrack@programTrack+edu.uky.cepis.domain/UserProgramProfile@" source="//@children.6" target="//@children.11" targetEnd="//@children.6/@sourceConnections.8/@children.2" label="//@children.6/@sourceConnections.8/@children.0" sourceEnd="//@children.6/@sourceConnections.8/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,10" id="edu.uky.cepis.domain.component/ProgramTrack@programTrack+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain/UserProgramProfile#" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="programTrack" location="158,229" id="edu.uky.cepis.domain.component/ProgramTrack@programTrack+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain.component/ProgramTrack#programTrack" multiplicityLabel="//@children.6/@sourceConnections.8/@children.2/@children.1" roleLabel="//@children.6/@sourceConnections.8/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - programTrack" location="287,462" size="77,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="378,462" size="18,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserProgramProfile->Standard::Call" source="//@children.6" target="//@children.12" targetEnd="//@children.6/@sourceConnections.9/@children.2" label="//@children.6/@sourceConnections.9/@children.0" sourceEnd="//@children.6/@sourceConnections.9/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,94" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="141,135"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserProgramProfile->Standard::Call" source="//@children.6" target="//@children.8" targetEnd="//@children.6/@sourceConnections.10/@children.2" label="//@children.6/@sourceConnections.10/@children.0" sourceEnd="//@children.6/@sourceConnections.10/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="166,243" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,21"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserProgramProfile->Standard::Call" source="//@children.6" target="//@children.11" targetEnd="//@children.6/@sourceConnections.11/@children.2" label="//@children.6/@sourceConnections.11/@children.0" sourceEnd="//@children.6/@sourceConnections.11/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="5,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="168,214"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserProgramProfile->Standard::Call" source="//@children.6" target="//@children.4" targetEnd="//@children.6/@sourceConnections.12/@children.2" label="//@children.6/@sourceConnections.12/@children.0" sourceEnd="//@children.6/@sourceConnections.12/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="176,152" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,39"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserProgramProfile->Standard::Call" source="//@children.6" target="//@children.10" targetEnd="//@children.6/@sourceConnections.13/@children.2" label="//@children.6/@sourceConnections.13/@children.0" sourceEnd="//@children.6/@sourceConnections.13/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="176,10" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="15,247"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserProgramProfile->Standard::Call" source="//@children.6" target="//@children.9" targetEnd="//@children.6/@sourceConnections.14/@children.2" label="//@children.6/@sourceConnections.14/@children.0" sourceEnd="//@children.6/@sourceConnections.14/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,237" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="176,15"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserProgramProfile->Standard::Call" source="//@children.6" target="//@children.7" targetEnd="//@children.6/@sourceConnections.15/@children.2" label="//@children.6/@sourceConnections.15/@children.0" sourceEnd="//@children.6/@sourceConnections.15/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="36,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="79,229"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserProgramProfile->Standard::Call" source="//@children.6" target="//@children.5" targetEnd="//@children.6/@sourceConnections.16/@children.2" label="//@children.6/@sourceConnections.16/@children.0" sourceEnd="//@children.6/@sourceConnections.16/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,238" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="112,0"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.2 //@children.6/@sourceConnections.15" name="ProgramGroup" location="539,50" size="171,229" id="edu.uky.cepis.domain.component/ProgramGroup">
+    <children xsi:type="editmodel:CompartmentEditModel" size="148,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="edu.uky.cepis.domain.component/ProgramGroup#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="programGroupCode" id="edu.uky.cepis.domain.component/ProgramGroup#programGroupCode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain.component/ProgramGroup#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="status" id="edu.uky.cepis.domain.component/ProgramGroup#status"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="100,108">
+      <children xsi:type="editmodel:MethodEditModel" name="ProgramGroup" id="edu.uky.cepis.domain.component/ProgramGroup#ProgramGroup()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="ProgramGroup" id="edu.uky.cepis.domain.component/ProgramGroup#ProgramGroup(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain.component/ProgramGroup#compare(Ledu.uky.cepis.domain.component.ProgramGroup;Ledu.uky.cepis.domain.component.ProgramGroup;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain.component/ProgramGroup#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain.component/ProgramGroup#hashCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="edu.uky.cepis.domain.component/ProgramGroup#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.5 //@children.6/@sourceConnections.10 //@children.2/@sourceConnections.5" name="UKStatus" location="1023,1006" size="131,229" id="edu.uky.cepis.domain.component/UKStatus">
+    <children xsi:type="editmodel:CompartmentEditModel" size="108,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="edu.uky.cepis.domain.component/UKStatus#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain.component/UKStatus#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="status" id="edu.uky.cepis.domain.component/UKStatus#status"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="statusCode" id="edu.uky.cepis.domain.component/UKStatus#statusCode"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,108">
+      <children xsi:type="editmodel:MethodEditModel" name="UKStatus" id="edu.uky.cepis.domain.component/UKStatus#UKStatus()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="UKStatus" id="edu.uky.cepis.domain.component/UKStatus#UKStatus(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain.component/UKStatus#compare(Ledu.uky.cepis.domain.component.UKStatus;Ledu.uky.cepis.domain.component.UKStatus;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain.component/UKStatus#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain.component/UKStatus#hashCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="edu.uky.cepis.domain.component/UKStatus#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/UKStatus@status+edu.uky.cepis.domain/UserCollegeProfile@" source="//@children.8" target="//@children.2" targetEnd="//@children.8/@sourceConnections.0/@children.2" label="//@children.8/@sourceConnections.0/@children.0" sourceEnd="//@children.8/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="status" location="131,132" id="edu.uky.cepis.domain.component/UKStatus@status+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain.component/UKStatus#status" attachSource="true" multiplicityLabel="//@children.8/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.8/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - status" location="1161,1117" size="40,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="1161,1145" size="18,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,45" id="edu.uky.cepis.domain.component/UKStatus@status+edu.uky.cepis.domain/UserCollegeProfile@|edu.uky.cepis.domain/UserCollegeProfile#"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.4 //@children.6/@sourceConnections.14" name="ProgramDomain" location="108,921" size="176,265" id="edu.uky.cepis.domain.component/ProgramDomain">
+    <children xsi:type="editmodel:CompartmentEditModel" size="153,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="edu.uky.cepis.domain.component/ProgramDomain#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="programDomainCode" id="edu.uky.cepis.domain.component/ProgramDomain#programDomainCode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="programs" id="edu.uky.cepis.domain.component/ProgramDomain#programs"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain.component/ProgramDomain#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="status" id="edu.uky.cepis.domain.component/ProgramDomain#status"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="105,126">
+      <children xsi:type="editmodel:MethodEditModel" name="ProgramDomain" id="edu.uky.cepis.domain.component/ProgramDomain#ProgramDomain(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.util.List;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="ProgramDomain" id="edu.uky.cepis.domain.component/ProgramDomain#ProgramDomain(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="ProgramDomain" id="edu.uky.cepis.domain.component/ProgramDomain#ProgramDomain()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain.component/ProgramDomain#compare(Ledu.uky.cepis.domain.component.ProgramDomain;Ledu.uky.cepis.domain.component.ProgramDomain;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain.component/ProgramDomain#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain.component/ProgramDomain#hashCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="edu.uky.cepis.domain.component/ProgramDomain#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/ProgramDomain-Soyatec::Import->edu.uky.cepis.domain.component/Program" source="//@children.9" target="//@children.12" targetEnd="//@children.9/@sourceConnections.0/@children.2" label="//@children.9/@sourceConnections.0/@children.0" sourceEnd="//@children.9/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="41,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="99,229"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.7 //@children.6/@sourceConnections.13" name="UKMajor" location="872,117" size="138,247" id="edu.uky.cepis.domain.component/UKMajor">
+    <children xsi:type="editmodel:CompartmentEditModel" size="115,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="degreeLevel" id="edu.uky.cepis.domain.component/UKMajor#degreeLevel"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="edu.uky.cepis.domain.component/UKMajor#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain.component/UKMajor#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="status" id="edu.uky.cepis.domain.component/UKMajor#status"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="ukMajorCode" id="edu.uky.cepis.domain.component/UKMajor#ukMajorCode"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,108">
+      <children xsi:type="editmodel:MethodEditModel" name="UKMajor" id="edu.uky.cepis.domain.component/UKMajor#UKMajor()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="UKMajor" id="edu.uky.cepis.domain.component/UKMajor#UKMajor(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain.component/UKMajor#compare(Ledu.uky.cepis.domain.component.UKMajor;Ledu.uky.cepis.domain.component.UKMajor;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain.component/UKMajor#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain.component/UKMajor#hashCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="edu.uky.cepis.domain.component/UKMajor#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.8 //@children.6/@sourceConnections.11" name="ProgramTrack" location="213,226" size="168,229" id="edu.uky.cepis.domain.component/ProgramTrack">
+    <children xsi:type="editmodel:CompartmentEditModel" size="145,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="edu.uky.cepis.domain.component/ProgramTrack#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="programTrackCode" id="edu.uky.cepis.domain.component/ProgramTrack#programTrackCode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain.component/ProgramTrack#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="status" id="edu.uky.cepis.domain.component/ProgramTrack#status"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="97,108">
+      <children xsi:type="editmodel:MethodEditModel" name="ProgramTrack" id="edu.uky.cepis.domain.component/ProgramTrack#ProgramTrack(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="ProgramTrack" id="edu.uky.cepis.domain.component/ProgramTrack#ProgramTrack()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain.component/ProgramTrack#compare(Ledu.uky.cepis.domain.component.ProgramTrack;Ledu.uky.cepis.domain.component.ProgramTrack;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain.component/ProgramTrack#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain.component/ProgramTrack#hashCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="edu.uky.cepis.domain.component/ProgramTrack#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.9 //@children.9/@sourceConnections.0" name="Program" location="50,583" size="141,229" id="edu.uky.cepis.domain.component/Program">
+    <children xsi:type="editmodel:CompartmentEditModel" size="118,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="edu.uky.cepis.domain.component/Program#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="programCode" id="edu.uky.cepis.domain.component/Program#programCode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain.component/Program#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="status" id="edu.uky.cepis.domain.component/Program#status"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,108">
+      <children xsi:type="editmodel:MethodEditModel" name="Program" id="edu.uky.cepis.domain.component/Program#Program(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Program" id="edu.uky.cepis.domain.component/Program#Program()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain.component/Program#compare(Ledu.uky.cepis.domain.component.Program;Ledu.uky.cepis.domain.component.Program;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain.component/Program#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain.component/Program#hashCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="edu.uky.cepis.domain.component/Program#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="edu.uky.cepis.domain.component/Program@program+edu.uky.cepis.domain/UserProgramProfile@" source="//@children.12" target="//@children.6" targetEnd="//@children.12/@sourceConnections.0/@children.2" label="//@children.12/@sourceConnections.0/@children.0" sourceEnd="//@children.12/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="program" location="141,166" id="edu.uky.cepis.domain.component/Program@program+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain.component/Program#program" attachSource="true" multiplicityLabel="//@children.12/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.12/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - program" location="198,756" size="50,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="198,728" size="18,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,98" id="edu.uky.cepis.domain.component/Program@program+edu.uky.cepis.domain/UserProgramProfile@|edu.uky.cepis.domain/UserProgramProfile#"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.2 //@children.2/@sourceConnections.6 //@children.0/@sourceConnections.0" name="UKDepartment" location="1750,1638" size="182,283" id="edu.uky.cepis.domain.component/UKDepartment">
+    <children xsi:type="editmodel:CompartmentEditModel" size="159,144">
+      <children xsi:type="editmodel:AttributeEditModel" name="departmentAddress" id="edu.uky.cepis.domain.component/UKDepartment#departmentAddress"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="departmentChairName" id="edu.uky.cepis.domain.component/UKDepartment#departmentChairName"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="departmentCode" id="edu.uky.cepis.domain.component/UKDepartment#departmentCode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="departmentContact" id="edu.uky.cepis.domain.component/UKDepartment#departmentContact"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="departmentName" id="edu.uky.cepis.domain.component/UKDepartment#departmentName"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDescription" id="edu.uky.cepis.domain.component/UKDepartment#shortDescription"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="speedSort" id="edu.uky.cepis.domain.component/UKDepartment#speedSort"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="status" id="edu.uky.cepis.domain.component/UKDepartment#status"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="99,90">
+      <children xsi:type="editmodel:MethodEditModel" name="UKDepartment" id="edu.uky.cepis.domain.component/UKDepartment#UKDepartment()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="UKDepartment" id="edu.uky.cepis.domain.component/UKDepartment#UKDepartment(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain.component/UKDepartment#compare(Ledu.uky.cepis.domain.component.UKDepartment;Ledu.uky.cepis.domain.component.UKDepartment;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain.component/UKDepartment#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain.component/UKDepartment#hashCode()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@sourceConnections.4 //@children.2/@sourceConnections.10" name="UserType" location="2109,954" size="256,225" id="edu.uky.cepis.domain/UserType">
+    <children xsi:type="editmodel:CompartmentEditModel" size="233,54">
+      <children xsi:type="editmodel:AttributeEditModel" name="shortDesc" id="edu.uky.cepis.domain/UserType#shortDesc"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="typeCode" id="edu.uky.cepis.domain/UserType#typeCode"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="userClassifications" id="edu.uky.cepis.domain/UserType#userClassifications"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="79,108">
+      <children xsi:type="editmodel:MethodEditModel" name="UserType" id="edu.uky.cepis.domain/UserType#UserType(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="UserType" id="edu.uky.cepis.domain/UserType#UserType()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="compare" id="edu.uky.cepis.domain/UserType#compare(Ledu.uky.cepis.domain.UserType;Ledu.uky.cepis.domain.UserType;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="equals" id="edu.uky.cepis.domain/UserType#equals(Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="hashCode" id="edu.uky.cepis.domain/UserType#hashCode()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" id="edu.uky.cepis.domain/UserType#toString()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="edu.uky.cepis.domain/UserType-Soyatec::Import->edu.uky.cepis.domain/UserClassification" source="//@children.14" target="//@children.1" targetEnd="//@children.14/@sourceConnections.0/@children.2" label="//@children.14/@sourceConnections.0/@children.0" sourceEnd="//@children.14/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="61,225" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="101,0"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" level="-1" properties="wireOptions=7;Product=eUML2"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

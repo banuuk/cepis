@@ -1,0 +1,148 @@
+<beans default-autowire="byName"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<bean id="hibernateProvider" class="org.efs.openreports.providers.HibernateProvider">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="propertiesProvider"
+		class="org.efs.openreports.providers.impl.PropertiesProviderImpl">
+		<constructor-arg>
+			<ref bean="hibernateProvider" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="directoryProvider" class="org.efs.openreports.providers.DirectoryProvider">
+		<constructor-arg>
+			<ref bean="propertiesProvider" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="dateProvider" class="org.efs.openreports.providers.DateProvider">
+		<constructor-arg>
+			<ref bean="propertiesProvider" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="dataSourceProvider"
+		class="org.efs.openreports.providers.impl.DataSourceProviderImpl">
+		<constructor-arg>
+			<ref bean="hibernateProvider" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="groupProvider" class="org.efs.openreports.providers.impl.GroupProviderImpl">
+		<constructor-arg>
+			<ref bean="hibernateProvider" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="parameterProvider"
+		class="org.efs.openreports.providers.impl.ParameterProviderImpl">
+		<constructor-arg>
+			<ref bean="dataSourceProvider" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="dateProvider" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="hibernateProvider" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="reportLogProvider"
+		class="org.efs.openreports.providers.impl.ReportLogProviderImpl">
+		<constructor-arg>
+			<ref bean="hibernateProvider" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="reportProvider" class="org.efs.openreports.providers.impl.ReportProviderImpl">
+		<constructor-arg>
+			<ref bean="directoryProvider" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="hibernateProvider" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="userProvider" class="org.efs.openreports.providers.impl.UserProviderImpl">
+		<constructor-arg>
+			<ref bean="hibernateProvider" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="mailProvider" class="org.efs.openreports.providers.MailProvider">
+		<property name="cepisEmailSender" ref="cepisEmailSender" />
+	</bean>
+
+	<bean id="chartProvider" class="org.efs.openreports.providers.impl.ChartProviderImpl">
+		<constructor-arg>
+			<ref bean="hibernateProvider" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="tagProvider" class="org.efs.openreports.providers.impl.TagProviderImpl">
+		<constructor-arg>
+			<ref bean="hibernateProvider" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="servletContext"
+		class="org.springframework.web.context.support.ServletContextFactoryBean" />
+
+	<bean id="birtProvider" class="org.efs.openreports.providers.BirtProvider">
+		<constructor-arg>
+			<ref bean="servletContext" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="schedulerProvider"
+		class="org.efs.openreports.providers.impl.SchedulerProviderImpl">
+		<property name="scheduler" ref="scheduler" />
+	</bean>
+
+	<bean id="alertProvider" class="org.efs.openreports.providers.impl.AlertProviderImpl">
+		<constructor-arg>
+			<ref bean="dataSourceProvider" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="reportLogProvider" />
+		</constructor-arg>
+		<constructor-arg>
+			<ref bean="hibernateProvider" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="searchResultsTableDecorator" class="org.efs.openreports.util.SearchResultsTableDecorator">
+		<property name="tagProvider" ref="tagProvider" />
+	</bean>
+
+	<bean id="dateColumnDecorator" class="org.efs.openreports.util.DateColumnDecorator">
+		<property name="dateProvider" ref="dateProvider" />
+	</bean>
+
+	<bean id="dateTimeColumnDecorator" class="org.efs.openreports.util.DateTimeColumnDecorator">
+		<property name="dateProvider" ref="dateProvider" />
+	</bean>
+
+	<bean id="fileSystemDeliveryMethod" class="org.efs.openreports.delivery.FileSystemDeliveryMethod">
+		<property name="directoryProvider" ref="directoryProvider" />
+		<property name="mailProvider" ref="mailProvider" />
+	</bean>
+
+	<bean id="emailDeliveryMethod" class="org.efs.openreports.delivery.EMailDeliveryMethod">
+		<property name="mailProvider" ref="mailProvider" />
+	</bean>
+
+</beans>

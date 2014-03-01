@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.uky.cepis.domain.Query" table="tblSavedQueries">
+		<meta attribute="class-description">Query class to store the dynamic search
+			options. It contains org.hibernate.criterion.DetachedCriteria object</meta>
+		<cache region="edu.uky.cepis.cache.query" usage="read-write" />
+		<id name="sid" column="SEARCH_ID">
+			<generator class="increment"></generator>
+		</id>
+		<property name="name" column="SEARCH_NAME" not-null="true"
+			length="255" />
+		<property name="desc" column="SEARCH_MEMO" not-null="false"
+			length="1024" />
+		<property name="dateCreated" column="DATE_CREATED" />
+		<property name="dateModified" column="LAST_MODIFIED" />
+		<property name="createdBy" column="UID" length="50"/>
+		<property name="query" column="query" type="edu.uky.cepis.util.database.DetachedCriteriaUserType"/>
+		
+	</class>
+
+</hibernate-mapping>
+

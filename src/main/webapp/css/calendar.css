@@ -1,0 +1,52 @@
+@CHARSET "ISO-8859-1";
+
+.alignTop {
+	vertical-align: top;
+}
+
+.yearMonthHeader {
+	background-color: 	#B5C8CF;
+	color: #000000;
+	text-align: center;
+	border: none;
+	font-weight: bold;
+}
+
+.weekHeader {
+	background-color: #E7E7E7;
+	color: #000000;
+	text-align: center;
+	border: none;
+	font-size: 12px;
+}
+
+.currentDayCell {
+	background-color: #DDDDDD;
+	color: #000000;
+	border: none;
+}
+
+.calendarcol1 {
+	width: 20%;
+	align: center;
+	text-align: center;
+}
+
+.calendarcol2 {
+	width: 80%;
+	align: center;
+}
+
+.mycalendarcol1 {
+	width: 50%;
+	align: left;
+	text-align: left;
+}
+
+.mycalendarcol2 {
+	width: 50%;
+	align: right;
+	text-align: right;
+}
+
+.calendarcontrol {font-size: 11px;}

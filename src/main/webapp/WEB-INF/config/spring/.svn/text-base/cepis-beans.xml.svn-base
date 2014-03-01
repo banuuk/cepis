@@ -1,0 +1,2468 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+
+	
+
+
+	<bean id="profilePicture" class="edu.uky.cepis.util.global.ProfilePicture" />
+	<bean id="fileUploadBean" class="edu.uky.cepis.util.global.FileUploadBean">
+		<property name="userService" ref="cepisUserService" />
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+
+	<!-- CEPIS Global Component Configurator bean -->
+	<bean id="cepisGlobalComponentConfigurator"
+		class="edu.uky.cepis.util.global.CEPISGlobalComponentConfigurator"
+		depends-on="cepisConfigurator" parent="cepisConfigurator">
+
+		<constructor-arg index="0" ref="programService" />
+		<constructor-arg index="1" ref="programDomainService" />
+		<constructor-arg index="2" ref="programTrackService" />
+		<constructor-arg index="3" ref="programGroupService" />
+		<constructor-arg index="4" ref="ukMajorService" />
+		<constructor-arg index="5" ref="ukTermService" />
+		<constructor-arg index="6" ref="ukStatusService" />
+		<constructor-arg index="7" ref="advisorService" />
+		<constructor-arg index="8" ref="facultyAdvisorService" />		
+		<constructor-arg index="9" ref="roleService" />
+		<constructor-arg index="10" ref="addressTypeService" />
+		<constructor-arg index="11" ref="phoneTypeService" />
+		<constructor-arg index="12" ref="emailAddressTypeService" />
+		<constructor-arg index="13" ref="ethnicService" />
+		<constructor-arg index="14" ref="ukCollegeService" />
+		<constructor-arg index="15" ref="ukDepartmentService" />
+		<constructor-arg index="16" ref="userTypeService" />
+		<constructor-arg index="17" ref="userClassificationService" />
+		<constructor-arg index="18" ref="cohortTypeService" />
+		<constructor-arg index="19" ref="cohortTermService" />
+		<constructor-arg index="20" ref="rankingService" />
+		<constructor-arg index="21" ref="praxisIITestService" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<!-- CEPIS Initializer -->
+	<!-- Initializes the CepisWebView abstract class's static variables -->
+	<bean id="initCEPIS" class="edu.uky.cepis.init.InitCEPIS">
+		<property name="userService" ref="cepisUserService" />
+		<property name="ipAddressService" ref="ipAddressService" />
+		<property name="workingSetService" ref="workingSetService" />
+		<property name="queryService" ref="queryService" />
+		<property name="lastLoginService" ref="lastLoginService" />
+		<property name="roleservice" ref="roleService" />
+		<property name="programService" ref="programService" />
+		<property name="programDomainService" ref="programDomainService" />
+		<property name="programTrackService" ref="programTrackService" />
+		<property name="programGroupService" ref="programGroupService" />
+		<property name="ukMajorService" ref="ukMajorService" />
+		<property name="ukStatusService" ref="ukStatusService" />
+		<property name="ukTermService" ref="ukTermService" />
+		<property name="advisorService" ref="advisorService" />
+		<property name="userProgramProfileService" ref="userProgramProfileService" />
+		<property name="userCollegeProfileService" ref="userCollegeProfileService" />
+		<property name="userPersonalProfileService" ref="userPersonalProfileService" />
+		<property name="userAcademicProfileService" ref="userAcademicProfileService" />
+		<property name="userAssessmentProfileService" ref="userAssessmentProfileService" />
+		<property name="searchEngineService" ref="searchEngineService" />
+		<property name="addressTypeService" ref="addressTypeService" />
+		<property name="phoneTypeService" ref="phoneTypeService" />
+		<property name="emailAddressTypeService" ref="emailAddressTypeService" />
+		<property name="emailAddressService" ref="emailAddressService" />
+		<property name="addressService" ref="addressService" />
+		<property name="phoneService" ref="phoneService" />
+		<property name="eventService" ref="eventService" />
+		<property name="ethnicService" ref="ethnicService" />
+		<property name="ukCollegeService" ref="ukCollegeService" />
+		<property name="ukDepartmentService" ref="ukDepartmentService" />
+		<property name="userTypeService" ref="userTypeService" />
+		<property name="userClassificationService" ref="userClassificationService" />
+		<property name="cohortTypeService" ref="cohortTypeService" />
+		<property name="cohortTermService" ref="cohortTermService" />
+		<property name="conferenceService" ref="conferenceService" />
+		<property name="attendeeService" ref="attendeeService" />
+		<property name="advisingSessionService" ref="advisingSessionService" />
+		<property name="advisingSessionSlotService" ref="advisingSessionSlotService" />
+		<property name="rankingService" ref="rankingService" />
+		<property name="certificationService" ref="certificationService" />
+		<property name="emailService" ref="emailService" />
+		<property name="holdLiftService" ref="holdLiftService" />
+		<property name="noteService" ref="noteService" />
+		<property name="praxisIITestScoreService" ref="praxisIITestScoreService" />
+		<property name="praxisITestScoreService" ref="praxisITestScoreService" />
+		<property name="artifactService" ref="artifactService" />
+		<property name="greTestScoreService" ref="greTestScoreService" />
+		<property name="praxisITestService" ref="praxisITestService" />
+		<property name="praxisIITestService" ref="praxisIITestService" />	
+		<property name="reportYearService" ref="reportYearService" />	
+		<property name="tepAdmissionService" ref="tepAdmissionService" />
+		<property name="tepApplicationService" ref="tepApplicationService" />
+		<property name="applicationStatusService" ref="applicationStatusService" />	
+		<property name="letterService" ref="letterService" />		
+		<property name="characterAndFitnessService" ref="characterAndFitnessService" />
+		<property name="feeService" ref="feeService" />
+		<property name="facultyAdvisorService" ref="facultyAdvisorService" />
+		<property name="scholarshipService" ref="scholarshipService" />
+		<property name="studentScholarshipService" ref="studentScholarshipService" />
+	</bean>
+
+	<bean id="today" class="java.util.Date" scope="session">
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<bean id="calendarModel"
+		class="org.apache.myfaces.custom.schedule.model.SimpleScheduleModel"
+		lazy-init="true" scope="session">
+		<property name="mode" value="0" />
+		<property name="selectedDate" ref="today" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+	<bean id="scheduleEntryRenderer" class="edu.uky.cepis.ext.CEPISScheduleEntryRenderer"
+		lazy-init="true" scope="session">
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+
+	<bean id="calendarModel2"
+		class="org.apache.myfaces.custom.schedule.model.SimpleScheduleModel"
+		lazy-init="true" scope="session">
+		<property name="mode" value="0" />
+		<property name="selectedDate" ref="today" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<!-- CEPIS View Controllers -->
+	<bean id="initController" class="edu.uky.cepis.controller.InitController"
+		depends-on="initCEPIS" lazy-init="true" scope="session">
+		<property name="init" ref="initCEPIS" />
+		<property name="userManager" ref="cepisUserManager" />
+		<property name="configurationManager" ref="cepisConfigurationManager" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<bean id="whoamiController" class="edu.uky.cepis.controller.WhoAmIController"
+		lazy-init="true" depends-on="initController" scope="session">
+		<property name="whoAmIBean" ref="whoAmIBean" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<bean id="lastLoginController" class="edu.uky.cepis.controller.LastLoginController"
+		lazy-init="true" depends-on="initController" scope="session">
+		<property name="lastLoginBean" ref="lastLoginBean" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<bean id="workingSetController" class="edu.uky.cepis.controller.WorkingSetController"
+		lazy-init="true" depends-on="initController" scope="session">
+		<property name="workingSetBean" ref="workingSetBean" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<bean id="appComponentController" class="edu.uky.cepis.controller.ApplicationComponentController"
+		lazy-init="true" depends-on="initController" scope="session">
+		<property name="appComponentBean" ref="appComponentBean" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<bean id="userDetailController" class="edu.uky.cepis.controller.UserDetailController"
+		lazy-init="true" depends-on="initController" scope="session">
+		<property name="userDetailBean" ref="userDetailBean" />
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<bean id="accountManagementController" class="edu.uky.cepis.controller.AccountManagementController"
+		lazy-init="true" depends-on="initController" scope="session">
+		<property name="accountManagementBean" ref="accountManagementBean" />
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+		<property name="jobLauncher" ref="jobLauncher" />
+		<property name="job" ref="job" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<bean id="conferenceManagementController" class="edu.uky.cepis.controller.ConferenceManagementController"
+		lazy-init="true" depends-on="initController" scope="session">
+		<property name="conferenceBean" ref="conferenceBean" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<bean id="calendarController" class="edu.uky.cepis.controller.CalendarController"
+		lazy-init="true" depends-on="calendarModel" scope="session">
+		<property name="cepisConfigurator" ref="cepisConfigurator" />
+		<property name="calendarBean" ref="calendarBean" />
+		<property name="model" ref="calendarModel" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<bean id="advisingManagementController" class="edu.uky.cepis.controller.AdvisingManagementController"
+		lazy-init="true" depends-on="initController,calendarModel2" scope="session">
+		<property name="accountManagementController" ref="accountManagementController" />
+		<property name="advisingManagementBean" ref="advisingManagementBean" />
+		<property name="model" ref="calendarModel2" />
+		<aop:scoped-proxy proxy-target-class="true" />
+	</bean>
+
+	<!-- JSF Custom Converters -->
+	<bean id="UserDataConverter" class="edu.uky.cepis.view.converter.UserDataConverter">
+
+	</bean>
+	<bean id="WorkingSetDataConverter" class="edu.uky.cepis.view.converter.WorkingSetDataConverter">
+	</bean>	
+	<bean id="ReportYearDataConverter" class="edu.uky.cepis.view.converter.ReportYearDataConverter">
+	</bean>	
+	<bean id="QueryDataConverter" class="edu.uky.cepis.view.converter.QueryDataConverter">
+	</bean>
+	<bean id="USStatesDataConverter" class="edu.uky.cepis.view.converter.USStatesDataConverter">
+	</bean>
+	<bean id="ProgramDataConverter" class="edu.uky.cepis.view.converter.ProgramDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="ProgramDomainDataConverter" class="edu.uky.cepis.view.converter.ProgramDomainDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="ProgramTrackDataConverter" class="edu.uky.cepis.view.converter.ProgramTrackDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="ProgramGroupDataConverter" class="edu.uky.cepis.view.converter.ProgramGroupDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="UKMajorDataConverter" class="edu.uky.cepis.view.converter.UKMajorDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="UKStatusDataConverter" class="edu.uky.cepis.view.converter.UKStatusDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="UKTermDataConverter" class="edu.uky.cepis.view.converter.UKTermDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="AdvisorDataConverter" class="edu.uky.cepis.view.converter.AdvisorDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="FacultyAdvisorDataConverter" class="edu.uky.cepis.view.converter.FacultyAdvisorDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="AdvisorGroupDataConverter" class="edu.uky.cepis.view.converter.AdvisorGroupDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="RoleDataConverter" class="edu.uky.cepis.view.converter.RoleDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="AddressTypeDataConverter" class="edu.uky.cepis.view.converter.AddressTypeDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="EmailAddressTypeDataConverter"
+		class="edu.uky.cepis.view.converter.EmailAddressTypeDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="PhoneTypeDataConverter" class="edu.uky.cepis.view.converter.PhoneTypeDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="PhoneDataConverter" class="edu.uky.cepis.view.converter.PhoneDataConverter">
+	</bean>
+	<bean id="PraxisITestDataConverter" class="edu.uky.cepis.view.converter.PraxisITestDataConverter">
+	</bean>
+	<bean id="PraxisIITestDataConverter" class="edu.uky.cepis.view.converter.PraxisIITestDataConverter">
+	</bean>
+	<bean id="AddressDataConverter" class="edu.uky.cepis.view.converter.AddressDataConverter">
+	</bean>
+	<bean id="EmailAddressDataConverter" class="edu.uky.cepis.view.converter.EmailAddressDataConverter">
+	</bean>
+	<bean id="EthnicDataConverter" class="edu.uky.cepis.view.converter.EthnicDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="UserTypeDataConverter" class="edu.uky.cepis.view.converter.UserTypeDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="UserClassificationDataConverter"
+		class="edu.uky.cepis.view.converter.UserClassificationDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="UKCollegeDataConverter" class="edu.uky.cepis.view.converter.UKCollegeDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="UKDepartmentDataConverter" class="edu.uky.cepis.view.converter.UKDepartmentDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="CohortTypeDataConverter" class="edu.uky.cepis.view.converter.CohortTypeDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="CohortTermDataConverter" class="edu.uky.cepis.view.converter.CohortTermDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	<bean id="UserProgramProfileDataConverter"
+		class="edu.uky.cepis.view.converter.UserProgramProfileDataConverter">
+	</bean>
+	<bean id="UserCollegeProfileDataConverter"
+		class="edu.uky.cepis.view.converter.UserCollegeProfileDataConverter">
+	</bean>
+	<bean id="UserPersonalProfileDataConverter"
+		class="edu.uky.cepis.view.converter.UserPersonalProfileDataConverter">
+	</bean>
+	<bean id="ConferenceDataConverter" class="edu.uky.cepis.view.converter.ConferenceDataConverter">
+	</bean>
+	<bean id="AttendeeDataConverter" class="edu.uky.cepis.view.converter.AttendeeDataConverter">
+	</bean>
+	<bean id="AdvisingSessionDataConverter"
+		class="edu.uky.cepis.view.converter.AdvisingSessionDataConverter">
+	</bean>
+	<bean id="AdvisingSessionSlotDataConverter"
+		class="edu.uky.cepis.view.converter.AdvisingSessionSlotDataConverter">
+	</bean>
+	<bean id="RankingDataConverter" class="edu.uky.cepis.view.converter.RankingDataConverter">
+		<property name="cepisGlobalComponentConfigurator" ref="cepisGlobalComponentConfigurator" />
+	</bean>
+	
+	<bean id="CertificationDataConverter" class="edu.uky.cepis.view.converter.CertificationDataConverter"/>	
+	
+	<bean id="ArtifactDataConverter" class="edu.uky.cepis.view.converter.ArtifactDataConverter"/>	
+	
+	<bean id="ApplicationStatusDataConverter" class="edu.uky.cepis.view.converter.ApplicationStatusDataConverter"/>
+	
+	<bean id="TepAdmissionDataConverter" class="edu.uky.cepis.view.converter.TepAdmissionDataConverter"/>
+	
+	<bean id="TepApplicationDataConverter" class="edu.uky.cepis.view.converter.TepApplicationDataConverter"/>
+	
+
+	<!-- CEPIS View Beans -->
+	<bean id="whoAmIBean" class="edu.uky.cepis.view.WhoAmIViewBean"
+		depends-on="initCEPIS">
+	</bean>
+
+	<bean id="lastLoginBean" class="edu.uky.cepis.view.LastLoginViewBean"
+		depends-on="initCEPIS">
+	</bean>
+
+	<bean id="workingSetBean" class="edu.uky.cepis.view.WorkingSetViewBean"
+		depends-on="initCEPIS">
+	</bean>
+
+	<bean id="appComponentBean" class="edu.uky.cepis.view.ApplicationComponentViewBean"
+		depends-on="initCEPIS">
+	</bean>
+
+	<bean id="userDetailBean" class="edu.uky.cepis.view.UserDetailViewBean"
+		depends-on="initCEPIS">
+	</bean>
+
+	<bean id="accountManagementBean" class="edu.uky.cepis.view.AccountManagementViewBean"
+		depends-on="initCEPIS">
+	</bean>
+
+	<bean id="searchEngineBean" class="edu.uky.cepis.view.SearchEngineViewBean"
+		depends-on="initCEPIS">
+	</bean>
+
+	<bean id="calendarBean" class="edu.uky.cepis.view.CalendarViewBean"
+		depends-on="initCEPIS">
+	</bean>
+
+	<bean id="conferenceBean" class="edu.uky.cepis.view.ConferenceManagementViewBean"
+		depends-on="initCEPIS">
+	</bean>
+
+	<bean id="advisingManagementBean" class="edu.uky.cepis.view.AdvisingManagementViewBean"
+		depends-on="initCEPIS">
+	</bean>
+	
+	<bean id="noteBean" class="edu.uky.cepis.view.NoteViewBean"
+		depends-on="initCEPIS">
+	</bean>
+	
+	<bean id="tepBean" class="edu.uky.cepis.view.TepViewBean"
+		depends-on="initCEPIS">
+	</bean>
+	
+	<bean id="certificationBean" class="edu.uky.cepis.view.CertificationViewBean"
+		depends-on="initCEPIS">
+	</bean>
+	
+	<bean id="testScoreBean" class="edu.uky.cepis.view.TestScoreViewBean"
+		depends-on="initCEPIS">
+	</bean>
+	
+	<bean id="scholarshipBean" class="edu.uky.cepis.view.ScholarshipViewBean"
+		depends-on="initCEPIS">
+	</bean>
+	
+	<bean id="dateColumnDecorator" class="org.efs.openreports.util.DateColumnDecorator"
+		lazy-init="false" depends-on="dateProvider">
+		<property name="dateProvider" ref="dateProvider" />
+	</bean>
+
+	<bean id="dateTimeColumnDecorator" class="org.efs.openreports.util.DateTimeColumnDecorator"
+		depends-on="dateProvider" lazy-init="false">
+		<property name="dateProvider" ref="dateProvider" />
+	</bean>
+	
+
+	
+	<!-- #User Business and Persistence Layers -->
+	<!-- AOP Configuration for Business Transactions -->
+	<aop:config>
+		<aop:pointcut id="userServiceMethods" expression="execution(* edu.uky.cepis.service.UserService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="userServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUserProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="cepisUserService" parent="txnUserProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UserServiceImpl">
+				<property name="userDao" ref="userDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+
+
+	<bean id="userDao" class="edu.uky.cepis.dao.UserDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- #Role Business and Persistence Layers -->
+
+	<!-- AOP Configuration for Business Transactions -->
+	<aop:config>
+		<aop:pointcut id="roleServiceMethods"
+			expression="execution(* edu.uky.cepis.service.RoleService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="roleServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnRoleProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="roleService" parent="txnRoleProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.RoleServiceImpl">
+				<property name="roleDao" ref="roleDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+  
+
+	<bean id="roleDao" class="edu.uky.cepis.dao.RoleDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- #LastLogin Business and Persistence Layers -->
+	<!-- AOP Configuration for Business Transactions -->
+	<aop:config>
+		<aop:pointcut id="lastLoginServiceMethods"
+			expression="execution(* edu.uky.cepis.service.LastLoginService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="lastLoginServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnLastLoginProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="lastLoginService" parent="txnLastLoginProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.LastLoginServiceImpl">
+				<property name="lastLoginDao" ref="lastLoginDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="lastLoginDao" class="edu.uky.cepis.dao.LastLoginDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<!-- #IPAddress Business and Persistence Layers -->
+	<!-- AOP Configuration for Business Transactions -->
+	<aop:config>
+		<aop:pointcut id="ipAddressServiceMethods"
+			expression="execution(* edu.uky.cepis.service.IPAddressService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="ipAddressServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnIPAddressProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="ipAddressService" parent="txnIPAddressProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.IPAddressServiceImpl">
+				<property name="ipAddressDao" ref="ipAddressDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="ipAddressDao" class="edu.uky.cepis.dao.IPAddressDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<!-- #Email Business and Persistence Layers -->
+	<aop:config>
+		<aop:pointcut id="emailServiceMethods"
+			expression="execution(* edu.uky.cepis.service.EmailService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="emailServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnEmailProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="emailService" parent="txnEmailProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.EmailServiceImpl">
+				<property name="emailDao" ref="emailDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="emailDao" class="edu.uky.cepis.dao.EmailDaoImpl">
+		<property name="mailProvider" ref="mailProvider" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- #Components Business and Persistence Layers -->
+	<!-- #Contact Business and Persistence Layers -->
+	<!-- AOP Configuration for Business Transactions -->
+	<aop:config>
+		<aop:pointcut id="advisorServiceMethods" expression="execution(* edu.uky.cepis.service.AdvisorService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="advisorServiceMethods" />
+	</aop:config>
+	
+	<aop:config>
+		<aop:pointcut id="facultyAdvisorServiceMethods" expression="execution(* edu.uky.cepis.service.FacultyAdvisorService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="facultyAdvisorServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnAdvisorProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="advisorService" parent="txnAdvisorProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.AdvisorServiceImpl">
+				<property name="advisorDao" ref="advisorDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="advisorDao" class="edu.uky.cepis.dao.AdvisorDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="addressServiceMethods"
+			expression="execution(* edu.uky.cepis.service.AddressService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="addressServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnAddressProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="addressService" parent="txnAddressProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.AddressServiceImpl">
+				<property name="addressDao" ref="addressDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="addressDao" class="edu.uky.cepis.dao.AddressDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="phoneServiceMethods"
+			expression="execution(* edu.uky.cepis.service.PhoneService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="phoneServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnPhoneProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="phoneService" parent="txnPhoneProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.PhoneServiceImpl">
+				<property name="phoneDao" ref="phoneDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="phoneDao" class="edu.uky.cepis.dao.PhoneDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<aop:config>
+		<aop:pointcut id="emailAddressServiceMethods"
+			expression="execution(* edu.uky.cepis.service.EmailAddressService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="emailAddressServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnEmailAddressProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="emailAddressService" parent="txnEmailAddressProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.EmailAddressServiceImpl">
+				<property name="emailAddressDao" ref="emailAddressDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="emailAddressDao" class="edu.uky.cepis.dao.EmailAddressDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<aop:config>
+		<aop:pointcut id="ethnicServiceMethods"
+			expression="execution(* edu.uky.cepis.service.EthnicService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="ethnicServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnEthnicProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="ethnicService" parent="txnEthnicProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.EthnicServiceImpl">
+				<property name="ethnicDao" ref="ethnicDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="ethnicDao" class="edu.uky.cepis.dao.EthnicDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="programServiceMethods"
+			expression="execution(* edu.uky.cepis.service.ProgramService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="programServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnProgramProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="programService" parent="txnProgramProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.ProgramServiceImpl">
+				<property name="programDao" ref="programDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="programDao" class="edu.uky.cepis.dao.ProgramDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<aop:config>
+		<aop:pointcut id="programDomainServiceMethods"
+			expression="execution(* edu.uky.cepis.service.ProgramDomainService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="programDomainServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnProgramDomainProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="programDomainService" parent="txnProgramDomainProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.ProgramDomainServiceImpl">
+				<property name="programDomainDao" ref="programDomainDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="programDomainDao" class="edu.uky.cepis.dao.ProgramDomainDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<aop:config>
+		<aop:pointcut id="programTrackServiceMethods"
+			expression="execution(* edu.uky.cepis.service.ProgramTrackService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="programTrackServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnProgramTrackProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="programTrackService" parent="txnProgramTrackProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.ProgramTrackServiceImpl">
+				<property name="programTrackDao" ref="programTrackDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="programTrackDao" class="edu.uky.cepis.dao.ProgramTrackDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<aop:config>
+		<aop:pointcut id="programGroupServiceMethods"
+			expression="execution(* edu.uky.cepis.service.ProgramGroupService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="programGroupServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnProgramGroupProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="programGroupService" parent="txnProgramGroupProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.ProgramGroupServiceImpl">
+				<property name="programGroupDao" ref="programGroupDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="programGroupDao" class="edu.uky.cepis.dao.ProgramGroupDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUKMajorProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="ukMajorService" parent="txnUKMajorProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UKMajorServiceImpl">
+				<property name="ukMajorDao" ref="ukMajorDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="ukMajorDao" class="edu.uky.cepis.dao.UKMajorDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<aop:config>
+		<aop:pointcut id="ukStatusServiceMethods"
+			expression="execution(* edu.uky.cepis.service.UKStatusService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="ukStatusServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUKStatusProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="ukStatusService" parent="txnUKStatusProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UKStatusServiceImpl">
+				<property name="ukStatusDao" ref="ukStatusDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="ukStatusDao" class="edu.uky.cepis.dao.UKStatusDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<aop:config>
+		<aop:pointcut id="ukTermServiceMethods"
+			expression="execution(* edu.uky.cepis.service.UKTermService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="ukTermServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUKTermProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="ukTermService" parent="txnUKTermProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UKTermServiceImpl">
+				<property name="ukTermDao" ref="ukTermDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="ukTermDao" class="edu.uky.cepis.dao.UKTermDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="cohortTypeServiceMethods"
+			expression="execution(* edu.uky.cepis.service.CohortTypeService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="cohortTypeServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnCohortTypeProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="cohortTypeService" parent="txnCohortTypeProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.CohortTypeServiceImpl">
+				<property name="cohortTypeDao" ref="cohortTypeDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="cohortTypeDao" class="edu.uky.cepis.dao.CohortTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="cohortTermServiceMethods"
+			expression="execution(* edu.uky.cepis.service.CohortTermService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="cohortTermServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnCohortTermProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="cohortTermService" parent="txnCohortTermProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.CohortTermServiceImpl">
+				<property name="cohortTermDao" ref="cohortTermDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="cohortTermDao" class="edu.uky.cepis.dao.CohortTermDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="userProgramProfileServiceMethods"
+			expression="execution(* edu.uky.cepis.service.UserProgramProfileService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="userProgramProfileServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUserProgramProfileProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="userProgramProfileService" parent="txnUserProgramProfileProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UserProgramProfileServiceImpl">
+				<property name="userProgramProfileDao" ref="userProgramProfileDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="userProgramProfileDao" class="edu.uky.cepis.dao.UserProgramProfileDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="userCollegeProfileServiceMethods"
+			expression="execution(* edu.uky.cepis.service.UserCollegeProfileService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="userCollegeProfileServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUserCollegeProfileProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="userCollegeProfileService" parent="txnUserCollegeProfileProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UserCollegeProfileServiceImpl">
+				<property name="userCollegeProfileDao" ref="userCollegeProfileDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="userCollegeProfileDao" class="edu.uky.cepis.dao.UserCollegeProfileDaoImpl">
+		<property name="dataSourceProvider" ref="dataSourceProvider" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="userPersonalProfileServiceMethods"
+			expression="execution(* edu.uky.cepis.service.UserPersonalProfileService.*(..))" />
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="userPersonalProfileServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUserPersonalProfileProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="userPersonalProfileService" parent="txnUserPersonalProfileProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UserPersonalProfileServiceImpl">
+				<property name="userPersonalProfileDao" ref="userPersonalProfileDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="userPersonalProfileDao" class="edu.uky.cepis.dao.UserPersonalProfileDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="userAcademicProfileServiceMethods"
+			expression="execution(* edu.uky.cepis.service.UserAcademicProfileService.*(..))" />
+		<aop:advisor advice-ref="txApexAdvice"
+			pointcut-ref="userAcademicProfileServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUserAcademicProfileProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="apexTransactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="userAcademicProfileService" parent="txnUserAcademicProfileProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UserAcademicProfileServiceImpl">
+				<property name="userAcademicProfileDao" ref="userAcademicProfileDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="userAcademicProfileDao" class="edu.uky.cepis.dao.UserAcademicProfileDaoImpl">
+		<property name="sessionFactory" ref="apexSessionFactory" />
+	</bean>
+	
+	<aop:config>
+		<aop:pointcut id="userAssessmentProfileServiceMethods"
+			expression="execution(* edu.uky.cepis.service.UserAssessmentProfileService.*(..))" />
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="userAssessmentProfileServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUserAssessmentProfileProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="userAssessmentProfileService" parent="txnUserAssessmentProfileProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UserAssessmentProfileServiceImpl">
+				<property name="userAssessmentProfileDao" ref="userAssessmentProfileDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="userAssessmentProfileDao" class="edu.uky.cepis.dao.UserAssessmentProfileDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<aop:config>
+		<aop:pointcut id="artifactServiceMethods"
+			expression="execution(* edu.uky.cepis.service.ArtifactService.*(..))" />
+		<aop:advisor advice-ref="txOTISAdvice" pointcut-ref="artifactServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnArtifactProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="otisTransactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="artifactService" parent="txnArtifactProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.ArtifactServiceImpl">
+				<property name="artifactDao" ref="artifactDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="artifactDao" class="edu.uky.cepis.dao.ArtifactDaoImpl">
+		<property name="sessionFactory" ref="otisSessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="ukCollegeServiceMethods"
+			expression="execution(* edu.uky.cepis.service.UKCollegeService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="ukCollegeServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUKCollegeProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="ukCollegeService" parent="txnUKCollegeProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UKCollegeServiceImpl">
+				<property name="ukCollegeDao" ref="ukCollegeDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="ukCollegeDao" class="edu.uky.cepis.dao.UKCollegeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="ukDepartmentServiceMethods"
+			expression="execution(* edu.uky.cepis.service.UKDepartmentService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="ukDepartmentServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUKDepartmentProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="ukDepartmentService" parent="txnUKDepartmentProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UKDepartmentServiceImpl">
+				<property name="ukDepartmentDao" ref="ukDepartmentDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="ukDepartmentDao" class="edu.uky.cepis.dao.UKDepartmentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="userTypeServiceMethods"
+			expression="execution(* edu.uky.cepis.service.UserTypeService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="userTypeServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUserTypeProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="userTypeService" parent="txnUserTypeProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UserTypeServiceImpl">
+				<property name="userTypeDao" ref="userTypeDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="userTypeDao" class="edu.uky.cepis.dao.UserTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="userClassificationServiceMethods"
+			expression="execution(* edu.uky.cepis.service.UserClassificationService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="userClassificationServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnUserClassificationProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="userClassificationService" parent="txnUserClassificationProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.UserClassificationServiceImpl">
+				<property name="userClassificationDao" ref="userClassificationDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="userClassificationDao" class="edu.uky.cepis.dao.UserClassificationDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<aop:config>
+		<aop:pointcut id="addressTypeServiceMethods"
+			expression="execution(* edu.uky.cepis.service.AddressTypeService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="addressTypeServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnAddressTypeProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="addressTypeService" parent="txnAddressTypeProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.AddressTypeServiceImpl">
+				<property name="addressTypeDao" ref="addressTypeDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="addressTypeDao" class="edu.uky.cepis.dao.AddressTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="phoneTypeServiceMethods"
+			expression="execution(* edu.uky.cepis.service.PhoneTypeService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="phoneTypeServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnPhoneTypeProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="phoneTypeService" parent="txnPhoneTypeProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.PhoneTypeServiceImpl">
+				<property name="phoneTypeDao" ref="phoneTypeDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="phoneTypeDao" class="edu.uky.cepis.dao.PhoneTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="emailAddressTypeServiceMethods"
+			expression="execution(* edu.uky.cepis.service.EmailAddressTypeService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="emailAddressTypeServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnEmailAddressTypeProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="emailAddressTypeService" parent="txnEmailAddressTypeProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.EmailAddressTypeServiceImpl">
+				<property name="emailAddressTypeDao" ref="emailAddressTypeDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="emailAddressTypeDao" class="edu.uky.cepis.dao.EmailAddressTypeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- #Conference Business and Persistence Layers -->
+	<aop:config>
+		<aop:pointcut id="conferenceServiceMethods"
+			expression="execution(* edu.uky.cepis.service.ConferenceService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="conferenceServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnConferenceProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="conferenceService" parent="txnConferenceProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.ConferenceServiceImpl">
+				<property name="conferenceDao" ref="conferenceDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="conferenceDao" class="edu.uky.cepis.dao.ConferenceDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="attendeeServiceMethods"
+			expression="execution(* edu.uky.cepis.service.AttendeeService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="attendeeServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnAttendeeProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="attendeeService" parent="txnAttendeeProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.AttendeeServiceImpl">
+				<property name="attendeeDao" ref="attendeeDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="attendeeDao" class="edu.uky.cepis.dao.AttendeeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<aop:config>
+		<aop:pointcut id="advisingSessionServiceMethods"
+			expression="execution(* edu.uky.cepis.service.AdvisingSessionService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="advisingSessionServiceMethods" />
+	</aop:config>
+
+	<!-- #Calendar Business and Persistence Layers -->
+	<aop:config>
+		<aop:pointcut id="eventServiceMethods"
+			expression="execution(* edu.uky.cepis.service.EventService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="eventServiceMethods" />
+	</aop:config>
+	<!--For Before Business method calls -->
+	<bean id="txnEventProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="eventService" parent="txnEventProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.EventServiceImpl">
+				<property name="eventDao" ref="eventDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="eventDao" class="edu.uky.cepis.dao.EventDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- #Advising #Appointments Business and Persistence Layers -->
+	<!--For Before Business method calls -->
+	<bean id="txnAdvisingSessionProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="advisingSessionService" parent="txnAdvisingSessionProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.AdvisingSessionServiceImpl">
+				<property name="advisingSessionDao" ref="advisingSessionDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="advisingSessionDao" class="edu.uky.cepis.dao.AdvisingSessionDaoImpl">
+		<property name="scheduler" ref="scheduler" />
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="advisingSessionSlotServiceMethods"
+			expression="execution(* edu.uky.cepis.service.AdvisingSessionSlotService.*(..))" />
+		<aop:advisor advice-ref="txAdvice"
+			pointcut-ref="advisingSessionSlotServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnAdvisingSessionSlotProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="advisingSessionSlotService" parent="txnAdvisingSessionSlotProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.AdvisingSessionSlotServiceImpl">
+				<property name="advisingSessionSlotDao" ref="advisingSessionSlotDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="advisingSessionSlotDao" class="edu.uky.cepis.dao.AdvisingSessionSlotDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="holdLiftServiceMethods"
+			expression="execution(* edu.uky.cepis.service.HoldLiftService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="holdLiftServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnHoldLiftProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="holdLiftService" parent="txnHoldLiftProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.HoldLiftServiceImpl">
+				<property name="holdLiftDao" ref="holdLiftDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="holdLiftDao" class="edu.uky.cepis.dao.HoldLiftDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- #Certification Business and Persistence Layers -->
+
+	<aop:config>
+		<aop:pointcut id="rankingServiceMethods"
+			expression="execution(* edu.uky.cepis.service.RankingService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="rankingServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnRankingProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="rankingService" parent="txnRankingProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.RankingServiceImpl">
+				<property name="rankingDao" ref="rankingDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="rankingDao" class="edu.uky.cepis.dao.RankingDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="certificationServiceMethods"
+			expression="execution(* edu.uky.cepis.service.CertificationService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="certificationServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnCertificationProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="certificationService" parent="txnCertificationProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.CertificationServiceImpl">
+				<property name="certificationDao" ref="certificationDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="certificationDao" class="edu.uky.cepis.dao.CertificationDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- #TestScore Business and Persistence Layers -->
+
+	<!-- #PraxisTestScore Business and Persistence Layers -->
+	<!-- AOP Configuration for Business Transactions -->
+	<aop:config>
+		<aop:pointcut id="PraxisIITestScoreServiceMethods"
+			expression="execution(* edu.uky.cepis.service.PraxisIITestScoreService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="PraxisIITestScoreServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnPraxisIITestScoreProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="praxisIITestScoreService" parent="txnPraxisIITestScoreProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.PraxisIITestScoreServiceImpl">
+				<property name="praxisIITestScoreDao" ref="praxisIITestScoreDao" />
+				<property name="praxisIITestDao" ref="praxisIITestDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="praxisIITestScoreDao" class="edu.uky.cepis.dao.PraxisIITestScoreDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- #PraxisTestScore Business and Persistence Layers -->
+	<!-- AOP Configuration for Business Transactions -->
+	<aop:config>
+		<aop:pointcut id="PraxisITestScoreServiceMethods"
+			expression="execution(* edu.uky.cepis.service.PraxisITestScoreService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="PraxisITestScoreServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnPraxisITestScoreProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="praxisITestScoreService" parent="txnPraxisITestScoreProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.PraxisITestScoreServiceImpl">
+				<property name="praxisITestScoreDao" ref="praxisITestScoreDao" />
+				<property name="praxisITestDao" ref="praxisITestDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="praxisITestScoreDao" class="edu.uky.cepis.dao.PraxisITestScoreDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<!-- #PraxisTest Business and Persistence Layers -->
+	<!-- AOP Configuration for Business Transactions -->
+	<aop:config>
+		<aop:pointcut id="praxisIITestServiceMethods"
+			expression="execution(* edu.uky.cepis.service.PraxisIITestService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="praxisIITestServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnPraxisIITestProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="praxisIITestService" parent="txnPraxisIITestProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.PraxisIITestServiceImpl">
+				<property name="praxisIITestDao" ref="praxisIITestDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="praxisIITestDao" class="edu.uky.cepis.dao.PraxisIITestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- #PraxisTest Business and Persistence Layers -->
+	<!-- AOP Configuration for Business Transactions -->
+	<aop:config>
+		<aop:pointcut id="praxisITestServiceMethods"
+			expression="execution(* edu.uky.cepis.service.PraxisITestService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="praxisITestServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnPraxisITestProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="praxisITestService" parent="txnPraxisITestProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.PraxisITestServiceImpl">
+				<property name="praxisITestDao" ref="praxisITestDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="praxisITestDao" class="edu.uky.cepis.dao.PraxisITestDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- #PraxisTest Business and Persistence Layers -->
+	<!-- AOP Configuration for Business Transactions -->
+	<aop:config>
+		<aop:pointcut id="reportYearServiceMethods"
+			expression="execution(* edu.uky.cepis.service.ReportYearService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="reportYearServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnReportYearProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="reportYearService" parent="txnReportYearProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.ReportYearServiceImpl">
+				<property name="reportYearDao" ref="reportYearDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="reportYearDao" class="edu.uky.cepis.dao.ReportYearDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- #Working Set Business and Persistence Layers -->
+	<!-- AOP Configuration for Business Transactions -->
+	<aop:config>
+		<aop:pointcut id="workingSetServiceMethods"
+			expression="execution(* edu.uky.cepis.service.WorkingSetService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="workingSetServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnWorkingSetProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="workingSetService" parent="txnWorkingSetProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.WorkingSetServiceImpl">
+				<property name="workingSetDao" ref="workingSetDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="workingSetDao" class="edu.uky.cepis.dao.WorkingSetDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- #Search Engine Business and Persistence Layers -->
+	<aop:config>
+		<aop:pointcut id="searchEngineServiceMethods"
+			expression="execution(* edu.uky.cepis.service.SearchEngineService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="searchEngineServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnSearchEngineProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="searchEngineService" parent="txnSearchEngineProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.SearchEngineServiceImpl">
+				<property name="searchEngineDao" ref="searchEngineDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+	<bean id="searchEngineDao" class="edu.uky.cepis.dao.SearchEngineDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<aop:config>
+		<aop:pointcut id="ukMajorServiceMethods"
+			expression="execution(* edu.uky.cepis.service.UKMajorService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="ukMajorServiceMethods" />
+	</aop:config>
+
+	<!-- #Query Business and Persistence Layer -->
+	<!-- AOP Configuration for Business Transactions -->
+	<aop:config>
+		<aop:pointcut id="queryServiceMethods"
+			expression="execution(* edu.uky.cepis.service.QueryService.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="queryServiceMethods" />
+	</aop:config>
+
+	<!--For Before Business method calls -->
+	<bean id="txnQueryProxyTemplate" abstract="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="queryService" parent="txnQueryProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.QueryServiceImpl">
+				<property name="queryDao" ref="queryDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="queryDao" class="edu.uky.cepis.dao.QueryDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- ***************************************NOTES*************************************** -->
+	
+	<bean id="txnNoteProxyTemplate" abstract="true"
+	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="noteService" parent="txnNoteProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.NoteServiceImpl">
+				<property name="noteDao" ref="noteDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+
+	<bean id="noteDao" class="edu.uky.cepis.dao.NoteDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- ********************************GRE TEST SCORES******************************** -->
+	
+	<bean id="txnGreTestScoreProxyTemplate" abstract="true"
+	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="greTestScoreService" parent="txnGreTestScoreProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.GreTestScoreServiceImpl">
+				<property name="greTestScoreDao" ref="greTestScoreDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="greTestScoreDao" class="edu.uky.cepis.dao.GreTestScoreDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<!-- ********************************TEP ADMISSION******************************** -->
+		
+	<bean id="txnTepAdmissionProxyTemplate" abstract="true"
+	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="tepAdmissionService" parent="txnTepAdmissionProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.TepAdmissionServiceImpl">
+				<property name="tepAdmissionDao" ref="tepAdmissionDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="tepAdmissionDao" class="edu.uky.cepis.dao.TepAdmissionDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+	
+	<!-- ********************************UG TEP ADMISSION******************************** -->
+		
+	<bean id="txnTepApplicationProxyTemplate" abstract="true"
+	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="tepApplicationService" parent="txnTepApplicationProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.TepApplicationServiceImpl">
+				<property name="tepApplicationDao" ref="tepApplicationDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="tepApplicationDao" class="edu.uky.cepis.dao.TepApplicationDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+			
+	<!-- ********************************Application Status******************************** -->
+		
+	<bean id="txnApplicationStatusProxyTemplate" abstract="true"
+	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="applicationStatusService" parent="txnApplicationStatusProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.ApplicationStatusServiceImpl">
+				<property name="applicationStatusDao" ref="applicationStatusDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="applicationStatusDao" class="edu.uky.cepis.dao.ApplicationStatusDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+	
+	
+	<!-- ********************************Letter******************************** -->
+		
+	<bean id="txnLetterProxyTemplate" abstract="true"
+	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="letterService" parent="txnLetterProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.LetterServiceImpl">
+				<property name="letterDao" ref="letterDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="letterDao" class="edu.uky.cepis.dao.LetterDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+	
+	<!-- ********************************Character And Fitness******************************** -->
+		
+	<bean id="txnCharacterAndFitnessProxyTemplate" abstract="true"
+	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="characterAndFitnessService" parent="txnCharacterAndFitnessProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.CharacterAndFitnessServiceImpl">
+				<property name="characterAndFitnessDao" ref="characterAndFitnessDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="characterAndFitnessDao" class="edu.uky.cepis.dao.CharacterAndFitnessDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+	
+	<!-- ********************************Fee******************************** -->
+		
+	<bean id="txnFeeProxyTemplate" abstract="true"
+	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="feeService" parent="txnFeeProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.FeeServiceImpl">
+				<property name="feeDao" ref="feeDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="feeDao" class="edu.uky.cepis.dao.FeeDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+
+
+
+	<!-- ********************************STUDENTSCHOLARSHIP******************************** -->
+		
+	<bean id="txnStudentScholarshipProxyTemplate" abstract="true"
+	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="studentScholarshipService" parent="txnStudentScholarshipProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.StudentScholarshipServiceImpl">
+				<property name="studentScholarshipDao" ref="studentScholarshipDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="studentScholarshipDao" class="edu.uky.cepis.dao.StudentScholarshipDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+	
+	
+	<!-- ********************************SCHOLARSHIP******************************** -->
+		
+	<bean id="txnScholarshipProxyTemplate" abstract="true"
+	class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="scholarshipService" parent="txnScholarshipProxyTemplate">
+		<property name="target">
+			<bean class="edu.uky.cepis.service.ScholarshipServiceImpl">
+				<property name="scholarshipDao" ref="scholarshipDao" />
+			</bean>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<ref bean="traceBeforeAdvisor" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="scholarshipDao" class="edu.uky.cepis.dao.ScholarshipDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>	
+</beans>

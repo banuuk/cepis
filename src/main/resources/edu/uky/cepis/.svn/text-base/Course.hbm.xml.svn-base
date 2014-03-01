@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="edu.uky.cepis.domain.Course">
+		<meta attribute="class-description">Class to identify courses taken by a student.
+			Data fetched from APEX Datasource</meta>
+		<subselect>
+			SELECT 
+			
+			acadrec.stu_mast_no as stuMasterNo,			
+			acadrec.source_id as sourceID,
+			acadrec.source_cd as sourceCD,
+			acadrec.cdpmask as cdpMask,
+			demo.stuiddesc as ukID, 
+			acadrec.crs_num as no,
+			acadrec.ctitle as title,
+			acadrec.crs_yt as term,
+			acadrec.crs_seq as section,
+			acadrec.grade as gpa, 
+			acadrec.gpahrs as gpaHours,
+			acadrec.gpapts as gpaPoints, 
+			acadrec.rtitle as rTitle
+			
+			FROM dbo.stu_acadrec acadrec
+			INNER JOIN dbo.stu_demo
+			demo ON
+			acadrec.stu_mast_no =
+			demo.stu_mast_no
+		</subselect>
+		<synchronize table="dbo.stu_demo" />
+		<synchronize table="dbo.stu_acadrec" />
+		<composite-id>
+			<key-property name="stuMasterNo"></key-property>
+			<key-property name="sourceID"></key-property>
+			<key-property name="sourceCD"></key-property>
+			<key-property name="cdpMask"></key-property>
+			<key-property name="no" type="string" length="15"></key-property>
+			<key-property name="term" type="string" length="6"></key-property>
+			<key-property name="section" type="string" length="3"></key-property>
+		</composite-id>
+
+		<property name="ukID" type="string" length="80" />
+		<!-- Following variable will be used in the drop down menu -->
+		<property name="title" type="string" length="29" />
+		<property name="gpa" type="string" length="4" />
+		<property name="gpaHours" type="integer" />
+		<property name="gpaPoints" type="integer" />
+		<property name="rTitle" type="string" length="29"/>
+	</class>
+
+</hibernate-mapping>
+

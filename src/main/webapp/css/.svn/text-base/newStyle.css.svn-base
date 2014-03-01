@@ -1,0 +1,176 @@
+
+/* 
+
+COLORS 
+
+Good blue colors: 99CCFF, 3399FF, 6699FF
+
+Good tan colors: F8F8F8
+
+********************************************
+glassX Colors:
+********************************************
+headerBackgroundColor=#ACBECE
+headerTextColor=#000000
+intShadow=#c0c0c0
+newBorder=#ACBECE
+generalTextColor=#474747
+
+tabHeader=#E4EAEF
+tabGradient=#EDF1F4
+
+tabDisabledTextColor=#7890AB
+********************************************
+
+*/
+
+label.tiny{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: navy;}	
+label.small{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	color: navy;}
+label.medium{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: navy;}
+label.medium-bold{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	font-weight: bold;
+	color: navy;}
+label.large {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 24px;		
+	color: navy;}
+
+.bold{font-weight: bold;}
+	
+.styleish .buttonStyle {
+	padding: 3px;
+	margin-left:5px;}
+
+.styleish .tinyInput {
+	width: 100px;}
+.styleish .smallInput {
+	width: 150px;}
+.styleish .mediumInput {
+	width: 200px;}
+.styleish .largeInput {
+	width: 250px;}
+
+
+.savedQueryStyle{	
+	font-size: 12px; 
+	font-family: "Book Antiqua", "Times New Roman", Serif; 
+	border-width:1px;
+	border-style:solid;
+	border-color:#ACBECE;	
+	margin-left:2px;	
+	width: auto; 
+	height: 20px;	
+}
+
+.radioButtonSpace table tbody td {padding-right:150px;}
+
+table, td {vertical-align: top;}
+
+table.basicTable{}
+
+table.basicTable tbody td {text-align: center;
+		}
+table.basicTable tr.oddRow {
+	background: #FFF;
+	border-bottom: none;
+	border-left: none;
+	border-right: 1px solid #CCC;
+	border-top: 1px solid #DDD;
+	padding: 2px 3px 3px 4px}
+	
+table.basicTable tr.evenRow {
+	background: #EEE;
+	border-bottom: none;
+	border-left: none;
+	border-right: 1px solid #CCC;
+	border-top: 1px solid #DDD;
+	padding: 2px 3px 3px 4px}
+	
+table.basicTable th{	
+	background-color: #E4EAEF;}
+	
+table.basicTable tr.selectedRow {
+	background-color: #99CCFF;
+	color: #FFFFFF;}
+	
+.toolBox{padding: 0px;}
+.toolBoxPanel{border: 0px; background-color: inherit;}
+
+div.entry-selected-window{
+	background-color: #eeeeee;
+	border-left: inherit;	
+	text-decoration: none;
+	border-color: #CAD4E7;
+	border-radius: 3px 3px 3px 3px;
+	vertical-align: middle;
+	padding-right: 10px; 
+	padding-left: 10px}
+		
+.skinny-col{
+	width: 200px;
+	vertical-align: top;}
+	
+.average-col{
+	width:50%;
+	vertical-align: top;}
+	
+.fat-col{
+	width:1500px;
+	vertical-align: top;}
+
+.highlightClass{
+	cursor: pointer;
+	border-radius: 3px 3px 3px 3px;
+	padding: 2px 4px; 
+	background-color: #ECEEF5;
+	border-color: #CAD4E7;
+	text-decoration: none;
+	color: #3B5998;}
+
+.header {
+	background: #C6D3F7;
+	border-left: 0px solid #39618C;
+	border-right: 0px solid #39618C;
+	border-top: 1px solid #39618C;
+	border-bottom: 1px solid #39618C;
+	font-weight: normal;
+	padding: 4px 3px;
+	text-align: left}
+
+.footer {
+	background: lightgray;
+	border-left: 0px solid #39618C;
+	border-right: 0px solid #39618C;
+	border-top: 0.2px solid #39618C;
+	border-bottom: 0.2px solid #39618C;
+	font-weight: normal;
+	padding: 1px 1px;
+	text-align: center}
+	
+	
+/************************USER PERSONAL PROFILE************************/
+.label-col{
+	width:35%;}	
+	
+.output-col{
+	width:55%;}
+
+.right-col{
+	text-align: right;}	
+	
+.left-col{
+	text-align: left;}
+	
+	
+	

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="edu.uky.cepis.domain.EmailAddressType" table="lstComputertype">
+		<meta attribute="class-description">Class to identify the email address type</meta>
+		<cache region="edu.uky.cepis.cache.emailaddresstype" usage="read-write" />
+		<id name="code" column="Computertypecode" type="string" length="50" />
+		<!-- Following variable will be used in the drop down menu -->
+		<property name="desc" column="Desccomptertype" type="string"
+			length="255" />
+	</class>
+</hibernate-mapping>
+

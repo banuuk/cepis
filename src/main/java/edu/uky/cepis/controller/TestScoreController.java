@@ -1,0 +1,1000 @@
+package edu.uky.cepis.controller;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
+import org.apache.log4j.Logger;
+import org.richfaces.component.html.HtmlExtendedDataTable;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import edu.uky.cepis.domain.GreTestScore;
+import edu.uky.cepis.domain.PraxisIITest;
+import edu.uky.cepis.domain.PraxisIITestScore;
+import edu.uky.cepis.domain.PraxisITest;
+import edu.uky.cepis.domain.PraxisITestScore;
+import edu.uky.cepis.domain.User;
+import edu.uky.cepis.view.TestScoreView;
+
+@Component
+@Scope("session")
+public class TestScoreController extends AbstractController {
+	
+	private static final long serialVersionUID = 1L;
+	private static Logger log = Logger.getLogger(TestScoreController.class);
+	
+	@Resource(name="testScoreBean")
+	private TestScoreView testScoreBean;
+	
+	private User currentlySelectedUser;
+	
+			
+	/***************************PraxisI***************************/	
+	
+	private List<PraxisITestScore> praxisITestScoreList;		
+	private HtmlExtendedDataTable praxisITable;
+	private PraxisITestScore selectedPraxisITestScore;
+	private Date praxisITestDate;
+	private Date praxisIReceivedDate;
+	private int praxisITestScore;
+	private PraxisITest selectedPraxisITest;
+	private boolean praxisICutoff;
+	private boolean praxisIPrimary;
+	private List<PraxisITest> currentPraxisITestList;
+	private List<PraxisITest> oldPraxisITestList;
+	private boolean praxisIOldTestCodeFlg;
+	private boolean praxisIEditOldTestCodeFlg;
+	private String praxisICandidateId;
+	
+	/***************************PraxisII***************************/	
+	
+	private List<PraxisIITestScore> praxisIITestScoreList = new ArrayList<PraxisIITestScore>(0);
+	private boolean showArchivedPraxisIITestScore = false;
+	private HtmlExtendedDataTable praxisIITable;
+	private PraxisIITestScore selectedPraxisIITestScore;
+	private Date praxisIITestDate;
+	private Date praxisIIReceivedDate;
+	private int praxisIITestScore;
+	private PraxisIITest selectedPraxisIITest;
+	private boolean praxisIICutoff;
+	private boolean praxisIIPrimary;
+	private List<PraxisIITest> currentPraxisIITestList;
+	private List<PraxisIITest> oldPraxisIITestList;
+	private boolean praxisIIOldTestCodeFlg;
+	private boolean praxisIIEditOldTestCodeFlg;
+	private String praxisIICandidateId;
+	
+	/***************************GRE***************************/	
+	
+	private List<GreTestScore> greTestScoreList;	
+	private HtmlExtendedDataTable greTable;	
+	private Date greTestDate;
+	private Date greReceivedDate;
+	private int greVerbal;
+	private int greQuantitative;
+	private float greAnalytic;
+	private boolean grePrimary;
+	private GreTestScore selectedGreTestScore;
+	
+	
+	
+	private static String INVALID_TEST_DATE = "Test Date is not in selected Test's date range";
+	private static String NO_TEST_SCORE_SELECTED = "No Test Score is Selected.";
+	
+	
+	// GRE OLD = GRE TAKEN PRIOR TO 8/01/11
+	private static int GRE_QUANTITATIVE_OLD = 480;
+	private static int GRE_VERBAL_OLD = 450;
+	private static double GRE_ANALYTIC_OLD = 4.0;
+	
+	// GRE NEW = GRE TAKEN AFTER 8/01/11
+	private static int GRE_QUANTITATIVE = 143;
+	private static int GRE_VERBAL = 150;
+	private static double GRE_ANALYTIC = 4.0;
+	
+	
+	@PostConstruct
+	public void initTestScore() {
+		
+		setPraxisIEditOldTestCodeFlg(false);
+		setPraxisIOldTestCodeFlg(false);
+		setCurrentPraxisITestList(this.getTestScoreBean().getPraxisITests());
+		setOldPraxisITestList(this.getTestScoreBean().getPraxisITests());		
+		
+		
+		setPraxisIIEditOldTestCodeFlg(false);
+		setPraxisIIOldTestCodeFlg(false);
+		setCurrentPraxisIITestList(this.getTestScoreBean().getPraxisIITests());
+		setOldPraxisIITestList(this.getTestScoreBean().getPraxisIITests());		
+	}
+	
+	/* ******************************************************************************************************************************************* */
+	/* **************************************************************** PRAXIS I ***************************************************************** */
+	/* ******************************************************************************************************************************************* */
+
+	public void takePraxisISelection() {		
+		if(this.getPraxisITable() != null){
+			PraxisITestScore praxisITestScore = (PraxisITestScore) this.getPraxisITable().getRowData();
+			if (praxisITestScore != null) {
+				setSelectedPraxisITestScore(praxisITestScore);
+			}	
+		}					
+	}
+	
+	public void prepEditSelectedPraxisI(){
+		if(getSelectedPraxisITestScore().getPraxisITest() != null){
+			if(getSelectedPraxisITestScore().getPraxisITest().getStatus().equals("Old")){
+				setPraxisIEditOldTestCodeFlg(true);
+			}
+		}else{
+			FacesContext context = FacesContext.getCurrentInstance();
+			FacesMessage message = new FacesMessage();
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			message.setSummary(NO_TEST_SCORE_SELECTED);
+			context.addMessage("msg", message);
+		}
+	}
+	
+	public void editPraxisITestScoreForUser(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage();
+		
+		if(getSelectedPraxisITestScore().equals(new PraxisITestScore())) {
+				
+				message.setSeverity(FacesMessage.SEVERITY_ERROR);
+				message.setSummary(NO_TEST_SCORE_SELECTED);
+				context.addMessage("msg", message);
+				
+				return;
+			}
+		
+		this.getTestScoreBean().updatePraxisITestScore(
+				this.getConfigurationManager().getSelectedUser(), 
+				getSelectedPraxisITestScore(), 
+				getSelectedPraxisITestScore().getTestDate(),
+				getSelectedPraxisITestScore().getPraxisITest(), 
+				getSelectedPraxisITestScore().getCandidateId(), 
+				getSelectedPraxisITestScore().getScore(), 
+				getSelectedPraxisITestScore().getPrimary());
+		clearPraxisI();
+	}
+	
+	public void addPraxisITestScoreToUser(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage();
+		PraxisITestScore newPraxisITestScore = new PraxisITestScore();		
+						
+		if(getPraxisITestDate().after(getSelectedPraxisITest().getEndDate()) || 
+			getPraxisITestDate().before(getSelectedPraxisITest().getBeginDate())) {
+			
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			message.setSummary(INVALID_TEST_DATE);
+			context.addMessage("msg", message);
+			
+			return;
+		}
+		
+		newPraxisITestScore.setTestDate(getPraxisITestDate());
+		newPraxisITestScore.setDateRecieved(getPraxisIReceivedDate());
+		newPraxisITestScore.setScore(getPraxisITestScore());
+		newPraxisITestScore.setPraxisICode(getSelectedPraxisITest().getPraxisICode());
+		newPraxisITestScore.setUser(this.getConfigurationManager().getSelectedUser());
+		newPraxisITestScore.setCandidateId(getPraxisICandidateId());
+		
+		
+		if(getPraxisITestScore() > getSelectedPraxisITest().getCutoff()  || 
+			getPraxisITestScore() == getSelectedPraxisITest().getCutoff()){
+			newPraxisITestScore.setCutOff(1);
+		}else{
+			newPraxisITestScore.setCutOff(0);
+		}
+		
+		this.getTestScoreBean().addPraxisITestScoreToUser(this.getConfigurationManager().getSelectedUser(), newPraxisITestScore);
+		
+		/*************************************DETERMINE PRIMARY TEST SCORES*************************************/		
+		
+		// A list of all primary praxisII test scores
+		List<PraxisITestScore> primaryPraxisITestScoreList = new ArrayList<PraxisITestScore>();
+		// A list of testcodes used to determine the primary test score during loop iteration
+		List<String> testCodes = new ArrayList<String>();
+		// A test is considered no longer valid if it is more then 5 years old, this is used in determining the primary
+		Calendar fiveYearCutOff = Calendar.getInstance();
+		fiveYearCutOff.add(Calendar.YEAR, -5);
+		Date fiveYearCutOffDate = fiveYearCutOff.getTime();
+		
+		
+		//Count is used during FOR EACH LOOP to determine which test score is the PRIMARY test score
+		int count = 0;
+				
+		//Create a list of the primary praxis tests
+		for(PraxisITestScore praxisITest : getPraxisITestScoreList()){			
+			if(count == 0){		
+				primaryPraxisITestScoreList.add(praxisITest);	
+				testCodes.add(praxisITest.getPraxisICode());
+			}else{			
+				if(!testCodes.contains(praxisITest.getPraxisICode())){			
+					testCodes.add(praxisITest.getPraxisICode());
+					primaryPraxisITestScoreList.add(praxisITest);
+				}else if (testCodes.contains(praxisITest.getPraxisICode())) {	
+					for(PraxisITestScore primaryPraxisITest : primaryPraxisITestScoreList){		
+						if(primaryPraxisITest.getPraxisICode().equals(praxisITest.getPraxisICode())){
+							//Check if it is past the 5 year cutoff
+							if(praxisITest.getTestDate().before(fiveYearCutOffDate)){
+								primaryPraxisITestScoreList.remove(primaryPraxisITest);
+								primaryPraxisITestScoreList.add(praxisITest);
+								break;
+							}else if(praxisITest.getScore() > primaryPraxisITest.getScore()){
+								primaryPraxisITestScoreList.remove(primaryPraxisITest);
+								primaryPraxisITestScoreList.add(praxisITest);
+								break;
+							//Check if scores are equal, if so then take the newest score
+							}else if(praxisITest.getScore() == primaryPraxisITest.getScore()){
+								if(praxisITest.getTestDate().after(primaryPraxisITest.getTestDate())){
+									primaryPraxisITestScoreList.remove(primaryPraxisITest);
+									primaryPraxisITestScoreList.add(praxisITest);
+									break;
+								}
+							}
+						}					
+					}					
+				}
+			}
+			count ++;
+		}
+		//Initialize all the primarys back to zero
+		for(PraxisITestScore praxisITestScore : this.praxisITestScoreList){
+			praxisITestScore.setPrimary(0);
+		}
+		//Set primary scores
+		for(PraxisITestScore primaryPraxisITest : primaryPraxisITestScoreList){
+			for(PraxisITestScore praxisITestScore : this.praxisITestScoreList){					
+				if(praxisITestScore.getId() == primaryPraxisITest.getId()){
+					praxisITestScore.setPrimary(1);
+				}				
+			}				
+		}	
+		
+		/*******************************************Updated test scores*******************************************/
+		
+		for(PraxisITestScore praxisITestScore : this.praxisITestScoreList){
+			this.getTestScoreBean().updatePraxisITestScore(
+					this.getConfigurationManager().getSelectedUser(),
+					praxisITestScore,
+					praxisITestScore.getTestDate(),
+					praxisITestScore.getPraxisITest(),
+					praxisITestScore.getCandidateId(),
+					praxisITestScore.getScore(),
+					praxisITestScore.getPrimary());
+		}
+		clearPraxisI();		
+	}
+	
+	public void deletePraxisITestScoreFromUser(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage();
+		
+		if(getSelectedPraxisITestScore().equals(new PraxisITestScore())) {
+				
+				message.setSeverity(FacesMessage.SEVERITY_ERROR);
+				message.setSummary(NO_TEST_SCORE_SELECTED);
+				context.addMessage("msg", message);
+				
+				return;
+			}
+		
+		this.getTestScoreBean().removePraxisITestScoreFromUser(this.getConfigurationManager().getSelectedUser(), getSelectedPraxisITestScore());
+		clearPraxisI();
+	}
+	
+	private void clearPraxisI(){
+		setPraxisITestDate(new Date());
+		setPraxisIReceivedDate(new Date());
+		setPraxisIOldTestCodeFlg(false);
+		setPraxisITestScore(0);
+	}
+	
+	/* ******************************************************************************************************************************************* */
+	/* **************************************************************** PRAXIS II **************************************************************** */
+	/* ******************************************************************************************************************************************* */
+	
+	public void takePraxisIISelection() {		
+		if(this.getPraxisIITable() != null){
+			PraxisIITestScore praxisIITestScore = (PraxisIITestScore) this.getPraxisIITable().getRowData();
+			if (praxisIITestScore != null) {
+				setSelectedPraxisIITestScore(praxisIITestScore);			
+			}	
+		}					
+	}
+	
+	public void prepEditSelectedPraxisII(){
+		
+		if(getSelectedPraxisIITestScore().getPraxisIITest() != null){
+			if(getSelectedPraxisIITestScore().getPraxisIITest().getStatus().equals("Old")){
+				setPraxisIIEditOldTestCodeFlg(true);
+			}	
+		}else{
+			FacesContext context = FacesContext.getCurrentInstance();
+			FacesMessage message = new FacesMessage();
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			message.setSummary(NO_TEST_SCORE_SELECTED);
+			context.addMessage("msg", message);
+		}
+	}
+	
+	public void addPraxisIITestScoreToUser(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage();
+		PraxisIITestScore newPraxisIITestScore = new PraxisIITestScore();		
+								
+		/*************************************ADD NEW PRAXIS II TEST SCORE TO SELECTED USER*************************************/
+		
+		if(getPraxisIITestDate().after(getSelectedPraxisIITest().getEndDate()) || 
+			getPraxisIITestDate().before(getSelectedPraxisIITest().getBeginDate())) {
+			
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			message.setSummary(INVALID_TEST_DATE);
+			context.addMessage("msg", message);
+			
+			return;
+		}
+		
+		newPraxisIITestScore.setTestDate(getPraxisIITestDate());
+		newPraxisIITestScore.setReceivedDate(getPraxisIIReceivedDate());
+		newPraxisIITestScore.setScore(getPraxisIITestScore());
+		newPraxisIITestScore.setPraxisIICode(getSelectedPraxisIITest().getTestCode());
+		newPraxisIITestScore.setUser(this.getConfigurationManager().getSelectedUser());
+		newPraxisIITestScore.setCandidateId(getPraxisIICandidateId());
+		newPraxisIITestScore.setLastEdit(new Date());
+		
+		if(getPraxisIITestScore() > getSelectedPraxisIITest().getCutoffScore()  || 
+			getPraxisIITestScore() == getSelectedPraxisIITest().getCutoffScore()){
+			newPraxisIITestScore.setCutoff(1);
+		}else{
+			newPraxisIITestScore.setCutoff(0);
+		}
+		
+		this.getTestScoreBean().addPraxisIITestScoreToUser(this.getConfigurationManager().getSelectedUser(), newPraxisIITestScore);
+		
+		/*************************************DETERMINE PRIMARY TEST SCORES*************************************/		
+		
+		// A list of all primary praxisII test scores
+		List<PraxisIITestScore> primaryPraxisIITestScoreList = new ArrayList<PraxisIITestScore>();
+		// A list of testcodes used to determine the primary test score during loop iteration
+		List<String> testCodes = new ArrayList<String>();
+		// A test is considered no longer valid if it is more then 5 years old, this is used in determining the primary
+		Calendar fiveYearCutOff = Calendar.getInstance();
+		fiveYearCutOff.add(Calendar.YEAR, -5);
+		Date fiveYearCutOffDate = fiveYearCutOff.getTime();
+		
+		
+		//Count is used during FOR EACH LOOP to determine which test score is the PRIMARY test score
+		int count = 0;
+				
+		//Create a list of the primary praxis tests
+		for(PraxisIITestScore praxisIITest : getPraxisIITestScoreList()){			
+			if(count == 0){		
+				primaryPraxisIITestScoreList.add(praxisIITest);	
+				testCodes.add(praxisIITest.getPraxisIICode());
+			}else{			
+				if(!testCodes.contains(praxisIITest.getPraxisIICode())){			
+					testCodes.add(praxisIITest.getPraxisIICode());
+					primaryPraxisIITestScoreList.add(praxisIITest);
+				}else if (testCodes.contains(praxisIITest.getPraxisIICode())) {	
+					for(PraxisIITestScore primaryPraxisIITest : primaryPraxisIITestScoreList){		
+						if(primaryPraxisIITest.getPraxisIICode().equals(praxisIITest.getPraxisIICode())){
+							//Check if it is past the 5 year cutoff
+							if(praxisIITest.getTestDate().before(fiveYearCutOffDate)){
+								primaryPraxisIITestScoreList.remove(primaryPraxisIITest);
+								primaryPraxisIITestScoreList.add(praxisIITest);
+								break;
+							}else if(praxisIITest.getScore() > primaryPraxisIITest.getScore()){
+								primaryPraxisIITestScoreList.remove(primaryPraxisIITest);
+								primaryPraxisIITestScoreList.add(praxisIITest);
+								break;
+							//Check if scores are equal, if so then take the newest score
+							}else if(praxisIITest.getScore() == primaryPraxisIITest.getScore()){
+								if(praxisIITest.getTestDate().after(primaryPraxisIITest.getTestDate())){
+									primaryPraxisIITestScoreList.remove(primaryPraxisIITest);
+									primaryPraxisIITestScoreList.add(praxisIITest);
+									break;
+								}
+							}
+						}					
+					}					
+				}
+			}
+			count ++;
+		}
+		//Initialize all the primarys back to zero
+		for(PraxisIITestScore praxisIITestScore : this.praxisIITestScoreList){
+			praxisIITestScore.setPrimary(0);
+		}
+		//Set primary scores
+		for(PraxisIITestScore primaryPraxisIITest : primaryPraxisIITestScoreList){
+			for(PraxisIITestScore praxisIITestScore : this.praxisIITestScoreList){					
+				if(praxisIITestScore.getId() == primaryPraxisIITest.getId()){
+					praxisIITestScore.setPrimary(1);
+				}				
+			}				
+		}	
+		
+		/*******************************************Updated test scores*******************************************/
+		
+		for(PraxisIITestScore praxisIITestScore : this.praxisIITestScoreList){
+			this.getTestScoreBean().updatePraxisTestScore(
+					this.getConfigurationManager().getSelectedUser(),
+					praxisIITestScore,
+					praxisIITestScore.getReceivedDate(),
+					praxisIITestScore.getTestDate(),
+					praxisIITestScore.getPraxisIITest(),
+					praxisIITestScore.getCandidateId(),
+					praxisIITestScore.getScore(),
+					praxisIITestScore.getPrimary(),
+					praxisIITestScore.getNonStandardAdministration(),
+					praxisIITestScore.getRevisedScoreIndicator(),
+					praxisIITestScore.getExcellenceIndicator());
+		}
+		clearPraxisII();		
+	}
+	
+	public void editPraxisIITestScoreForUser(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage();
+		
+		if(getSelectedPraxisIITestScore().equals(new PraxisIITestScore())) {
+				
+				message.setSeverity(FacesMessage.SEVERITY_ERROR);
+				message.setSummary(NO_TEST_SCORE_SELECTED);
+				context.addMessage("msg", message);
+				
+				return;
+			}
+		
+		this.getTestScoreBean().updatePraxisTestScore(
+				this.getConfigurationManager().getSelectedUser(), 
+				getSelectedPraxisIITestScore(), 
+				getSelectedPraxisIITestScore().getReceivedDate(),
+				getSelectedPraxisIITestScore().getTestDate(),
+				getSelectedPraxisIITestScore().getPraxisIITest(), 
+				getSelectedPraxisIITestScore().getCandidateId(), 
+				getSelectedPraxisIITestScore().getScore(), 
+				getSelectedPraxisIITestScore().getPrimary(), 
+				getSelectedPraxisIITestScore().getNonStandardAdministration(), 
+				getSelectedPraxisIITestScore().getRevisedScoreIndicator(), 
+				getSelectedPraxisIITestScore().getExcellenceIndicator());
+		clearPraxisII();
+	}
+	
+	public void deletePraxisIITestScoreFromUser(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage();
+		
+		if(getSelectedPraxisIITestScore().equals(new PraxisIITestScore())) {
+				
+				message.setSeverity(FacesMessage.SEVERITY_ERROR);
+				message.setSummary(NO_TEST_SCORE_SELECTED);
+				context.addMessage("msg", message);
+				
+				return;
+			}
+		
+		this.getTestScoreBean().removePraxisIITestScoreFromUser(this.getConfigurationManager().getSelectedUser(), getSelectedPraxisIITestScore());
+		clearPraxisII();
+	}
+	
+	private void clearPraxisII(){
+		setPraxisIITestDate(new Date());
+		setPraxisIIReceivedDate(new Date());
+		setPraxisIITestScore(0);
+		setPraxisIIOldTestCodeFlg(false);
+	}
+	
+	
+	/* ******************************************************************************************************************************************* */
+	/* ******************************************************************* GRE ******************************************************************* */
+	/* ******************************************************************************************************************************************* */
+
+	public void takeGreSelection() {		
+		if(this.getGreTable() != null){
+			GreTestScore greTestScore = (GreTestScore) this.getGreTable().getRowData();
+			if (greTestScore != null) {
+				setSelectedGreTestScore(greTestScore);			
+			}	
+		}					
+	}
+	
+	public void prepGreEdit(){
+		if(getSelectedGreTestScore().equals(new GreTestScore())){
+			FacesContext context = FacesContext.getCurrentInstance();
+			FacesMessage message = new FacesMessage();
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			message.setSummary(NO_TEST_SCORE_SELECTED);
+			context.addMessage("msg", message);
+		}
+	}
+	
+	public void addGreTestScoreToUser(){
+		
+		GreTestScore newGreTestScore = new GreTestScore();	
+		
+		// GRE OLD = GRE TAKEN PRIOR TO 8/01/11
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2011);
+		cal.set(Calendar.MONTH, 8);
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+			
+		Date greOld = cal.getTime();
+
+		newGreTestScore.setAnalytic(getGreAnalytic());
+		newGreTestScore.setQuantitative(getGreQuantitative());
+		newGreTestScore.setVerbal(getGreVerbal());
+		newGreTestScore.setDateRecieved(getGreReceivedDate());
+		newGreTestScore.setTestDate(getGreTestDate());
+		newGreTestScore.setUser(this.getConfigurationManager().getSelectedUser());
+		newGreTestScore.setPrimaryBoolean(isGrePrimary());
+		
+		if(getGreTestDate().before(greOld)){
+			if(getGreAnalytic() >= GRE_ANALYTIC_OLD && getGreQuantitative() >= GRE_QUANTITATIVE_OLD && getGreVerbal() >= GRE_VERBAL_OLD){
+				newGreTestScore.setCutOff(1);
+			}else{
+				newGreTestScore.setCutOff(0);
+			}
+		}else{
+			if(getGreAnalytic() >= GRE_ANALYTIC  && getGreQuantitative() >= GRE_QUANTITATIVE  && getGreVerbal() >= GRE_VERBAL){
+				newGreTestScore.setCutOff(1);
+			}else{
+				newGreTestScore.setCutOff(0);
+			}
+		}
+		this.getTestScoreBean().addGreTestScoreToUser(this.getConfigurationManager().getSelectedUser(), newGreTestScore);
+		clearGre();
+	}
+	
+	public void deleteGreTestScoreFromUser(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage();
+		
+		if(getSelectedGreTestScore().equals(new GreTestScore())) {				
+				message.setSeverity(FacesMessage.SEVERITY_ERROR);
+				message.setSummary(NO_TEST_SCORE_SELECTED);
+				context.addMessage("msg", message);				
+				return;
+			}
+		
+		this.getTestScoreBean().removeGreTestScoreFromUser(this.getConfigurationManager().getSelectedUser(), getSelectedGreTestScore());
+		clearGre();
+	}
+	
+	public void editGreTestScoreForUser(){
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, 2011);
+		cal.set(Calendar.MONTH, 8);
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+			
+		Date greOld = cal.getTime();
+		
+		if(getSelectedGreTestScore().equals(new GreTestScore())) {
+				
+				message.setSeverity(FacesMessage.SEVERITY_ERROR);
+				message.setSummary(NO_TEST_SCORE_SELECTED);
+				context.addMessage("msg", message);
+				
+				return;
+			}
+		
+		if(getSelectedGreTestScore().getTestDate().before(greOld)){
+			if(getSelectedGreTestScore().getAnalytic() >= 4.0 && getSelectedGreTestScore().getQuantitative() >= 490 && getSelectedGreTestScore().getVerbal() >= 450){
+				getSelectedGreTestScore().setCutOff(1);
+			}else{
+				getSelectedGreTestScore().setCutOff(0);
+			}
+		}else{
+			if(getSelectedGreTestScore().getAnalytic() >= 4.0 && getSelectedGreTestScore().getQuantitative() >= 143 &&  getSelectedGreTestScore().getVerbal() >= 150){
+				getSelectedGreTestScore().setCutOff(1);
+			}else{
+				getSelectedGreTestScore().setCutOff(0);
+			}
+		}
+		this.getTestScoreBean().updateGreTestScore(this.getConfigurationManager().getSelectedUser(), getSelectedGreTestScore());
+		clearGre();
+	}
+	
+	private void clearGre(){
+		setGreAnalytic(0);
+		setGreQuantitative(0);
+		setGreVerbal(0);
+		setGreReceivedDate(new Date());
+		setGreTestDate(new Date());
+		setSelectedGreTestScore(new GreTestScore());		
+	}
+	
+	
+	
+	public List<PraxisIITestScore> getPraxisIITestScoreList() {
+		System.out.print("Calling Get PraxisIITestScore List: ");
+		if (this.getConfigurationManager().getSelectedUser() != null
+				&& this.getConfigurationManager().getSelectedUser().getUid() != null) {
+			log.debug("loaded");
+			this.setPraxisIITestScoreList(this.getTestScoreBean().getPraxisIITestScoreList(this.getConfigurationManager().getSelectedUser()));
+		} else {
+			log.debug("skipped");
+		}
+		return this.praxisIITestScoreList;
+	}
+			
+	public void setPraxisIITestScoreList(List<PraxisIITestScore> praxisIITestScoreList) {
+		this.praxisIITestScoreList = praxisIITestScoreList;
+	}
+	
+	public boolean isShowArchivedPraxisIITestScore() {
+		return showArchivedPraxisIITestScore;
+	}
+
+	public void setShowArchivedPraxisIITestScore(boolean showArchivedPraxisIITestScore) {
+		this.showArchivedPraxisIITestScore = showArchivedPraxisIITestScore;
+	}
+	
+	public HtmlExtendedDataTable getPraxisIITable() {
+		return praxisIITable;
+	}
+
+	public void setPraxisIITable(HtmlExtendedDataTable praxisIITable) {
+		this.praxisIITable = praxisIITable;
+	}
+
+	public PraxisIITestScore getSelectedPraxisIITestScore() {
+		if(selectedPraxisIITestScore == null){
+			setSelectedPraxisIITestScore(new PraxisIITestScore());
+		}
+		return selectedPraxisIITestScore;		
+	}
+
+	public void setSelectedPraxisIITestScore(PraxisIITestScore selectedPraxisIITestScore) {
+		this.selectedPraxisIITestScore = selectedPraxisIITestScore;
+	}
+
+	public Date getPraxisIITestDate() {
+		return praxisIITestDate;
+	}
+
+	public void setPraxisIITestDate(Date praxisIITestDate) {
+		this.praxisIITestDate = praxisIITestDate;
+	}
+
+	public Date getPraxisIIReceivedDate() {
+		return praxisIIReceivedDate;
+	}
+
+	public void setPraxisIIReceivedDate(Date praxisIIReceivedDate) {
+		this.praxisIIReceivedDate = praxisIIReceivedDate;
+	}
+
+	public int getPraxisIITestScore() {
+		return praxisIITestScore;
+	}
+
+	public void setPraxisIITestScore(int praxisIITestScore) {
+		this.praxisIITestScore = praxisIITestScore;
+	}
+	
+	public PraxisIITest getSelectedPraxisIITest() {
+		return selectedPraxisIITest;
+	}
+
+	public void setSelectedPraxisIITest(PraxisIITest selectedPraxisIITest) {
+		this.selectedPraxisIITest = selectedPraxisIITest;
+	}
+
+	public boolean isPraxisIICutoff() {
+		return praxisIICutoff;
+	}
+
+	public void setPraxisIICutoff(boolean praxisIICutoff) {
+		this.praxisIICutoff = praxisIICutoff;
+	}
+
+	public boolean isPraxisIIPrimary() {
+		return praxisIIPrimary;
+	}
+
+	public void setPraxisIIPrimary(boolean praxisIIPrimary) {
+		this.praxisIIPrimary = praxisIIPrimary;
+	}
+
+	public List<PraxisIITest> getCurrentPraxisIITestList() {
+		return currentPraxisIITestList;
+	}
+
+	public void setCurrentPraxisIITestList(List<PraxisIITest> currentPraxisIITestList) {
+		this.currentPraxisIITestList = new ArrayList<PraxisIITest>();
+		for(PraxisIITest praxisIITest : currentPraxisIITestList){
+			if(praxisIITest.getStatus().equals("Current")){
+				this.currentPraxisIITestList.add(praxisIITest);
+			}
+		}
+	}
+
+	public List<PraxisIITest> getOldPraxisIITestList() {
+		return oldPraxisIITestList;
+	}
+
+	public void setOldPraxisIITestList(List<PraxisIITest> oldPraxisIITestList) {
+		this.oldPraxisIITestList = new ArrayList<PraxisIITest>();
+		for(PraxisIITest praxisIITest : oldPraxisIITestList){
+			if(praxisIITest.getStatus().equals("Old")){
+				this.oldPraxisIITestList.add(praxisIITest);
+			}
+		}		
+	}
+
+	public boolean isPraxisIIOldTestCodeFlg() {
+		return praxisIIOldTestCodeFlg;
+	}
+
+	public void setPraxisIIOldTestCodeFlg(boolean praxisIIOldTestCodeFlg) {
+		this.praxisIIOldTestCodeFlg = praxisIIOldTestCodeFlg;
+	}
+
+	public boolean isPraxisIIEditOldTestCodeFlg() {
+		return praxisIIEditOldTestCodeFlg;
+	}
+
+	public void setPraxisIIEditOldTestCodeFlg(boolean praxisIIEditOldTestCodeFlg) {
+		this.praxisIIEditOldTestCodeFlg = praxisIIEditOldTestCodeFlg;
+	}
+	
+	public List<PraxisITestScore> getPraxisITestScoreList() {
+		System.out.print("Calling Get PraxisITestScore List: ");
+		
+		if (this.getConfigurationManager().getSelectedUser() != null
+				&& this.getConfigurationManager().getSelectedUser().getUid() != null){
+			log.debug("loaded");
+			this.setPraxisITestScoreList(this.getTestScoreBean().getPraxisITestScores(this.getConfigurationManager().getSelectedUser()));
+		}else {
+			log.debug("skipped");
+		}
+		return this.praxisITestScoreList;
+	}
+
+	public void setPraxisITestScoreList(List<PraxisITestScore> praxisITestScoreList) {
+		this.praxisITestScoreList = praxisITestScoreList;
+	}
+	
+	public HtmlExtendedDataTable getPraxisITable() {
+		return praxisITable;
+	}
+
+	public void setPraxisITable(HtmlExtendedDataTable praxisITable) {
+		this.praxisITable = praxisITable;
+	}
+
+	public PraxisITestScore getSelectedPraxisITestScore() {
+		if(selectedPraxisITestScore == null){
+			setSelectedPraxisITestScore(new PraxisITestScore());
+		}
+		return selectedPraxisITestScore;	
+	}
+
+	public void setSelectedPraxisITestScore(PraxisITestScore praxisITestScore) {
+		this.selectedPraxisITestScore = praxisITestScore;
+	}
+
+	public Date getPraxisITestDate() {
+		return praxisITestDate;
+	}
+
+	public void setPraxisITestDate(Date praxisITestDate) {
+		this.praxisITestDate = praxisITestDate;
+	}
+
+	public Date getPraxisIReceivedDate() {
+		return praxisIReceivedDate;
+	}
+
+	public void setPraxisIReceivedDate(Date praxisIReceivedDate) {
+		this.praxisIReceivedDate = praxisIReceivedDate;
+	}
+
+	public int getPraxisITestScore() {
+		return praxisITestScore;
+	}
+
+	public void setPraxisITestScore(int praxisITestScore) {
+		this.praxisITestScore = praxisITestScore;
+	}
+
+	public PraxisITest getSelectedPraxisITest() {
+		return selectedPraxisITest;
+	}
+
+	public void setSelectedPraxisITest(PraxisITest selectedPraxisITest) {
+		this.selectedPraxisITest = selectedPraxisITest;
+	}
+
+	public boolean isPraxisICutoff() {
+		return praxisICutoff;
+	}
+
+	public void setPraxisICutoff(boolean praxisICutoff) {
+		this.praxisICutoff = praxisICutoff;
+	}
+
+	public boolean isPraxisIPrimary() {
+		return praxisIPrimary;
+	}
+
+	public void setPraxisIPrimary(boolean praxisIPrimary) {
+		this.praxisIPrimary = praxisIPrimary;
+	}
+
+	public List<PraxisITest> getCurrentPraxisITestList() {
+		return currentPraxisITestList;
+	}
+
+	public void setCurrentPraxisITestList(List<PraxisITest> currentPraxisITestList) {
+		this.currentPraxisITestList = new ArrayList<PraxisITest>();
+		for(PraxisITest praxisITest : currentPraxisITestList){
+			if(praxisITest.getStatus().equals("Current")){
+				this.currentPraxisITestList.add(praxisITest);
+			}
+		}	
+	}
+
+	public List<PraxisITest> getOldPraxisITestList() {
+		return oldPraxisITestList;
+	}
+
+	public void setOldPraxisITestList(List<PraxisITest> oldPraxisITestList) {
+		this.oldPraxisITestList = new ArrayList<PraxisITest>();
+		for(PraxisITest praxisITest : oldPraxisITestList){
+			if(praxisITest.getStatus().equals("Old")){
+				this.oldPraxisITestList.add(praxisITest);
+			}
+		}	
+	}
+
+	public boolean isPraxisIOldTestCodeFlg() {
+		return praxisIOldTestCodeFlg;
+	}
+
+	public void setPraxisIOldTestCodeFlg(boolean praxisIOldTestCodeFlg) {
+		this.praxisIOldTestCodeFlg = praxisIOldTestCodeFlg;
+	}
+
+	public boolean isPraxisIEditOldTestCodeFlg() {
+		return praxisIEditOldTestCodeFlg;
+	}
+
+	public void setPraxisIEditOldTestCodeFlg(boolean praxisIEditOldTestCodeFlg) {
+		this.praxisIEditOldTestCodeFlg = praxisIEditOldTestCodeFlg;
+	}
+
+	public String getPraxisICandidateId() {
+		return praxisICandidateId;
+	}
+
+	public void setPraxisICandidateId(String praxisICandidateId) {
+		this.praxisICandidateId = praxisICandidateId;
+	}
+
+	public List<GreTestScore> getGreTestScoreList() {
+		
+		GreTestScore greTestScoreExample = new GreTestScore();		
+		greTestScoreExample.setUser(this.getConfigurationManager().getSelectedUser());		
+		setGreTestScoreList(getTestScoreBean().findGreTestScoreByExample(greTestScoreExample));
+		
+		if(greTestScoreList == null){
+			setGreTestScoreList(new ArrayList<GreTestScore>());
+		}
+		return greTestScoreList;
+	}
+
+	public void setGreTestScoreList(List<GreTestScore> greTestScoreList) {
+		this.greTestScoreList = greTestScoreList;
+	}
+
+	public HtmlExtendedDataTable getGreTable() {
+		return greTable;
+	}
+
+	public void setGreTable(HtmlExtendedDataTable greTable) {
+		this.greTable = greTable;
+	}
+
+	public Date getGreTestDate() {
+		return greTestDate;
+	}
+
+	public void setGreTestDate(Date greTestDate) {
+		this.greTestDate = greTestDate;
+	}
+
+	public Date getGreReceivedDate() {
+		return greReceivedDate;
+	}
+
+	public void setGreReceivedDate(Date greReceivedDate) {
+		this.greReceivedDate = greReceivedDate;
+	}
+
+	public int getGreVerbal() {
+		return greVerbal;
+	}
+
+	public void setGreVerbal(int greVerbal) {
+		this.greVerbal = greVerbal;
+	}
+
+	public int getGreQuantitative() {
+		return greQuantitative;
+	}
+
+	public void setGreQuantitative(int greQuantitative) {
+		this.greQuantitative = greQuantitative;
+	}
+
+	public float getGreAnalytic() {	
+		return greAnalytic;
+	}
+
+	public void setGreAnalytic(float greAnalytic) {
+		this.greAnalytic = greAnalytic;
+	}
+
+	public boolean isGrePrimary() {
+		return grePrimary;
+	}
+
+	public void setGrePrimary(boolean grePrimary) {
+		this.grePrimary = grePrimary;
+	}
+
+	public String getPraxisIICandidateId() {
+		return praxisIICandidateId;
+	}
+
+	public void setPraxisIICandidateId(String praxisIICandidateId) {
+		this.praxisIICandidateId = praxisIICandidateId;
+	}
+
+	public GreTestScore getSelectedGreTestScore() {		
+		if(selectedGreTestScore == null){
+			setSelectedGreTestScore(new GreTestScore());
+		}
+		return selectedGreTestScore;
+	}
+
+	public void setSelectedGreTestScore(GreTestScore selectedGreTestScore) {
+		this.selectedGreTestScore = selectedGreTestScore;
+	}
+
+	public TestScoreView getTestScoreBean() {
+		return testScoreBean;
+	}
+
+	public void setTestScoreBean(TestScoreView testScoreBean) {
+		this.testScoreBean = testScoreBean;
+	}
+
+	public User getCurrentlySelectedUser() {
+		setCurrentlySelectedUser(this.getConfigurationManager().getSelectedUser());
+		return currentlySelectedUser;
+	}
+
+	public void setCurrentlySelectedUser(User currentlySelectedUser) {
+		this.currentlySelectedUser = currentlySelectedUser;
+	}
+	
+
+	
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="edu.uky.cepis.domain.UserType" table="lstCollpersontype">
+		<meta attribute="class-description">Class to identify type of a cepis user (Staff,
+			Student, Faculty and more)</meta>
+		<cache region="edu.uky.cepis.cache.usertype" usage="read-write" />
+		<id name="typeCode" column="Collpersontypecode" type="string"
+			length="15" />
+		<!-- Following variable will be used in the drop down menu -->
+		<property name="shortDesc" column="Desccollpersontypecode"
+			type="string" not-null="true" length="255" />
+		<set name="userClassifications" lazy="true" cascade="save-update">
+			<cache region="edu.uky.cepis.cache.userclassification" usage="read-write" />
+			<key>
+				<column name="personTypeCode" not-null="true" />
+			</key>
+			<one-to-many class="edu.uky.cepis.domain.UserClassification"  not-found="ignore"/>
+
+		</set>
+	</class>
+</hibernate-mapping>
+

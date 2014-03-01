@@ -1,0 +1,21 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+#Resource
+cepis.properties
+
+#Eclipse
+.settings/*
+.classpath
+javadoc.xml
+.umlproject
+META-INF/*
+.project
+
+#SVN
+.svn/*
+.euml2

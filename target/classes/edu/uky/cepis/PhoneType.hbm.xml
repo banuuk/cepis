@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+	<class name="edu.uky.cepis.domain.PhoneType" table="lstPhonetype">
+		<meta attribute="class-description">Class to identify the phone type</meta>
+		<cache region="edu.uky.cepis.cache.phonetype" usage="read-write" />
+		<id name="code" column="Phonetypecode" type="string" length="50" />
+		<!-- Following variable will be used in the drop down menu -->
+		<property name="desc" column="Descphonetype" type="string"
+			length="255" />
+	</class>
+</hibernate-mapping>
+

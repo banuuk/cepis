@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.c3p0.acquire_incrementm">2</property>
+        <property name="hibernate.c3p0.idle_test_period">300</property>
+        <property name="hibernate.c3p0.max_size">5</property>
+        <property name="hibernate.c3p0.max_statements">100</property>
+        <property name="hibernate.c3p0.min_size">1</property>
+        <property name="hibernate.c3p0.timeout">5000</property>
+        <property name="hibernate.cache.provider_class">org.hibernate.cache.SingletonEhCacheProvider</property>
+        <property name="hibernate.cache.use_query_cache">true</property>
+        <property name="hibernate.cache.use_second_level_cache">true</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">u$652608</property>
+        <property name="hibernate.connection.url">jdbc:mysql://cepistest.coe.uky.edu/DataReview</property>
+        <property name="hibernate.connection.username">rsalli2</property>
+        <property name="hibernate.connection.zeroDateTimeBehavior">convertToNull</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.default_batch_fetch_size">25</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="hibernate.format_sql">false</property>
+        <property name="hibernate.jdbc.batch_size">50</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+        <property name="hibernate.use_sql_comments">false</property>
+        <mapping resource="edu/uky/cepis/domain/AdvisingSession.hbm.xml" />
+        <mapping resource="org/efs/openreports/objects/ReportLog.hbm.xml" />
+        <mapping resource="org/efs/openreports/objects/ReportParameter.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/Address.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/AdvisingSessionSlot.hbm.xml" />
+        <mapping resource="org/efs/openreports/objects/Report.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/LastLogin.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/EmailAddressType.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/component/UKDepartment.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/Email.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/component/UKStatus.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/IPAddress.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/component/ProgramDomain.hbm.xml" />
+        <mapping resource="org/efs/openreports/objects/ReportExportOption.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/UserProgramProfile.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/UserCollegeProfile.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/Ethnic.hbm.xml" />
+        <mapping resource="org/efs/openreports/objects/ReportUser.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/component/UKMajor.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/Role.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/Phone.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/User.hbm.xml" />
+        <mapping resource="org/efs/openreports/objects/ORTag.hbm.xml" />
+        <mapping resource="org/efs/openreports/objects/ReportAlert.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/PhoneType.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/Advisor.hbm.xml" />
+        <mapping resource="org/efs/openreports/objects/ReportGroup.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/Event.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/component/UKTerm.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/CohortTerm.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/UserPersonalProfile.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/WorkingSet.hbm.xml" />
+        <mapping resource="org/efs/openreports/objects/ReportChart.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/component/ProgramTrack.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/CohortType.hbm.xml" />
+        <mapping resource="org/efs/openreports/objects/ORProperty.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/AddressType.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/UserConfiguration.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/component/Program.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/component/UKCollege.hbm.xml" />
+        <mapping resource="org/efs/openreports/objects/ReportDataSource.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/EmailAddress.hbm.xml" />
+        <mapping resource="org/efs/openreports/objects/ReportDeliveryLog.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/UserType.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/Conference.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/UserClassification.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/Attendees.hbm.xml" />
+        <mapping resource="edu/uky/cepis/domain/component/ProgramGroup.hbm.xml" />
+    </session-factory>
+</hibernate-configuration>
